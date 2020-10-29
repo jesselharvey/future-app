@@ -9,13 +9,16 @@ import { Login } from './features/components/login/Login'
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Login />
-        </Route>
-      </Switch>
-    </Router>
+  <Router>
+    <Switch>
+      <Route exact path="/login">
+        <Login />
+      </Route>
+      <AuthRoute path="/dashboard">
+        <Dashboard />
+      </AuthRoute>
+    </Switch>
+  </Router>
   )
 }
 
