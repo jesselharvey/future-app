@@ -6,6 +6,8 @@ import {BrowserRouter as Router,
   Route
 } from "react-router-dom"
 import { Login } from './features/components/login/Login'
+import AuthRoute from './features/authentication/AuthRoute'
+import { Dashboard } from './features/components/dashboard/Dashboard'
 
 function App() {
   return (

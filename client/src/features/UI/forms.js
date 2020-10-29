@@ -1,8 +1,8 @@
 import React from 'react'
 import { LoginButton, RegisterButton } from './Buttons'
 import { useHistory } from 'react-router-dom'
-import { useAuth } from './features/authentication/auth'
-import api from './utils/request'
+import { useAuth } from '../authentication/auth'
+// import api from '../../utils/request'
 
 export function LoginForm() {
   const history = useHistory()
