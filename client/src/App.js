@@ -1,11 +1,20 @@
 import React from 'react';
-// import { Counter } from './features/components/counter/Counter';
 import './App.css';
+// import { Counter } from './features/components/counter/Counter';
+import {BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom"
 
 function App() {
   return (
-    <div>
-    </div>
+    <Router>
+      <Switch>
+        <Route>
+          
+        </Route>
+      </Switch>
+    </Router>
   )
 }
 
