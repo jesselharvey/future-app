@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import { Counter } from './features/components/counter/Counter';
 import './App.css';
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
         </span>
       </header>
     </div>
-  );
+  )
 }
 
 export default App;
