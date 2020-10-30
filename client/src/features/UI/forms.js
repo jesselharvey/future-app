@@ -20,10 +20,23 @@ export function LoginForm() {
         <input type="text" name="login"></input>
       <label htmlFor="password">Password</label>
         <input type="password" name="password"></input>
-      <div >
+        <button type="submit">Login</button>
+      {/* <div >
         <LoginButton />
         <RegisterButton />
-      </div>
+      </div> */}
     </form>
   )
+}
+
+export function RegisterForm() {
+  const history = useHistory()
+  const { signup } = useAuth()
+  function handle(e) {
+    e.preventDefault()
+    signup('user', 'password').then((resp) => {
+      
+    })
+  }
+
 }
