@@ -54,7 +54,9 @@ async function main() {
   await conn('goals').insert({title: `?`, reason:`?`, finish_line: `?`, user_id: `?`})
   await conn('tasks').insert({ description: `?`, parent_id: `?`, goal_id: `?`})
   await conn('posts').insert({date_time: `?`, description: `?`, goal_id: `?`})
+
   process.exit()
+  
 }
 
 main()
