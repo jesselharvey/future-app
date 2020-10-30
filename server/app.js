@@ -1,18 +1,23 @@
+require('dotenv').config()
 const express = require('express')
 const app = express();
 const PORT = 3001
-
-require('dotenv').config()
-
+const usersRoute = require('./routes/users')
+const goalsRoute = require('./routes/goals')
+const tasksRoute = require('./routes/tasks')
+const postsRoute = require('./routes/posts')
 const authRoutes = require('./routes/auth')
+
 const jwtMiddleware = require('express-jwt')
 const jwtToken = require('jsonwebtoken')
-const usersRoute = require('./routes/users')
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: false}))
+app.use(express.urlencoded({ extended: false }))
 
 app.use('/api', usersRoute)
+app.use('/api', goalsRoute)
+app.use('/api', tasksRoute)
+app.use('/api', postsRoute)
 app.use('/api', authRoutes)
 
 function attachUser(req, res, next) {
@@ -37,6 +42,8 @@ app.get(
     res.json()
   }
 )
+
+
 
 app.listen(PORT, () => {
   console.log("listening on port " + PORT)
