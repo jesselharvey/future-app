@@ -29,9 +29,9 @@ export default (state = initialState, action) => {
   }
 }
 
-function loginUser(username, password) {
+function loginUser(email, password) {
     return dispatch => {
-        return api.login(username, password)
+        return api.login(email, password)
         .then(resp => {
             dispatch({
                 type: LOGIN_SUCCESS,
@@ -50,9 +50,9 @@ function logoutUser() {
     }
 }
 
-function signupUser(username, password) {
+function signupUser(email, password) {
     return dispatch => {
-        return api.signup(username, password).then(resp => {
+        return api.signup(email, password).then(resp => {
             dispatch({
                 type: LOGOUT,
             })
@@ -64,8 +64,8 @@ function signupUser(username, password) {
 export function useAuth() {
   const dispatch = useDispatch()
   const isAuthenticated = useSelector(appState => appState.authState.isAuthenticated)
-  const login = (username, password) => dispatch(loginUser(username, password))
-  const signup = (username, password) => dispatch(signupUser(username, password))
+  const login = (email, password) => dispatch(loginUser(email, password))
+  const signup = (email, password) => dispatch(signupUser(email, password))
   const logout = () => dispatch(logoutUser())
   const testProtected = () => api.get('/dashboard')
 

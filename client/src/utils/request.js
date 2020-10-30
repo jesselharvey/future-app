@@ -60,9 +60,9 @@ class Request {
 }
 
 export class AuthService {
-    static login = (username, password) => {
+    static login = (email, password) => {
         const userToLogin = {
-            username: username,
+            email: email,
             password: password
         }
         return api.post('/login', userToLogin)
@@ -72,9 +72,9 @@ export class AuthService {
         })
     }
 
-    static signup = (username, password) => {
+    static signup = (email, password) => {
         const userToRegister = {
-            username: username,
+            email: email,
             password: password
         }
         return api.post('/registration', userToRegister)
