@@ -72,7 +72,7 @@ export class AuthService {
         })
     }
 
-    static signup = (email, password) => {
+    static register = (email, password) => {
         const userToRegister = {
             email: email,
             password: password
@@ -96,7 +96,7 @@ export class AuthService {
 
 const api = new Request()
 api.login = AuthService.login
-api.signup = AuthService.signup
+api.register = AuthService.register
 api.logout = AuthService.logout
 
 export default api

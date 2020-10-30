@@ -50,9 +50,9 @@ function logoutUser() {
     }
 }
 
-function signupUser(email, password) {
+function registerUser(email, password) {
     return dispatch => {
-        return api.signup(email, password).then(resp => {
+        return api.register(email, password).then(resp => {
             dispatch({
                 type: LOGOUT,
             })
@@ -65,11 +65,11 @@ export function useAuth() {
   const dispatch = useDispatch()
   const isAuthenticated = useSelector(appState => appState.authState.isAuthenticated)
   const login = (email, password) => dispatch(loginUser(email, password))
-  const signup = (email, password) => dispatch(signupUser(email, password))
+  const register = (email, password) => dispatch(registerUser(email, password))
   const logout = () => dispatch(logoutUser())
   const testProtected = () => api.get('/dashboard')
 
-  return { login, logout, signup, isAuthenticated, testProtected }
+  return { login, logout, register, isAuthenticated, testProtected }
 }
 
 //

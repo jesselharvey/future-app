@@ -1,5 +1,4 @@
-#loginForm {
-  width: 50%;
+.authForm {
   display: flex;
   align-items: center;
   flex-flow: column;
