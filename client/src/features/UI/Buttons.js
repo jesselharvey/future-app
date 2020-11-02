@@ -26,10 +26,9 @@ export function AddGoalButton(props) {
 
 export function IncrementFormButton() {
   const dispatch = useDispatch()
-  const formIndex = useSelector(selectFormIndex)
+  // const formIndex = useSelector(selectFormIndex)
   function handleIncrement(e) {
     e.preventDefault()
-    console.log(formIndex)
     dispatch(incrementIndex())
   }
 
@@ -43,7 +42,7 @@ export function DecrementFormButton() {
   const formIndex = useSelector(selectFormIndex)
   function handleDecrement(e) {
     e.preventDefault()
-    console.log(formIndex)
+    // console.log(formIndex)
     dispatch(decrementIndex())
   }
 
