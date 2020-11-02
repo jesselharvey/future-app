@@ -28,7 +28,8 @@ async function main() {
     table.increments('id')
     table.string('title', 30)
     table.string('reason', 30)
-    table.datetime('finish_line')
+    table.date('finish_line_date')
+    table.time('finish_line_time')
     table.integer('user_id').unsigned()
     table.foreign('user_id').references('users.id')
   }) 
@@ -43,7 +44,7 @@ async function main() {
 
   await conn.schema.createTable(`posts`, (table) => {
     table.increments('id')
-    table.datetime('date_time')
+    table.current_timestamp('date_time')
     table.string('description', 144)
     table.integer('goal_id').unsigned()
     table.foreign('goal_id').references('goals_id')
@@ -56,7 +57,7 @@ async function main() {
   await conn('posts').insert({date_time: `?`, description: `?`, goal_id: `?`})
 
   process.exit()
-  
+
 }
 
 main()
