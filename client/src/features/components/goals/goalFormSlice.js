@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
 
 export const goalFormSlice = createSlice({
   name: 'goalForm',
@@ -23,10 +24,25 @@ export const goalFormSlice = createSlice({
       state.reason = action.payload
     },
     setTasksState: (state, action) => {
-      state.tasks.push(action.payload)
-    }
+      state.tasks = action.payload
+    },
+    clearGoalFormState: (state) => {
+      state.title = ''
+      state.reason = ''
+      state.tasks = []
+    },
+    // submitGoalForm: (state, action) => {
+
+    // }
   },
 })
+
+export const submitGoalForm = () => (dispatch) => {
+  axios.post('/api/', {title: '', reason: '', }).then((resp) => {
+
+  })
+
+}
 
 export const { incrementIndex, decrementIndex, setTitleState, setReasonState, setTasksState } = goalFormSlice.actions
 
