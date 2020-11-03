@@ -1,16 +1,17 @@
-import React from 'react'
-import { useSelector, 
-//useDispatch
-} from 'react-redux'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { selectUserInfo, selectGoals } from '../goals/goalSlice'
+import { selectUserInfo, selectGoals, displayGoals } from '../goals/goalSlice'
 import { AddGoalButton } from '../../UI/Buttons'
 
 export function Dashboard() {
-  // const dispatch = useDispatch()
-
+  const dispatch = useDispatch()
   const goals = useSelector(selectGoals)
   const user = useSelector(selectUserInfo)
+
+  useEffect(() => {
+    dispatch(displayGoals)
+  }, [])
 
   console.log(goals)
   console.log(user)
