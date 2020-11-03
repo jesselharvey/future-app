@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { selectUserInfo, selectGoals, displayGoals } from '../goals/goalSlice'
+import { selectUser, selectGoals, displayGoals, fetchUser } from '../goals/goalSlice'
 import { AddGoalButton } from '../../UI/Buttons'
 
 export function Dashboard() {
   const dispatch = useDispatch()
   const goals = useSelector(selectGoals)
-  const user = useSelector(selectUserInfo)
+  const user = useSelector(selectUser)
 
   useEffect(() => {
     dispatch(displayGoals)
-  }, [])
+    dispatch(fetchUser)
+  }, [displayGoals, fetchUser])
 
   console.log(goals)
   console.log(user)
@@ -19,10 +20,11 @@ export function Dashboard() {
   return (
     // <Nav>
     <div className="body">
-      <h1>Welcome {user.name}</h1>
+      <h1>Welcome {user.id}</h1>
       <div id="goalGrid">
         {goals.map((goal) => (
-        <Link className="goalCard" to={`/api/goal/${goal.id}`}><div>
+        <Link className="goalCard" to={`/api/goal/${goal.id}`}>
+          <div>
           <span>{goal.title}</span>
         </div></Link>
         ))}

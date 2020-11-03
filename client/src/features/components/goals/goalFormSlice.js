@@ -8,6 +8,8 @@ export const goalFormSlice = createSlice({
     title: '',
     reason: '',
     tasks: [],
+    date: '',
+    time: ''
   },
   reducers: {
     incrementIndex: (state) => {
@@ -37,14 +39,19 @@ export const goalFormSlice = createSlice({
   },
 })
 
-export const submitGoalForm = () => (dispatch) => {
-  axios.post('/api/', {title: '', reason: '', }).then((resp) => {
+export const submitGoalForm = (title, reason, tasks) => (dispatch) => {
+  axios.post('/api/goals/users/:userId', {title: title, reason: reason}).then((resp) => {
+    // const submitGoalTasks = () => (dispatch) => {
+    //   axios.post('/api/tasks/users/:userId', {tasks: tasks}).then((resp) => {
+    //   })
+    // }
 
   })
 
 }
 
-export const { incrementIndex, decrementIndex, setTitleState, setReasonState, setTasksState } = goalFormSlice.actions
+
+export const { incrementIndex, decrementIndex, setTitleState, setReasonState, setTasksState, clearGoalFormState } = goalFormSlice.actions
 
 export const selectFormIndex = state => state.goalForm.formIndex
 export const selectTitle = state => state.goalForm.title

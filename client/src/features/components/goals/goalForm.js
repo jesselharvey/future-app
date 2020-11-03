@@ -9,7 +9,9 @@ import { selectFormIndex,
   setReasonState,
   setTasksState,
   incrementIndex,
-  decrementIndex
+  decrementIndex,
+  submitGoalForm,
+  clearGoalFormState
 } from './goalFormSlice'
 
 export function Title() {
@@ -152,6 +154,9 @@ function handlePrevious(e) {
 
 function handleSubmit(e) {
   e.preventDefault()
+  dispatch(submitGoalForm(title, reason, tasks))
+  
+  // dispatch(clearGoalFormState())
   
 }
 

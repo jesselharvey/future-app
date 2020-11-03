@@ -14,18 +14,14 @@ const jwtToken = require('jsonwebtoken')
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-app.use('/api', usersRoute)
-app.use('/api', goalsRoute)
-app.use('/api', tasksRoute)
-app.use('/api', postsRoute)
-app.use('/api', authRoutes)
+
 
 function attachUser(req, res, next) {
   const authorizationHeader = req.headers.authorization
   if (authorizationHeader) {
     const token = authorizationHeader.split(' ')[1]
     const decoded = jwtToken.decode(token)
-    req.user = { id: decoded.id, username: decoded.username }
+    req.user = { id: decoded.id, email: decoded.email }
   }
   next()
 }
@@ -42,6 +38,12 @@ app.get(
     res.json()
   }
 )
+
+app.use('/api', authRoutes)
+app.use('/api', usersRoute)
+app.use('/api', goalsRoute)
+app.use('/api', tasksRoute)
+app.use('/api', postsRoute)
 
 
 app.listen(PORT, () => {

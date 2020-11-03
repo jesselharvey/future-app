@@ -5,16 +5,15 @@ import axios from 'axios'
 export const goalsSlice = createSlice({
   name: 'goal',
   initialState: {
-    userInfo: {
-      id: 1,
-      name: "Jesse",
-      email: "ex@example.com"
-    },
+    user: {},
     goals: [],
   },
   reducers: {
     asyncFetchGoals: (state, action) => {
       state.goals = action.payload
+    },
+    asyncFetchUser: (state, action) => {
+      state.user = action.payload
     },
     addGoalFunct: (state, action) => {
       state.goals.push(action.payload)
@@ -32,7 +31,7 @@ export const goalsSlice = createSlice({
   },
 })
 
-export const { asyncFetchGoals, addGoalFunct, removeGoalFunct, editGoalFunct} = goalsSlice.actions
+export const { asyncFetchGoals, asyncFetchUser, addGoalFunct, removeGoalFunct, editGoalFunct} = goalsSlice.actions
 
 export const displayGoals = (dispatch) => {
   axios.get('/api/goals').then((resp) => {
@@ -41,8 +40,14 @@ export const displayGoals = (dispatch) => {
   })
 }
 
+export const fetchUser = (dispatch) => {
+  axios.get('/api/users').then((resp) => {
+    dispatch(asyncFetchUser(resp.data))
+  })
+}
 
-export const selectUserInfo = state => state.goal.userInfo
+
+export const selectUser = state => state.goal.user
 export const selectGoals = state => state.goal.goals
 
 export default goalsSlice.reducer
