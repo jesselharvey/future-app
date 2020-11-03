@@ -1,3 +1,35 @@
+/* GLOBAL */
+
+.body {
+  width: 70%;
+  /* display: inline-flex;
+  flex-flow: row wrap;
+  justify-content: center; */
+  margin: 0 auto;
+}
+
+/* DASHBOARD */
+
+#goalGrid {
+  display: flex;
+}
+.goalCard {
+  height: 50px;
+  width: 40%;
+  background: #eee;
+  margin: 0 5%;
+}
+
+a.goalCard:link,
+a.goalCard:visited,
+a.goalCard:hover,
+a.goalCard:active {
+  text-decoration: none;
+  color: #000;
+}
+
+/* FORMS */
+
 .authForm {
   display: flex;
   align-items: center;
