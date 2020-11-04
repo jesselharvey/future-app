@@ -10,8 +10,8 @@ export function Dashboard() {
   const user = useSelector(selectUser)
 
   useEffect(() => {
-    dispatch(displayGoals())
-    dispatch(fetchUser())
+    // dispatch(displayGoals())
+    // dispatch(fetchUser())
   }, [dispatch])
 
   console.log(goals)
@@ -20,7 +20,7 @@ export function Dashboard() {
   return (
     // <Nav>
     <div className="body">
-      <h1>Welcome {user.id}</h1>
+      <h1>Welcome {user.name}</h1>
       <div id="goalGrid">
         {goals.map((goal) => (
         <Link className="goalCard" to={`/api/goal/${goal.id}`}>

@@ -1,4 +1,9 @@
 /* GLOBAL */
+:root {
+  --purple1: #C004D9;
+  --purple2: #AB05F2;
+
+}
 
 .body {
   width: 70%;

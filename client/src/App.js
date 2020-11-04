@@ -1,4 +1,5 @@
 import React from 'react';
+import 'antd/dist/antd.css'
 import './App.css';
 // import { Counter } from './features/components/counter/Counter';
 import {BrowserRouter as Router,
@@ -10,6 +11,7 @@ import { Register } from './features/components/auth/Register'
 import AuthRoute from './features/authentication/AuthRoute'
 import { Dashboard } from './features/components/dashboard/Dashboard'
 import { GoalForm } from './features/components/goals/goalForm'
+import { GoalPage } from './features/components/goals/goalPage'
 
 function App() {
   return (
@@ -23,6 +25,9 @@ function App() {
       </Route>
       <AuthRoute path='/dashboard'>
         <Dashboard />
+      </AuthRoute>
+      <AuthRoute path='/goal/:id'>
+      <GoalPage />
       </AuthRoute>
       <AuthRoute path='/goal-form'>
         <GoalForm />
