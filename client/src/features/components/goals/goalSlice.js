@@ -33,15 +33,16 @@ export const goalsSlice = createSlice({
 
 export const { asyncFetchGoals, asyncFetchUser, addGoalFunct, removeGoalFunct, editGoalFunct} = goalsSlice.actions
 
-export const displayGoals = (dispatch) => {
+export const displayGoals = () => (dispatch) => {
   axios.get('/api/goals').then((resp) => {
     console.log(resp.data)
     dispatch(asyncFetchGoals(resp.data))
   })
 }
 
-export const fetchUser = (dispatch) => {
+export const fetchUser = () => (dispatch) => {
   axios.get('/api/users').then((resp) => {
+    console.log(resp.data)
     dispatch(asyncFetchUser(resp.data))
   })
 }

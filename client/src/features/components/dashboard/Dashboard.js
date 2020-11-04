@@ -10,9 +10,9 @@ export function Dashboard() {
   const user = useSelector(selectUser)
 
   useEffect(() => {
-    dispatch(displayGoals)
-    dispatch(fetchUser)
-  }, [displayGoals, fetchUser])
+    dispatch(displayGoals())
+    dispatch(fetchUser())
+  }, [dispatch])
 
   console.log(goals)
   console.log(user)

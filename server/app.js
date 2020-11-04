@@ -26,10 +26,10 @@ function attachUser(req, res, next) {
   next()
 }
 app.use(attachUser)
-app.get('/api', (req, res) => {
-  res.json({ example: true })
-})
-app.use('/api', authRoutes)
+// app.get('/api', (req, res) => {
+//   res.json({ example: true })
+// })
+// app.use('/api', authRoutes)
 app.get(
   '/api/dashboard',
   jwtMiddleware({ secret: process.env.SECRET, algorithms: ['HS256'] }),
