@@ -1,5 +1,4 @@
 import React from 'react';
-import 'antd/dist/antd.css'
 import './App.css';
 // import { Counter } from './features/components/counter/Counter';
 import {BrowserRouter as Router,
@@ -26,8 +25,8 @@ function App() {
       <AuthRoute path='/dashboard'>
         <Dashboard />
       </AuthRoute>
-      <AuthRoute path='/goal/:id'>
-      <GoalPage />
+      <AuthRoute path='/goal/:goalId'>
+        <GoalPage />
       </AuthRoute>
       <AuthRoute path='/goal-form'>
         <GoalForm />

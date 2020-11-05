@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { selectUser, selectGoals, displayGoals, fetchUser } from '../goals/goalSlice'
 import { AddGoalButton } from '../../UI/Buttons'
+import { Button } from 'antd'
 
 export function Dashboard() {
   const dispatch = useDispatch()
@@ -10,8 +11,8 @@ export function Dashboard() {
   const user = useSelector(selectUser)
 
   useEffect(() => {
-    // dispatch(displayGoals())
-    // dispatch(fetchUser())
+    dispatch(displayGoals())
+    dispatch(fetchUser())
   }, [dispatch])
 
   console.log(goals)
@@ -20,10 +21,11 @@ export function Dashboard() {
   return (
     // <Nav>
     <div className="body">
+    <Button type="primary">Test Bitch</Button>
       <h1>Welcome {user.name}</h1>
       <div id="goalGrid">
         {goals.map((goal) => (
-        <Link className="goalCard" to={`/api/goal/${goal.id}`}>
+        <Link className="goalCard" to={`/goal/${goal.id}`}>
           <div>
           <span>{goal.title}</span>
         </div></Link>

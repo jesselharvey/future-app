@@ -1,9 +1,9 @@
 /* GLOBAL */
-:root {
+/* :root {
   --purple1: #C004D9;
   --purple2: #AB05F2;
 
-}
+} */
 
 .body {
   width: 70%;
@@ -39,4 +39,29 @@ a.goalCard:active {
   display: flex;
   align-items: center;
   flex-flow: column;
+}
+
+/* GOAL PAGE */
+
+#goalHeader {
+  display: inline-flex;
+  justify-content: space-around;
+  margin: 2.5% 10%;
+  width: 80%;
+  
+}
+
+#entryContainer {
+  display: inline-flex;
+  margin: 0 10%;
+  width: 80%;
+  overflow-x: scroll;
+}
+
+.entryCard {
+  width: 30%;
+}
+
+#accordianContainer {
+  width: 40%;
 }
