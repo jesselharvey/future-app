@@ -20,7 +20,7 @@ export function RegisterButton() {
 export function AddGoalButton(props) {
 
   return (
-  <button>New Goal!</button>
+  <button className={props.className}>New Goal!</button>
   )
 }
 

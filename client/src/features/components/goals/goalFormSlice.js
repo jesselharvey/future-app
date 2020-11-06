@@ -38,11 +38,17 @@ export const goalFormSlice = createSlice({
 })
 
 export const submitGoalForm = () => (dispatch) => {
-  axios.post('/api/', {title: '', reason: '', }).then((resp) => {
+  axios.post('api/goals/users/:userId', {title: '', reason: '', }).then((resp) => {
 
   })
 
 }
+
+// {title: req.body.title, 
+// reason: req.body.reason, 
+// finish_line_date: req.body.finish_line_date, 
+// finish_line_time: req.body.finish_line_time, 
+// user_id: req.params.userId}
 
 export const { incrementIndex, decrementIndex, setTitleState, setReasonState, setTasksState } = goalFormSlice.actions
 
