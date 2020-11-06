@@ -1,11 +1,9 @@
+@import "~antd/dist/antd.css";
+
 /* GLOBAL */
 
 * {
-  font-family: Optima, sans-serif;
-}
-
-.body {
-  min-height: 1370px;
+  font-family: Inconsolata;
 }
 
 /* DASHBOARD */
@@ -31,86 +29,130 @@
   padding-top: 23px;
 }
 
+.header span {
+  font-size: 15px;
+  color: darkslategrey;
+}
+
 .name-logo {
   position: relative;
-  right: 66px;
-  top: 5px;
-  color: black;
-  font-size: 20px;
+  right: 91px;
+  color: darkslategrey;
+  font-size: 30px;
 }
 
 .fake-logo {
   border: none;
-  background: rgba(0, 0, 0, 0.466);
+  background: rgba(0, 0, 0, 0.425);
   height: 50px;
   width: 50px;
-  border-radius: 50%;
+  border-radius: 75%;
   position: relative;
-  right: 58%;
-  bottom: 14px;
+  right: 69%;
+  bottom: 17px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.main {
+  min-height: 1390px;
 }
 
 .dashboard-header {
-  height: 670px;
+  height: 700px;
   margin-bottom: 25px;
   background: rgb(197, 244, 197);
   background: linear-gradient(
     0deg,
     rgba(197, 244, 197, 1) 0%,
-    rgba(108, 213, 108, 1) 80%
+    rgba(108, 213, 108, 1) 90%
   );
 }
 
 .welcome-header {
-  font-size: 80px;
-  letter-spacing: 1px;
+  font-size: 90px;
   position: relative;
   width: 80%;
-  top: 21%;
-  left: 11%;
+  top: 22%;
+  left: 15%;
+  color: darkslategrey;
+  text-shadow: 2px 2px grey;
 }
 
 .add-goal-button {
-  width: 20%;
-  height: 20%;
+  width: 30%;
+  height: 25%;
   position: relative;
-  top: 30%;
-  left: 25%;
+  top: 25%;
+  left: 20%;
   font-size: 30px;
   border: none;
-  background: rgba(0, 0, 0, 0.466);
-  color: lightgreen;
-  border-radius: 15px;
+  background: darkslategrey;
+  color: rgb(197, 244, 197);
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.add-goal-button:active {
+  outline: none;
+}
+
+.add-goal-button:hover {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  color: darkslategrey;
+  background: rgba(108, 213, 108, 1);
 }
 
 .motivation-quote {
   font-size: 22px;
   width: 29%;
   position: relative;
-  left: 54%;
+  left: 56%;
+  bottom: 7%;
   text-align: right;
   font-style: italic;
+  color: darkslategrey;
 }
 
 .lets-make-progress {
-  font-size: 45px;
+  padding-top: 5px;
+  font-size: 40px;
   text-align: center;
+}
+
+.contact-area {
+  position: fixed;
+  z-index: 2147483003;
+  bottom: 10px;
+  right: 10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: black;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16), 0 5px 10px rgba(0, 0, 0, 0.23);
+}
+
+.contact-icon {
+  position: relative;
+  color: white;
+  left: 22px;
+  top: 22px;
 }
 
 #goalGrid {
   width: 75%;
-  margin: 0 5% 0 12%;
+  margin: 0 5% 5% 14%;
   display: flex;
   flex-wrap: wrap;
 }
 .ant-card {
   height: 260px;
-  width: 30%;
-  margin: 1.5%;
+  width: 31%;
+  margin: 1%;
   color: black;
-  border: 5px solid black;
-  border-radius: 50%;
-  background: lightgreen;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 a.goalCard:link,
@@ -127,8 +169,8 @@ a.goalCard:active {
 }
 
 .dashboard-footer {
-  height: 50px;
-  background: rgba(0, 0, 0, 0.9);
+  height: 85px;
+  background: darkslategrey;
 }
 
 /* FORMS */

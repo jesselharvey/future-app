@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { selectUserInfo, selectGoals, displayGoals, fetchUser } from '../goals/goalSlice'
 import { AddGoalButton } from '../../UI/Buttons'
-import { DatePicker, Card, Menu, Breadcrumb } from 'antd'
+import { Card, Menu, Breadcrumb } from 'antd'
 import { SmileOutlined } from '@ant-design/icons';
 
 export function Dashboard() {
@@ -25,25 +25,28 @@ export function Dashboard() {
   return (<>
     <div className="header">
       <Breadcrumb id="nav-bar">
-      <button className="fake-logo">
-        <h1 className="name-logo">AppName</h1>
-      </button>
-      <Breadcrumb.Item><a href="">Goals</a></Breadcrumb.Item>
-      <Breadcrumb.Item><a href="">Settings</a></Breadcrumb.Item>
-      <Breadcrumb.Item><a href="">Contact Us</a></Breadcrumb.Item>
-      <Breadcrumb.Item><a href="">Future Features</a></Breadcrumb.Item>
-      <Breadcrumb.Item><a href="">Logout</a></Breadcrumb.Item>
+        <button className="fake-logo">
+          <h1 className="name-logo">AppName</h1>
+        </button>
+        <Breadcrumb.Item><a href="">Home</a></Breadcrumb.Item>
+        <Breadcrumb.Item><a href="">Archives</a></Breadcrumb.Item>
+        <Breadcrumb.Item><a href="">Settings</a></Breadcrumb.Item>
+        <Breadcrumb.Item><a href="">Logout</a></Breadcrumb.Item>
       </Breadcrumb>
-      </div>
+    </div>
+    <div className="body">
       <div className="main">
-      <div className="body">
         <div className="dashboard-header">
-          <h1 className="welcome-header">Good morning "username"</h1>
+          <h1 className="welcome-header">Good morning, Lance</h1>
           <Link to={'/goal-form'}><AddGoalButton className="add-goal-button" /></Link>
-          <p className="motivation-quote">"If the mind is willing, the flesh could go on and on without many things."<br/>– Sun Tzu</p>
+          <p className="motivation-quote">“If you fulfill your obligations everyday, you don't need to worry about the future.”<br/>
+          ― Jordan Peterson</p>
         </div>
         <h1 className="lets-make-progress">Lets make progress!</h1>
-        <div id="goalGrid">
+        <div className="contact-area">
+        <SmileOutlined className="contact-icon" />
+        </div>
+        <div id="goalGrid"> 
           {goals.map((goal) => (
             <Card >
               <Link className="goalCard" to={`/api/goal/${goal.id}`}>

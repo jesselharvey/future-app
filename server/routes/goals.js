@@ -21,7 +21,7 @@ router.post('/goals/users/:userId', async (req, res) => {
 })
 
 
-router.delete('goals/:id', async (req, res) => {
+router.delete('/goals/:id', async (req, res) => {
   await conn('goals').where({id: req.params.id}).del()
   res.json({message: 'goal deleted'})
 })
