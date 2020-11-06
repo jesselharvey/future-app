@@ -2,11 +2,11 @@ require('dotenv').config()
 const express = require('express')
 const app = express();
 const PORT = 3001
+const authRoutes = require('./routes/auth')
 const usersRoute = require('./routes/users')
 const goalsRoute = require('./routes/goals')
 const tasksRoute = require('./routes/tasks')
 const postsRoute = require('./routes/posts')
-const authRoutes = require('./routes/auth')
 
 const jwtMiddleware = require('express-jwt')
 const jwtToken = require('jsonwebtoken')

@@ -2,12 +2,15 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchGoal, selectGoal } from '../goals/goalSlice'
 // import { Button } from 'antd'
-import { Collapse, Card } from 'antd';
+import { Collapse, Card, Input } from 'antd';
+import { FormOutlined } from '@ant-design/icons'
 import { Accordian } from '../../UI/Accordian'
 
 
 export function GoalPage() {
   const { Panel } = Collapse
+
+  const { TextArea } = Input
   
   function callback(key) {
     console.log(key)
@@ -36,17 +39,17 @@ export function GoalPage() {
       {
         id: 4,
         name: 'sub step 1',
-        parent_id: 1,
+        parent_id: null,
       }, 
       {
         id: 5,
         name: 'sub step 2',
-        parent_id: 1,
+        parent_id: null,
       },
       {
         id: 6,
         name: 'sub step 3',
-        parent_id: 2,
+        parent_id: null,
       },
     ],
     entries: [
@@ -135,12 +138,17 @@ export function GoalPage() {
       </div>
       <br />
       <div id="entryContainer">
-        {goalObj.entries.map(entry => (
-          <Card className="entryCard" title={entry.date}>
-            <span>{entry.content}</span>
-          </Card>
-          // <span>{entry.content}</span>
-        ))}
+        <Card className="inputEntryCard" title={'Add new entry!'}   >
+          <TextArea autoSize={{minRows: 1, maxRows: 2}} />
+        </Card>
+        <div id="entries">
+          {goalObj.entries.map(entry => (
+            <Card className="entryCard" title={entry.date}>
+              <span>{entry.content}</span>
+            </Card>
+            // <span>{entry.content}</span>
+          ))}
+        </div>
       </div>
       <div id="accordianContainer">
           <Accordian goal={goalObj}></Accordian>

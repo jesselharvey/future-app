@@ -53,8 +53,12 @@ a.goalCard:active {
 
 #entryContainer {
   display: inline-flex;
-  margin: 0 10%;
   width: 80%;
+  margin: 2.5% 10% 5%;
+}
+
+#entries {
+  display: inline-flex;
   overflow-x: scroll;
 }
 
@@ -62,6 +66,11 @@ a.goalCard:active {
   width: 30%;
 }
 
+.inputEntryCard {
+  width: 70%;
+}
+
 #accordianContainer {
   width: 40%;
+  margin: 5% 10%;
 }

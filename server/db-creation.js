@@ -51,10 +51,10 @@ async function main() {
   })
 
   const salt = createSalt(20)
-  await conn('users').insert({email: `?`, password: sha512(`?` + salt), salt: salt})
-  await conn('goals').insert({title: `?`, reason:`?`, finish_line: `?`, user_id: `?`})
-  await conn('tasks').insert({ description: `?`, parent_id: `?`, goal_id: `?`})
   await conn('posts').insert({date_time: `?`, description: `?`, goal_id: `?`})
+  await conn('tasks').insert({ description: `?`, parent_id: `?`, goal_id: `?`})
+  await conn('goals').insert({title: `?`, reason:`?`, finish_line: `?`, user_id: `?`})
+  await conn('users').insert({email: `?`, password: sha512(`?` + salt), salt: salt})
 
   process.exit()
 
