@@ -9,7 +9,7 @@ router.get('/goals', async (req, res) => {
   res.json(goals.rows)
 })
 
-router.get('/goals/id', async (req, res) => {
+router.get('/goals/:id', async (req, res) => {
   const goalId = req.params.id
   const selectedGoal = await conn.raw(`SELECT * FROM goals WHERE id = ${goalId};`)
   res.json(selectedGoal.rows)
