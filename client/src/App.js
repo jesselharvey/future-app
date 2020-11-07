@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-// import { Counter } from './features/components/counter/Counter';
 import {BrowserRouter as Router,
   Switch,
   Route
@@ -10,6 +9,7 @@ import { Register } from './features/components/auth/Register'
 import AuthRoute from './features/authentication/AuthRoute'
 import { Dashboard } from './features/components/dashboard/Dashboard'
 import { GoalForm } from './features/components/goals/goalForm'
+
 
 function App() {
   return (

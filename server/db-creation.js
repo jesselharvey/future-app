@@ -4,10 +4,10 @@ const sha512 = require('js-sha512')
 const { createSalt } = require('./utils/auth')
 
 const tables = [
-  'users',
-  'goals',
+  'posts',
   'tasks',
-  'posts'
+  'goals',
+  'users',
 ]
 
 async function main() {
@@ -28,33 +28,37 @@ async function main() {
     table.increments('id')
     table.string('title', 30)
     table.string('reason', 30)
-    table.date('finish_line_date')
-    table.time('finish_line_time')
+    table.enu('status', ['complete', 'active']).defaultTo('active')
+    table.date('date')
+    table.time('time')
     table.integer('user_id').unsigned()
-    table.foreign('user_id').references('users.id')
+    table.foreign('user_id').references('users.id').onDelete('cascade')
   }) 
 
   await conn.schema.createTable(`tasks`, (table) => {
     table.increments('id')
     table.string('description', 50)
-    table.increments('parent_id')
+    table.integer('parent_id').unsigned()
+    table.enu('status', ['complete', 'active']).defaultTo('active')
+    // table.increments('parent_id').references('tasks.id').onDelete('cascade')
     table.integer('goal_id').unsigned()
-    table.foreign('goal_id').references('goals_id')
+    table.foreign('goal_id').references('goals.id').onDelete('cascade')
   })
 
   await conn.schema.createTable(`posts`, (table) => {
     table.increments('id')
-    table.current_timestamp('date_time')
+    table.timestamp('date_time')
     table.string('description', 144)
     table.integer('goal_id').unsigned()
-    table.foreign('goal_id').references('goals_id')
+    table.foreign('goal_id').references('goals.id').onDelete('cascade')
   })
 
   const salt = createSalt(20)
-  await conn('users').insert({email: `?`, password: sha512(`?` + salt), salt: salt})
-  await conn('goals').insert({title: `?`, reason:`?`, finish_line: `?`, user_id: `?`})
-  await conn('tasks').insert({ description: `?`, parent_id: `?`, goal_id: `?`})
-  await conn('posts').insert({date_time: `?`, description: `?`, goal_id: `?`})
+  const user = await conn('users').insert({email: `test@example.com`, password: sha512(`?` + salt), salt: salt})
+  const goal = await conn('goals').insert({title: `goal 1`, reason:`this is the reason`, date: '2020-10-07', time: '12:00:00', user_id: 1})
+  const task = await conn('tasks').insert({ description: `task 1`, parent_id: null, goal_id: 1})
+  const subTasks = await conn('tasks').insert({ description: `sub task of 1`, parent_id: 1, goal_id: 1})
+  await conn('posts').insert({date_time: new Date(), description: `My first post`, goal_id: 1})
 
   process.exit()
 
