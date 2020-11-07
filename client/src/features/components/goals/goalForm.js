@@ -13,6 +13,7 @@ import { selectFormIndex,
   submitGoalForm,
   clearGoalFormState
 } from './goalFormSlice'
+import Navbar from '../../UI/Nav'
 
 export function Title() {
 const dispatch = useDispatch()
@@ -36,7 +37,11 @@ function handleNext(e) {
 // console.log(props.title)
 // const x = title
   return (
-    <div>
+    <div className="onboarding-container">
+      <div className="onboarding-nav-bar">
+      <Navbar />  
+      </div>
+      <div className="onboarding-body"></div>
       <h3>Goal</h3>
       <label htmlFor="title">I want...</label>
       <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" placeholder="e.g. to gain muscle"></input>
@@ -69,7 +74,11 @@ useEffect(() => {
   }
 
   return (
-    <div>
+    <div className="onboarding-container">
+      <div className="onboarding-nav-bar">
+      <Navbar />  
+      </div>
+      <div className="onboarding-body">
       <h3>Reason</h3>
       <label htmlFor="reason">Because...</label>
       <input value={reason} onChange={(e) => setReason(e.target.value)} type="text" placeholder="e.g. i'll look and feel healthier"></input>
@@ -77,6 +86,7 @@ useEffect(() => {
       {/* <IncrementFormButton /> */}
       <button onClick={(e) => handlePrevious(e)} >Previous</button>
       <button onClick={(e) => handleNext(e)} >Next</button>
+      </div>
     </div>
   )
 }
@@ -111,7 +121,11 @@ export function Tasks() {
   }
 
   return (
-    <div>
+    <div className="onboarding-container">
+      <div className="onboarding-nav-bar">
+      <Navbar />  
+      </div>
+      <div className="onboarding-body">
       <h3>Tasks</h3>
       <label htmlFor="tasks">So I must...</label>
       <input value={task} onChange={(e) => setTask(e.target.value)} type="text" placeholder="e.g. i'll look and feel healthier"></input>
@@ -125,6 +139,7 @@ export function Tasks() {
           <li key={tasks.indexOf(task)} onClick={(e) => console.log(e.target)}>{task}</li>
         ))}
       </ol>
+      </div>
     </div>
   )
 }
@@ -161,7 +176,11 @@ function handleSubmit(e) {
 }
 
 return(
-  <div>
+  <div className="onboarding-container">
+    <div className="onboarding-nav-bar">
+    <Navbar />  
+    </div>
+    <div className="onboarding-body">
     <h1>Confirm</h1>
     <div>
       <span>My goal is: <strong>{title}</strong></span>
@@ -179,6 +198,7 @@ return(
     </div>
     <button onClick={(e) => handlePrevious(e)}>Previous</button>
     <button onClick={(e) => handleSubmit(e)}>Confirm goal</button>
+    </div>
   </div>
 )
 }

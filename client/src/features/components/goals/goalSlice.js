@@ -5,6 +5,7 @@ import api from '../../../utils/request'
 export const goalsSlice = createSlice({
   name: 'goal',
   initialState: {
+<<<<<<< HEAD
     user: {
       // id: 1,
       // name: 'Jesse',
@@ -39,14 +40,21 @@ export const goalsSlice = createSlice({
       // },
     ],
     goal: {}
+=======
+    user: [],
+    goals: [],
+>>>>>>> 4e4bcb23f8659f3065a34ca5552765cb661edeb0
   },
   reducers: {
     asyncFetchGoals: (state, action) => {
       state.goals = action.payload
     },
+<<<<<<< HEAD
     asyncFetchGoal: (state, action) => {
       state.goal = action.payload
     },
+=======
+>>>>>>> 4e4bcb23f8659f3065a34ca5552765cb661edeb0
     asyncFetchUser: (state, action) => {
       state.user = action.payload
     },

@@ -21,7 +21,6 @@ const postsRoute = require('./routes/posts')
 const jwtMiddleware = require('express-jwt')
 const jwtToken = require('jsonwebtoken')
 
-app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // app.get('/api', (req, res) => {
@@ -42,6 +41,7 @@ app.use('/api', usersRoute)
 app.use('/api', goalsRoute)
 app.use('/api', tasksRoute)
 app.use('/api', postsRoute)
+
 
 
 app.listen(PORT, () => {

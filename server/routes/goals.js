@@ -29,12 +29,12 @@ router.get('/goal/:goalId', async (req, res) => {
 // })
 
 router.post('/goals/users/:userId', async (req, res) => {
-  const goal = await conn('goals').insert({title: req.body.title, reason: req.body.reason, user_id: req.params.userId})
-  res.json(goal.rows)
+  const goal = await conn('goals').insert({title: req.body.title, reason: req.body.reason, date: req.body.date, time: req.body.time, user_id: req.params.userId})
+  res.json({message: 'goal created'})
 })
 
 
-router.delete('goals/:id', async (req, res) => {
+router.delete('/goals/:id', async (req, res) => {
   await conn('goals').where({id: req.params.id}).del()
   res.json({message: 'goal deleted'})
 })

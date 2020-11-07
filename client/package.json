@@ -16,5 +16,10 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"
   },
-  "proxy": "http://localhost:3001/"
+  "proxy": "http://localhost:3001/",
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!antd|@ant-design|rc-.+?|@babel/runtime).+(js|jsx)$"
+    ]
+  }
 }
