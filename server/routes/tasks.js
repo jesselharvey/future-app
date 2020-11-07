@@ -23,6 +23,11 @@ router.post('/tasks/:taskId/goals/:goalId', async (req, res) => {
   res.json({message: 'sub task created'})
 })
 
+router.patch('/tasks/:id/', async (req, res) => {
+  const task = await conn('tasks').where({id: req.params.id}).update({description: req.body.description})
+  res.json({message: 'task updated'})
+})
+
 router.delete('/tasks/:id', async (req, res) => {
   await conn('tasks').where({id: req.params.id}).del()
   res.json({message: 'task deleted'})
