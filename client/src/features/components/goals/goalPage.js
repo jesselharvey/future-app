@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { fetchGoal, selectGoal } from '../goals/goalSlice'
+import { fetchGoal, selectGoal } from './goalSlice'
 // import { Button } from 'antd'
 import { Collapse, Card, Input, Statistic } from 'antd';
 import { FormOutlined, EditOutlined } from '@ant-design/icons'
@@ -154,6 +154,7 @@ export function GoalPage() {
   useEffect(() => {
     dispatch(fetchGoal(goalId))
   }, [dispatch])
+  console.log("fuck you")
 
   return (
     <div>

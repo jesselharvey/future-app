@@ -42,7 +42,7 @@ export function Dashboard() {
         <div id="goalGrid"> 
           {goals.map((goal) => (
             <Card>
-              <Link className="goalCard" to={`/api/goal/${goal.id}`}>
+              <Link className="goalCard" to={`/goal/${goal.id}`}>
                 <div>
                   <span>{goal.title}</span>
                 </div>

@@ -22,6 +22,7 @@ const jwtMiddleware = require('express-jwt')
 const jwtToken = require('jsonwebtoken')
 
 app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
 // app.get('/api', (req, res) => {
 //   res.json({ example: true })
