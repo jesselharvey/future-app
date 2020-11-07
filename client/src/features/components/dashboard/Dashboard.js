@@ -7,7 +7,6 @@ import Navbar from '../../UI/Nav'
 import { Card, Menu, Breadcrumb, Button } from 'antd'
 import { SmileOutlined } from '@ant-design/icons';
 
-
 export function Dashboard() {
   const dispatch = useDispatch()
   const goals = useSelector(selectGoals)

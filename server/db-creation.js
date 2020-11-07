@@ -40,7 +40,7 @@ async function main() {
     table.string('description', 50)
     table.integer('parent_id').unsigned()
     table.enu('status', ['complete', 'active']).defaultTo('active')
-    // table.increments('parent_id').references('tasks.id').onDelete('cascade')
+    table.foreign('parent_id').references('tasks.id').onDelete('cascade')
     table.integer('goal_id').unsigned()
     table.foreign('goal_id').references('goals.id').onDelete('cascade')
   })
@@ -54,7 +54,7 @@ async function main() {
   })
 
   const salt = createSalt(20)
-  const user = await conn('users').insert({email: `test@example.com`, password: sha512(`?` + salt), salt: salt})
+  const user = await conn('users').insert({email: `test@example.com`, password: sha512(`test` + salt), salt: salt})
   const goal = await conn('goals').insert({title: `goal 1`, reason:`this is the reason`, date: '2020-10-07', time: '12:00:00', user_id: 1})
   const task = await conn('tasks').insert({ description: `task 1`, parent_id: null, goal_id: 1})
   const subTasks = await conn('tasks').insert({ description: `sub task of 1`, parent_id: 1, goal_id: 1})
