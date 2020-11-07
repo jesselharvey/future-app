@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+import api from '../../../utils/request'
 
 export const goalFormSlice = createSlice({
   name: 'goalForm',
@@ -40,7 +40,7 @@ export const goalFormSlice = createSlice({
 })
 
 export const submitGoalForm = (title, reason, tasks) => (dispatch) => {
-  axios.post('/api/goals/users/:userId', {title: title, reason: reason}).then((resp) => {
+  api.post('/goals/users/:userId', {title: title, reason: reason}).then((resp) => {
     // const submitGoalTasks = () => (dispatch) => {
     //   axios.post('/api/tasks/users/:userId', {tasks: tasks}).then((resp) => {
     //   })

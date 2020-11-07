@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+import api from '../../../utils/request'
 
 
 export const goalsSlice = createSlice({
@@ -63,30 +63,59 @@ export const goalsSlice = createSlice({
       return goal.id !== action.payload.id
       })
     },
+    addTaskFunc: (state, action) => {
+      state.tasks.push(action.payload)
+    },
+    removeTaskFunc: (state, action) => {
+      state.tasks = state.tasks.filter((task) =>{
+        return task.id !== action.payload.id
+      })
+    },
+    addSubTaskFunc: (state, action) => {
+      state.tasks.push(action.payload)
+    },
+    removeSubTaskFunc: (state, action) => {
+      state.tasks = state.tasks.filter((task) =>{
+        return task.id !== action.payload.id
+      })
+    }
   },
 })
 
-export const { asyncFetchGoals, asyncFetchGoal, asyncFetchUser, addGoalFunct, removeGoalFunct, editGoalFunct} = goalsSlice.actions
+export const { asyncFetchGoals,
+  asyncFetchGoal, 
+  asyncFetchUser, 
+  addGoalFunct, 
+  removeGoalFunct, 
+  editGoalFunct,
+  addTaskFunc,
+  removeTaskFunc,
+  addSubTaskFunc,
+  removeSubTaskFunc,
+  } = goalsSlice.actions
 
 export const displayGoals = () => (dispatch) => {
-  axios.get('/api/goals').then((resp) => {
+  api.get('/goals').then((resp) => {
     console.log(resp.data)
     dispatch(asyncFetchGoals(resp.data))
   })
 }
 
-export const fetchGoal = () => (dispatch) => {
-  axios.get('/api/goals/:goalId').then((resp) => {
+export const fetchGoal = (id) => (dispatch) => {
+  api.get('/goal/' + id).then((resp) => {
+    console.log(resp.data)
     dispatch(asyncFetchGoal(resp.data))
   })
 }
 
 export const fetchUser = () => (dispatch) => {
-  axios.get('/api/users').then((resp) => {
+  api.get('/users').then((resp) => {
     console.log(resp.data)
     dispatch(asyncFetchUser(resp.data))
   })
 }
+
+
 
 
 export const selectUser = state => state.goal.user

@@ -31,7 +31,7 @@ export function AccordianContent(props) {
       {
       // goalOptions.map(task => (
       //   task.parent_id == props.parent_id ?
-        <Checkbox.Group onChange={onChange} options={goalOptions.filter(task => (
+        <Checkbox.Group className="checkboxGroup" onChange={onChange} options={goalOptions.filter(task => (
             task.parent_id == props.parent_id && task.parent_id !== null ?
             task 
             : ''

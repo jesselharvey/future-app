@@ -11,6 +11,7 @@ import AuthRoute from './features/authentication/AuthRoute'
 import { Dashboard } from './features/components/dashboard/Dashboard'
 import { GoalForm } from './features/components/goals/goalForm'
 import { GoalPage } from './features/components/goals/goalPage'
+import { Test } from './features/components/Test'
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
       </AuthRoute>
       <AuthRoute path='/goal-form'>
         <GoalForm />
+      </AuthRoute>
+      <AuthRoute path='/test'>
+        <Test />
       </AuthRoute>
 
       {/* <AuthRoute path='/goal:id'>

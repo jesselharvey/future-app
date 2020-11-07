@@ -25,7 +25,7 @@ export function Dashboard() {
       <h1>Welcome {user.name}</h1>
       <div id="goalGrid">
         {goals.map((goal) => (
-        <Link className="goalCard" to={`/goal/${goal.id}`}>
+        <Link className="goalCard" to={'/goal/' + goal.id}>
           <div>
           <span>{goal.title}</span>
         </div></Link>

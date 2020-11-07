@@ -9,14 +9,18 @@ router.get('/goals', async (req, res) => {
   res.json(goals.rows)
 })
 
-router.get('/goals/:goalId', async (req, res) => {
+router.get('/goal/:goalId', async (req, res) => {
   const goalId = req.params.goalId
-  console.log(goalId)
+  console.log(req.params)
+  
   // console.log(req.user)
   // const userId = req.user.id
-  const goal = await conn.raw(`SELECT * FROM goals WHERE id = ${goalId};`)
-  res.json(goal.rows)
+  const goal = await conn.raw(`SELECT * FROM goals WHERE id = ?;`, [goalId])
+  // const goal = await conn('goals').where({id: goalId})
+  res.json(goal.rows[0])
 })
+
+// const goal = await conn.raw(`SELECT * FROM goals WHERE id = ${goalId};`)
 
 // router.get('/goals/:id', async (req, res) => {
 //   const goalId = req.params.id

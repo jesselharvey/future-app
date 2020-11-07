@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { fetchGoal, selectGoal } from '../goals/goalSlice'
+// import { fetchGoal, selectGoal } from '../goals/goalSlice'
 // import { Button } from 'antd'
-import { Collapse, Card, Input, Statistic } from 'antd';
-import { FormOutlined, EditOutlined } from '@ant-design/icons'
-import { Accordian } from '../../UI/Accordian'
+import { Collapse, Card, Input } from 'antd';
+import { FormOutlined } from '@ant-design/icons'
+import { Accordian } from '../UI/Accordian'
 
-
-export function GoalPage() {
-  const { goalId } = useParams()
+export function Test() {
   const { Panel } = Collapse
-  const { Countdown } = Statistic
 
   const { TextArea } = Input
   
@@ -41,38 +37,18 @@ export function GoalPage() {
       },
       {
         id: 4,
-        name: 'step 11',
+        name: 'sub step 1',
         parent_id: null,
       }, 
       {
         id: 5,
-        name: 'step 12',
-        parent_id: 1,
+        name: 'sub step 2',
+        parent_id: null,
       },
       {
         id: 6,
-        name: 'sub 3',
-        parent_id: 1,
-      },
-      {
-        id: 7,
-        name: 'sub step',
-        parent_id: 1,
-      },
-      {
-        id: 8,
-        name: 'sub step 33',
-        parent_id: 1,
-      },
-      {
-        id: 9,
-        name: 'sub step 23',
-        parent_id: 1,
-      },
-      {
-        id: 10,
-        name: 'sub step 13',
-        parent_id: 1,
+        name: 'sub step 3',
+        parent_id: null,
       },
     ],
     entries: [
@@ -141,28 +117,14 @@ export function GoalPage() {
         date: '11-3-2020',
         content: 'This is my last entry!',
       },
-    ],
-    finish_date: new Date(2020, 10, 7),
+    ]
   }
-
-  const [entryText, setEntryText] = useState('')
-  const [taskTest, setTaskTest] = useState('')
-
-  const dispatch = useDispatch()
-  const goal = useSelector(selectGoal)
-
-  useEffect(() => {
-    dispatch(fetchGoal(goalId))
-  }, [dispatch])
 
   return (
     <div>
       <div id="goalHeader">
-        <div>
-          <h2>My goal is {goalObj.title}</h2>
-          <h2>{goalObj.reason}</h2>
-        </div>
-        <Countdown title="Time left to accomplish your goal!" value={goalObj.finish_date} format="D HH:mm:ss" />
+        <h2>My goal is {goalObj.title}</h2>
+        <h2>{goalObj.reason}</h2>
       </div>
       <br />
       <div id="entryContainer">
@@ -172,32 +134,22 @@ export function GoalPage() {
         </Card>
         <div id="entries">
           {goalObj.entries.map(entry => (
-            <Card className="inputEntryCard" title={entry.date}>
+            <Card className="entryCard" title={entry.date}>
               <span>{entry.content}</span>
             </Card>
             // <span>{entry.content}</span>
           ))}
         </div>
       </div>
-      <div id="goalFooterContent">
-        <div id="accordianContainer">
-            <Accordian goal={goalObj}></Accordian>
-          {/* {goal.tasks.map(task => (
-                    task.parent_id === null ? 
-            <span>{task.name}</span>
-            : ''
-            ))} */}
-        </div>
-        <div /*onClick={modal for editor}> */>
-          <EditOutlined />
-          <span>Edit Steps...</span>
-        </div>
-        {/* <Card className="inputTaskCard" title={'Add new entry!'}   >
-            <Input prefix={<FormOutlined />} />
-            <TextArea autoSize={{minRows: 1, maxRows: 2}} />
-          </Card> */}
+      <div id="accordianContainer">
+          <Accordian goal={goalObj}></Accordian>
+        {/* {goal.tasks.map(task => (
+                  task.parent_id === null ? 
+          <span>{task.name}</span>
+          : ''
+          ))} */}
       </div>
-      {/* <Button type="primary">Test</Button> */}
+    {/* <Button type="primary">Test</Button> */}
     </div>
   )
 }

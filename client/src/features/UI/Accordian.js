@@ -27,7 +27,10 @@ export function Accordian(props) {
       // console.log(percent)
       // return percent
     }
-    let testPercent = (x, y) => x / y * 100
+    let testPercent = (x, y) => {
+      let result = x / y * 100
+      return Number.isNaN(result) ? 0 : result.toFixed(1)
+    }
   // }
 
   // function onChange(checkedValues) {
