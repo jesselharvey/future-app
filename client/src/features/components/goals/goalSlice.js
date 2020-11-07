@@ -5,56 +5,16 @@ import api from '../../../utils/request'
 export const goalsSlice = createSlice({
   name: 'goal',
   initialState: {
-<<<<<<< HEAD
-    user: {
-      // id: 1,
-      // name: 'Jesse',
-      // email: 'ex@test.com'
-    },
-    goals: [
-      // {
-      //   id: 1,
-      //   title: "stop smoking",
-      //   reason: "it's unhealthy",
-      //   tasks: []
-      // },      {
-      //   id: 2,
-      //   title: "practice cello",
-      //   reason: "it's soothing",
-      //   tasks: []
-      // },      {
-      //   id: 3,
-      //   title: "read more",
-      //   reason: "it expands my mind",
-      //   tasks: []
-      // },      {
-      //   id: 4,
-      //   title: "exercise",
-      //   reason: "it's healthy",
-      //   tasks: []
-      // },      {
-      //   id: 5,
-      //   title: "stop drinking",
-      //   reason: "it's unhealthy too",
-      //   tasks: []
-      // },
-    ],
-    goal: {}
-=======
     user: [],
     goals: [],
->>>>>>> 4e4bcb23f8659f3065a34ca5552765cb661edeb0
   },
   reducers: {
     asyncFetchGoals: (state, action) => {
       state.goals = action.payload
     },
-<<<<<<< HEAD
     asyncFetchGoal: (state, action) => {
       state.goal = action.payload
     },
-=======
->>>>>>> 4e4bcb23f8659f3065a34ca5552765cb661edeb0
     asyncFetchUser: (state, action) => {
       state.user = action.payload
     },

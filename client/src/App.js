@@ -9,7 +9,7 @@ import { Register } from './features/components/auth/Register'
 import AuthRoute from './features/authentication/AuthRoute'
 import { Dashboard } from './features/components/dashboard/Dashboard'
 import { GoalForm } from './features/components/goals/goalForm'
-import { GoalPage } from './features/components/goals/goalPage'
+import { GoalPage } from './features/components/goals/GoalPage'
 import { Test } from './features/components/Test'
 
 

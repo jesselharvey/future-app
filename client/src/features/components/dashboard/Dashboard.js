@@ -1,18 +1,12 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-<<<<<<< HEAD
 import { selectUser, selectGoals, displayGoals, fetchUser } from '../goals/goalSlice'
 import { AddGoalButton } from '../../UI/Buttons'
-import { Button } from 'antd'
-=======
-import { selectUserInfo, selectGoals, displayGoals, fetchUser } from '../goals/goalSlice'
-import { AddGoalButton } from '../../UI/Buttons'
 import Navbar from '../../UI/Nav'
-import { Card, Menu, Breadcrumb } from 'antd'
+import { Card, Menu, Breadcrumb, Button } from 'antd'
 import { SmileOutlined } from '@ant-design/icons';
 
->>>>>>> 4e4bcb23f8659f3065a34ca5552765cb661edeb0
 
 export function Dashboard() {
   const dispatch = useDispatch()
