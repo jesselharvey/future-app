@@ -2,8 +2,12 @@
 
 /* GLOBAL */
 
-* {
-  font-family: Inconsolata;
+/* * {
+  font-family: ;
+} */
+
+body {
+  width: 100%;
 }
 
 /* DASHBOARD */
@@ -11,10 +15,9 @@
 .header {
   width: 100%;
   height: 65px;
-  background: rgba(108, 213, 108, 1);
-  /* background: black; */
   position: fixed;
   z-index: 1;
+  background: white;
 }
 
 #nav-bar {
@@ -24,9 +27,8 @@
   font-size: 17px;
   padding-right: 50px;
   position: relative;
-  background: rgba(108, 213, 108, 1);
-  /* background: black; */
-  padding-top: 23px;
+  top: 55%;
+  background: white;
 }
 
 .header span {
@@ -36,36 +38,38 @@
 
 .name-logo {
   position: relative;
-  right: 91px;
+  right: 265%;
   color: darkslategrey;
   font-size: 30px;
+  letter-spacing: 1px;
 }
 
 .fake-logo {
   border: none;
-  background: rgba(0, 0, 0, 0.425);
+  background: rgba(108, 213, 108, 1);
   height: 50px;
   width: 50px;
   border-radius: 75%;
   position: relative;
-  right: 69%;
+  right: 66%;
   bottom: 17px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .main {
-  min-height: 1390px;
+  min-height: 1430px;
+  width: 100%;
+  height: 100%;
 }
 
 .dashboard-header {
-  height: 700px;
-  margin-bottom: 25px;
-  background: rgb(197, 244, 197);
-  background: linear-gradient(
-    0deg,
-    rgba(197, 244, 197, 1) 0%,
-    rgba(108, 213, 108, 1) 90%
-  );
+  height: 645px;
+  margin: 0 9%;
+  background-image: url("https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-repeat: no-repeat;
+  position: relative;
+  top: 75%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .welcome-header {
@@ -73,9 +77,9 @@
   position: relative;
   width: 80%;
   top: 22%;
-  left: 15%;
+  left: 9%;
   color: darkslategrey;
-  text-shadow: 2px 2px grey;
+  text-shadow: 1px 1px grey;
 }
 
 .add-goal-button {
@@ -83,7 +87,7 @@
   height: 25%;
   position: relative;
   top: 25%;
-  left: 20%;
+  left: 17%;
   font-size: 30px;
   border: none;
   background: darkslategrey;
@@ -103,10 +107,10 @@
 }
 
 .motivation-quote {
-  font-size: 22px;
+  font-size: 17px;
   width: 29%;
   position: relative;
-  left: 56%;
+  left: 60%;
   bottom: 7%;
   text-align: right;
   font-style: italic;
@@ -114,7 +118,7 @@
 }
 
 .lets-make-progress {
-  padding-top: 5px;
+  padding-top: 50px;
   font-size: 40px;
   text-align: center;
 }
@@ -127,7 +131,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: black;
+  background: darkslategrey;
   cursor: pointer;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16), 0 5px 10px rgba(0, 0, 0, 0.23);
 }
@@ -149,10 +153,11 @@
   height: 260px;
   width: 31%;
   margin: 1%;
+  background: rgba(108, 213, 108, 1);
   color: black;
-  border: 1px solid black;
   border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  border: none;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
 }
 
 a.goalCard:link,
@@ -170,7 +175,6 @@ a.goalCard:active {
 
 .dashboard-footer {
   height: 85px;
-  background: darkslategrey;
 }
 
 /* FORMS */
@@ -179,4 +183,21 @@ a.goalCard:active {
   display: flex;
   align-items: center;
   flex-flow: column;
+}
+
+.onboarding-container {
+  width: 100%;
+  height: 100%;
+}
+
+.onboarding-nav-bar {
+  width: 100%;
+  height: 65px;
+  background: grey;
+  margin: 0 auto;
+}
+
+.onboarding-body {
+  width: 80%;
+  margin: 0 auto;
 }
