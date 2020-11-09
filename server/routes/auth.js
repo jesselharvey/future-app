@@ -16,7 +16,7 @@ function createSalt(len = 20) {
 }
 
 router.post('/registration', async (req, res) => {
-  const { email, password } = req.body
+  const { name, email, password } = req.body
   const salt = createSalt(20)
   const hashedPassword = sha512(password + salt)
   const checkIfUserExistsSql = `SELECT * FROM users WHERE email = ?;`
@@ -27,10 +27,11 @@ router.post('/registration', async (req, res) => {
     res.status(400).json({ message: 'email already exists' })
   } else {
     const addUserSql = `
-                INSERT INTO users (email, password, salt)
-                VALUES (?, ?, ?);
+                INSERT INTO users (name, email, password, salt)
+                VALUES (?, ?, ?, ?);
             `
     const insertedUser = await conn.raw(addUserSql, [
+      name,
       email,
       hashedPassword,
       salt,

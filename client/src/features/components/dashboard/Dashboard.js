@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { selectUser, selectGoals, displayGoals, fetchUser } from '../goals/goalSlice'
 import { AddGoalButton } from '../../UI/Buttons'
 import Navbar from '../../UI/Nav'
-import { Card, Menu, Breadcrumb, Button } from 'antd'
+import { Card } from 'antd'
 import { SmileOutlined } from '@ant-design/icons';
 
 export function Dashboard() {
@@ -12,18 +12,11 @@ export function Dashboard() {
   const goals = useSelector(selectGoals)
   const user = useSelector(selectUser)
 
-  const SubMenu = Menu.SubMenu;
-  const MenuItemGroup = Menu.ItemGroup;
-
   useEffect(() => {
     dispatch(displayGoals())
     dispatch(fetchUser())
   }, [dispatch])
 
-  console.log(goals)
-  console.log(user)
-
-  // <Progress type="circle" percent={75} />
 
   return (<>
     <Navbar />
@@ -55,11 +48,3 @@ export function Dashboard() {
   </>
   )
 }
-
-
-// create new goal
-// pick between current goals
-// contact admins
-// sign out 
-// settings
-// future patch notes

@@ -31,14 +31,14 @@ app.get('/api', (req, res) => {
   res.json({ example: true })
 })
 app.use('/api', authRoutes)
-// app.get(
-//   '/api/dashboard',
-//   jwtMiddleware({ secret: process.env.SECRET, algorithms: ['HS256'] }),
-//   (req, res) => {
-//     // req.user will have the user based on the token signed from login
-//     res.json()
-//   }
-// )
+app.get(
+  '/api/dashboard',
+  jwtMiddleware({ secret: process.env.SECRET, algorithms: ['HS256'] }),
+  (req, res) => {
+    // req.user will have the user based on the token signed from login
+    res.json()
+  }
+)
 
 app.use('/api', usersRoute)
 app.use('/api', goalsRoute)

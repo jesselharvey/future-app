@@ -72,8 +72,9 @@ export class AuthService {
         })
     }
 
-    static register = (email, password) => {
+    static register = (name, email, password) => {
         const userToRegister = {
+            name: name,
             email: email,
             password: password
         }
