@@ -10,8 +10,3 @@ export default (props) => {
         }
         return <Route {...props} />
 }
-
-// export default (props) => {
-//     const { isAuthenticated } = useAuth()
-//     return <Route>{isAuthenticated ? props.children : <Redirect to="login"/>}</Route>
-// }

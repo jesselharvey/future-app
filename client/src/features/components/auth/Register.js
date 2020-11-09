@@ -5,8 +5,12 @@ export function Register() {
   
 
   return(
-    <div>
+    <>
+    <div className="login-register">
+      <div className="login-register-body-reg">
       <RegisterForm />
+      </div>
     </div>
+   </> 
   )
 }

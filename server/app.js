@@ -2,6 +2,13 @@ require('dotenv').config()
 const express = require('express')
 const app = express();
 const PORT = 3001
+
+const jwtMiddleware = require('express-jwt')
+const jwtToken = require('jsonwebtoken')
+
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+
 function attachUser(req, res, next) {
   const authorizationHeader = req.headers.authorization
   if (authorizationHeader) {
@@ -18,15 +25,10 @@ const goalsRoute = require('./routes/goals')
 const tasksRoute = require('./routes/tasks')
 const postsRoute = require('./routes/posts')
 
-const jwtMiddleware = require('express-jwt')
-const jwtToken = require('jsonwebtoken')
-
-app.use(express.urlencoded({ extended: false }))
-
-// app.get('/api', (req, res) => {
-//   res.json({ example: true })
-// })
-// app.use('/api', authRoutes)
+app.get('/api', (req, res) => {
+  res.json({ example: true })
+})
+app.use('/api', authRoutes)
 app.get(
   '/api/dashboard',
   jwtMiddleware({ secret: process.env.SECRET, algorithms: ['HS256'] }),

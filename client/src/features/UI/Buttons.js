@@ -6,14 +6,14 @@ import { decrementIndex, incrementIndex, selectFormIndex } from '../components/g
 export function LoginButton() {
 
   return(
-    <button>Log in</button>
+    <button className="login-reg-buttons">Log in</button>
   )
 }
 
 export function RegisterButton() {
 
   return (
-    <button>Register</button>
+    <button className="login-reg-buttons">Register</button>
   )
 }
 
