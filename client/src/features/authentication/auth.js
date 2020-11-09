@@ -71,5 +71,3 @@ export function useAuth() {
 
   return { login, logout, register, isAuthenticated, testProtected }
 }
-
-//

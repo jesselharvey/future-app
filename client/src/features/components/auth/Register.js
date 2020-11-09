@@ -3,7 +3,6 @@ import { RegisterForm } from '../../UI/Forms'
 
 export function Register() {
   
-
   return(
     <>
     <div className="login-register">
