@@ -14,6 +14,7 @@ import {
   deletePost,
   editPost,
   addTask,
+  deleteTask,
 } from './goalSlice'  
 // import { Button } from 'antd'
 import { Collapse, Card, Input, Statistic, Button } from 'antd';
@@ -214,6 +215,10 @@ export function GoalPage() {
     dispatch(fetchTasks(goalId))
   }
 
+  // const [taskState, setTaskState] = useState(false)
+
+
+
 
   return (
     <div>
@@ -239,20 +244,35 @@ export function GoalPage() {
         
         <div id="entries">
           {posts.map(post => (
+            // postStatus == false && toggleId !== post.id ?
+            
             //have to fix the normalization of the date data
             <Card className="inputEntryCard" title={post.date}>
               <div className="entryIcons">
                 <CloseCircleOutlined onClick={() => handlePostDelete(post.id)} />
                 <EditOutlined onClick={() => togglePostStatus(post.id)} />
               </div><br />
-              {postStatus == false && toggleId !== post.id ? 
-              <span>{post.description}</span> :
-              <form onSubmit={(e) => handlePostEdit(e, post.id)}>
-                <Input value={editPostText} onChange={(e) => setEditPostText(e.target.value)} defaultValue={post.description}></Input>
-                <button type="submit">Edit post</button>
-              </form>
-              }
-            </Card>
+              <span>{post.description}</span> 
+            </Card> 
+            // : 
+            // <Card className="inputEntryCard" title={post.date}>
+            //   <div className="entryIcons">
+            //     <CloseCircleOutlined onClick={() => handlePostDelete(post.id)} />
+            //     <EditOutlined onClick={() => togglePostStatus(post.id)} />
+            //   </div><br />
+            //   <form onSubmit={(e) => handlePostEdit(e, post.id)}>
+            //     <Input value={editPostText} onChange={(e) => setEditPostText(e.target.value)} defaultValue={post.description}></Input>
+            //     <button type="submit">Edit post</button>
+            //   </form>
+            // </Card> 
+
+              // {postStatus == false && toggleId !== post.id ? 
+              // <span>{post.description}</span> :
+              // <form onSubmit={(e) => handlePostEdit(e, post.id)}>
+              //   <Input value={editPostText} onChange={(e) => setEditPostText(e.target.value)} defaultValue={post.description}></Input>
+              //   <button type="submit">Edit post</button>
+              // </form>
+              // }
           ))}
         </div>
       </div>
@@ -265,7 +285,7 @@ export function GoalPage() {
           </form>
         </Card>
         <div id="accordianContainer">
-          <Accordian tasks={tasks}></Accordian>
+          <Accordian goal={goal} tasks={tasks}></Accordian>
         </div>
         <div /*onClick={modal for editor}> */>
           <EditOutlined />

@@ -43,12 +43,12 @@ export const goalsSlice = createSlice({
     //   })
     // },
     // // ENTRY REQUESTS
-    // addEntryFunc: (state, action) => {
-    //   state.tasks.push(action.payload)
+    // addPostFunc: (state, action) => {
+    //   state.posts.push(action.payload)
     // },
-    // removeEntryFunc: (state, action) => {
-    //   state.tasks = state.tasks.filter((task) =>{
-    //     return task.id !== action.payload.id
+    // removePostFunc: (state, action) => {
+    //   state.posts = state.posts.filter((post) =>{
+    //     return post.id !== action.payload.id
     //   })
     // },
     // // TASK REQUESTS
@@ -76,7 +76,9 @@ export const {
   asyncFetchGoal, 
   asyncFetchUser, 
   asyncFetchTasks,
-  asyncFetchPosts
+  asyncFetchPosts,
+  // addPostFunc,
+  // removePostFunc,
   // addGoalFunct, 
   // removeGoalFunct, 
   // editGoalFunct,
@@ -128,7 +130,8 @@ export const addPost = (goalId, text) => (dispatch) => {
 }
 
 export const deletePost = (id) => (dispatch) => {
-  api.delete('/posts/' + id).then((resp) => {
+  api.delete('/posts/', {id: id}).then((resp) => {
+    // dispatch(removePostFunc(resp.body))
   })
 }
 
@@ -146,8 +149,13 @@ export const addTask = (id, text) => (dispatch) => {
   })
 }
 
+export const addSubTask  = (taskId, goalId, text) => (dispatch) => {
+  api.post('/tasks/' + taskId + '/goals/' + goalId, {description: text}).then((resp) => {
+  })
+}
+
 export const deleteTask = (id) => (dispatch) => {
-  api.delete('/tasks/' + id).then((resp) => {
+  api.delete('/tasks/', {id: id}).then((resp) => {
   })
 }
 

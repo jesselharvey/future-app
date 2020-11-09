@@ -1,10 +1,18 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Checkbox, Input } from 'antd'
+import { 
+  fetchTasks,
+  addSubTask,
+  deleteTask
+} from '../../features/components/goals/goalSlice'
 
 
 export function AccordianContent(props) {
+  const dispatch = useDispatch()
+  const [taskText, setTaskText] = useState('')
   const tasks = props.tasks
-  const [deleteState, setDeleteState] = useState(false)
+  // const [deleteState, setDeleteState] = useState(false)
   // console.log(props.parent_id)
   console.log(tasks)
 
@@ -28,7 +36,14 @@ export function AccordianContent(props) {
     props.handlePercent(unchecked, checkedValues.length)
     // props.onChange(checkedValues)
     // console.log('unchecked = ', uncheckedValues);
+
   }
+      function handleTaskAdd(e) {
+        e.preventDefault()
+        dispatch(addSubTask(props.parent_id, props.goal.id, taskText))
+        setTaskText('')
+        dispatch(fetchTasks(props.goal.id))
+      }
 
   return (
     <div>
@@ -40,10 +55,13 @@ export function AccordianContent(props) {
             task 
             : ''
           ))} />
-        // <span key={task.id}>{task.name}</span> 
-      //   : ''
-      // ))
-      }
+          // <span key={task.id}>{task.name}</span> 
+          //   : ''
+          // ))
+        }
+        <form onSubmit={(e) => handleTaskAdd(e)}>
+          <Input value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
+        </form>
     </div>
   )
 }

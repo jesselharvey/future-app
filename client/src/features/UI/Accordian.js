@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { Collapse, Progress, Input } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons'
 import { AccordianContent } from './AccordianContent'
@@ -8,6 +9,7 @@ import {
 } from '../../features/components/goals/goalSlice'
 
 export function Accordian(props) {
+  const dispatch = useDispatch()
   const { Panel } = Collapse
   
   function callback(key) {
@@ -48,6 +50,10 @@ export function Accordian(props) {
   //   console.log(filteredArr)
   // }
 
+  function handleTaskDelete(id) {
+    dispatch(deleteTask(id))
+  }
+
   const tasks = props.tasks
   // console.log(tasks)
 
@@ -56,8 +62,8 @@ export function Accordian(props) {
     {tasks.map(task => (
       task.parent_id === null ? 
       <Panel header={task.description} extra={<Progress type="circle" percent={testPercent(incomplete, complete)} width={50} />} key={task.id}>
-        <CloseCircleOutlined />
-        <AccordianContent handlePercent={handlePercent} tasks={tasks} parent_id={task.id}></AccordianContent>
+        <CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />
+        <AccordianContent goal={props.goal} handlePercent={handlePercent} tasks={tasks} parent_id={task.id}></AccordianContent>
         {
         // tasks.map(task => (
           // task.parent_id === task.id ?
