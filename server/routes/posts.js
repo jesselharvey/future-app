@@ -2,15 +2,15 @@ const express = require('express')
 const router = express.Router()
 const conn = require('../db')
 
-router.get('/posts/:goalId', async (req, res) => {
+router.get('/posts/goals/:goalId', async (req, res) => {
   const goalId = req.params.goalId
-  const posts = await conn.raw(`SELECT * FROM posts WHERE goalId = ${goalId};`)
+  const posts = await conn.raw(`SELECT * FROM posts WHERE goal_id = ${goalId};`)
   res.json(posts.rows)
 })
 
 router.get('/posts/:postId', async (req, res) => {
   const postId = req.params.id
-  const selectedPost = await conn.raw(`SELECT * FROM post WHERE id = ${postId}`)
+  const selectedPost = await conn.raw(`SELECT * FROM posts WHERE id = ${postId}`)
   res.json(selectedPost.rows)
 })
 
@@ -26,9 +26,10 @@ router.patch('/posts/:id/', async (req, res) => {
   res.json(post.rows)
 })
 
-router.delete('/posts/:id', async (req, res) => {
-  await conn('posts').where({id: req.params.id}).del()
-  res.json({message: 'post deleted'})
+router.delete('/posts', async (req, res) => {
+  const post = await conn('posts').where({id: req.body.id}).del()
+  console.log(req.body.id)
+  res.json(post.rows)
 })
 
 module.exports = router

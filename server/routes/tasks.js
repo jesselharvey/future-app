@@ -7,9 +7,9 @@ router.get('/tasks', async (req, res) => {
   res.json(tasks.rows)
 })
 
-router.get('/tasks/:id', async (req, res) => {
-  const taskId = req.params.id
-  const selectedTask = await conn.raw(`SELECT * FROM tasks WHERE id = ${taskId}`)
+router.get('/tasks/:goalId', async (req, res) => {
+  const goalId = req.params.goalId
+  const selectedTask = await conn.raw(`SELECT * FROM tasks WHERE goal_id = ${goalId}`)
   res.json(selectedTask.rows)
 })
 
@@ -28,8 +28,8 @@ router.patch('/tasks/:id/', async (req, res) => {
   res.json({message: 'task updated'})
 })
 
-router.delete('/tasks/:id', async (req, res) => {
-  await conn('tasks').where({id: req.params.id}).del()
+router.delete('/tasks/', async (req, res) => {
+  await conn('tasks').where({id: req.body.id}).del()
   res.json({message: 'task deleted'})
 })
 
