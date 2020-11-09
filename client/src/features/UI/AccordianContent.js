@@ -1,14 +1,18 @@
-import React from 'react'
-import { Checkbox } from 'antd'
+import React, { useState } from 'react'
+import { Checkbox, Input } from 'antd'
+
 
 export function AccordianContent(props) {
-  const goal = props.goal
-  console.log(props.parent_id)
-  console.log(goal)
+  const tasks = props.tasks
+  const [deleteState, setDeleteState] = useState(false)
+  // console.log(props.parent_id)
+  console.log(tasks)
 
-  const goalOptions = goal.tasks.map(task => (
-    { label: task.name, value: task.name, id: task.id, parent_id: task.parent_id}
+  const goalOptions = tasks.map(task => (
+    { label: task.description, value: task.description, id: task.id, parent_id: task.parent_id}
   ))
+
+  console.log(goalOptions)
   
   function onChange(checkedValues) {
     console.log('checked = ', checkedValues.length);

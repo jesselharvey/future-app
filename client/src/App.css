@@ -211,6 +211,11 @@ a.goalCard:active {
   overflow-x: scroll;
 }
 
+.entryIcons {
+  display: flex;
+  justify-content: space-around;
+}
+
 .inputEntryCard {
   width: 40%;
 }

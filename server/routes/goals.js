@@ -4,19 +4,21 @@ const conn = require('../db')
 
 
 router.get('/goals', async (req, res) => {
-  const { id } = req.user
+  const { id } = req.user.id
   const goals = await conn.select().table('goals').where({user_id: id})
-  res.json(goals)
+  res.json(goals.rows)
 })
 
-router.get('/goals/:id', async (req, res) => {
-  const goalId = req.params.id
-  const goal = await conn.select().table('goals').where({id: goalId})
-  res.json(goal)
+router.get('/goals/:goalId', async (req, res) => {
+  const goalId = req.params.goalId
+  // const goal = await conn.select().table('goals').where({id: goalId})
+  const goal = await conn.raw(`SELECT * FROM goals WHERE id = ${goalId}`)
+  res.json(goal.rows[0])
 })
 
 router.post('/goals/users/:userId', async (req, res) => {
-  const goal = await conn('goals').insert({title: req.body.title, reason: req.body.reason, date: req.body.date, time: req.body.time, user_id: req.params.userId})
+  const { id } = req.user.id
+  const goal = await conn('goals').insert({title: req.body.title, reason: req.body.reason, date: req.body.date, time: req.body.time})
   res.json({message: 'goal created'})
 })
 
