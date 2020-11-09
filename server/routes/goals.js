@@ -4,9 +4,9 @@ const conn = require('../db')
 
 
 router.get('/goals', async (req, res) => {
-  const { id } = req.user.id
+  const { id } = req.user
   const goals = await conn.select().table('goals').where({user_id: id})
-  res.json(goals.rows)
+  res.json(goals)
 })
 
 router.get('/goals/:goalId', async (req, res) => {

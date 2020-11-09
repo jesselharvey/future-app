@@ -21,7 +21,6 @@ function attachUser(req, res, next) {
     const token = authorizationHeader.split(' ')[1]
     const decoded = jwtToken.decode(token)
     req.user = { id: decoded.id, email: decoded.email }
-    // console.log(req.user)
   }
   next()
 }
