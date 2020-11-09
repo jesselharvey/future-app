@@ -64,7 +64,7 @@ export function RegisterForm() {
     register(name, email, password).then((resp) => {
       history.push('/login')
     })
-  }
+    }
   }
 
   return (
