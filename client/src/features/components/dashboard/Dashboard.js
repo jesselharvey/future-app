@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { selectUser, selectGoals, displayGoals, fetchUser } from '../goals/goalSlice'
 import { AddGoalButton } from '../../UI/Buttons'
 import Navbar from '../../UI/Nav'
-import { Card, Menu, Breadcrumb, Button } from 'antd'
+import { Card } from 'antd'
 import { SmileOutlined } from '@ant-design/icons';
 
 export function Dashboard() {
