@@ -20,7 +20,8 @@ router.post('/registration', async (req, res) => {
   const salt = createSalt(20)
   const hashedPassword = sha512(password + salt)
   const checkIfUserExistsSql = `SELECT * FROM users WHERE email = ?;`
-  const hasAUser = await conn.raw(checkIfUserExistsSql, [email])
+  try {
+    const hasAUser = await conn.raw(checkIfUserExistsSql, [email])
   const userExists = hasAUser.rows.length
   if (userExists) {
     res.status(400).json({ message: 'email already exists' })
@@ -36,7 +37,11 @@ router.post('/registration', async (req, res) => {
       salt,
     ])
     res.status(201).json({ message: 'user successfully created' })
+  }  
+  } catch (error) {
+    console.log('error', error)
   }
+  
 })
 
 router.post('/login', async (req, res, next) => {

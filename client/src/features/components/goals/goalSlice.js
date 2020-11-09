@@ -7,8 +7,11 @@ export const goalsSlice = createSlice({
   initialState: {
     user: [],
     goals: [],
+    tasks: [],
+    entries: [],
   },
   reducers: {
+    // GENERAL FETCH REQUESTS
     asyncFetchGoals: (state, action) => {
       state.goals = action.payload
     },
@@ -18,6 +21,7 @@ export const goalsSlice = createSlice({
     asyncFetchUser: (state, action) => {
       state.user = action.payload
     },
+    // GOAL REQUESTS
     addGoalFunct: (state, action) => {
       state.goals.push(action.payload)
     },
@@ -31,6 +35,16 @@ export const goalsSlice = createSlice({
       return goal.id !== action.payload.id
       })
     },
+    // ENTRY REQUESTS
+    addEntryFunc: (state, action) => {
+      state.tasks.push(action.payload)
+    },
+    removeEntryFunc: (state, action) => {
+      state.tasks = state.tasks.filter((task) =>{
+        return task.id !== action.payload.id
+      })
+    },
+    // TASK REQUESTS
     addTaskFunc: (state, action) => {
       state.tasks.push(action.payload)
     },
@@ -81,6 +95,11 @@ export const fetchUser = () => (dispatch) => {
     console.log(resp.data)
     dispatch(asyncFetchUser(resp.data))
   })
+}
+// addTaskFunc, removeTaskFunc, addSubTaskFunc, removeSubTaskFunc
+
+export const addTask = () => (dispatch) => {
+  api.post()
 }
 
 
