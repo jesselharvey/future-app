@@ -14,13 +14,13 @@ export function AccordianContent(props) {
   const tasks = props.tasks
   // const [deleteState, setDeleteState] = useState(false)
   // console.log(props.parent_id)
-  console.log(tasks)
+  // console.log(tasks)
 
   const goalOptions = tasks.map(task => (
     { label: task.description, value: task.description, id: task.id, parent_id: task.parent_id}
   ))
 
-  console.log(goalOptions)
+  // console.log(goalOptions)
   
   function onChange(checkedValues) {
     console.log('checked = ', checkedValues.length);

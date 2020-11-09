@@ -123,15 +123,19 @@ export const fetchPosts = (goalId) => (dispatch) => {
 
 // ENTRIES
 
-export const addPost = (goalId, text) => (dispatch) => {
-  api.post('/posts/goals/' + goalId, {description: text}).then((resp) => {
-    // dispatch(asyncFetchPosts())
+export const addPost = (goalId, date_time, text) => (dispatch) => {
+  api.post('/posts/goals/' + goalId, {description: text, date_time: date_time}).then((resp) => {
+    dispatch(fetchPosts(goalId))
+    // console.log(resp.config.data)
+    // dispatch(addPostFunc(resp.body))
   })
 }
 
-export const deletePost = (id) => (dispatch) => {
-  api.delete('/posts/', {id: id}).then((resp) => {
-    // dispatch(removePostFunc(resp.body))
+export const deletePost = (id, goalId) => (dispatch) => {
+  api.delete('/posts/' + id).then((resp) => {
+    dispatch(fetchPosts(goalId))
+    // console.log(resp.data)
+    // dispatch(removePostFunc(resp.data))
   })
 }
 
@@ -146,16 +150,19 @@ export const editPost = (id, text) => (dispatch) => {
 
 export const addTask = (id, text) => (dispatch) => {
   api.post('/tasks/goals/' + id, {description: text}).then((resp) => {
+  dispatch(fetchTasks(id))    
   })
 }
 
 export const addSubTask  = (taskId, goalId, text) => (dispatch) => {
   api.post('/tasks/' + taskId + '/goals/' + goalId, {description: text}).then((resp) => {
+  dispatch(fetchTasks(goalId))
   })
 }
 
-export const deleteTask = (id) => (dispatch) => {
-  api.delete('/tasks/', {id: id}).then((resp) => {
+export const deleteTask = (goalId, id) => (dispatch) => {
+  api.delete('/tasks/' + id).then((resp) => {
+    dispatch(fetchTasks(goalId))
   })
 }
 

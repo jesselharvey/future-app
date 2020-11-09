@@ -28,8 +28,8 @@ router.patch('/tasks/:id/', async (req, res) => {
   res.json({message: 'task updated'})
 })
 
-router.delete('/tasks/', async (req, res) => {
-  await conn('tasks').where({id: req.body.id}).del()
+router.delete('/tasks/:id', async (req, res) => {
+  await conn('tasks').where({id: req.params.id}).del()
   res.json({message: 'task deleted'})
 })
 

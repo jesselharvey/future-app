@@ -3,12 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Collapse, Progress, Input } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons'
 import { AccordianContent } from './AccordianContent'
+import { useParams } from 'react-router-dom'
 import { 
   addTask,
   deleteTask
 } from '../../features/components/goals/goalSlice'
 
 export function Accordian(props) {
+  const { goalId } = useParams()
   const dispatch = useDispatch()
   const { Panel } = Collapse
   
@@ -51,7 +53,7 @@ export function Accordian(props) {
   // }
 
   function handleTaskDelete(id) {
-    dispatch(deleteTask(id))
+    dispatch(deleteTask(goalId, id))
   }
 
   const tasks = props.tasks

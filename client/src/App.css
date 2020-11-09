@@ -267,6 +267,7 @@ a.goalCard:active {
   display: inline-flex;
   width: 80%;
   margin: 0 10% 2.5%;
+  align-items: center;
 }
 
 #entries {
@@ -285,6 +286,10 @@ a.goalCard:active {
 
 .inputTaskCard {
   width: 35%;
+}
+
+.override.entryCard {
+  width: 250px;
 }
 
 #goalFooterContent {
