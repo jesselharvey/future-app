@@ -1,18 +1,90 @@
-@import "~antd/dist/antd.css";
+/* @import "~antd/dist/antd.css"; */
 
 /* GLOBAL */
-/* :root {
-  --purple1: #C004D9;
-  --purple2: #AB05F2;
 
-} */
-
-/* * {
-  font-family: ;
-} */
+* {
+  font-family: helvetica, arial;
+}
 
 body {
   width: 100%;
+}
+
+/* LOGIN/REGISTER */
+
+.login-page-div {
+  overflow: hidden;
+}
+
+.login-register {
+  width: 100%;
+  display: flex;
+  min-height: 789px;
+  margin: 0 auto;
+  background-image: url("https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?cs=srgb&dl=pexels-pixabay-247599.jpg&fm=jpg");
+  background-size: cover;
+}
+
+.login-register-body {
+  background: rgba(255, 255, 255, 0.884);
+  width: 40%;
+  height: 325px;
+  padding-top: 28px;
+  position: relative;
+  top: 225px;
+  left: 31%;
+  border-radius: 5px;
+  box-shadow: 15px 20px 25px rgba(0, 0, 0, 0.16),
+    15px 20px 25px rgba(0, 0, 0, 0.23);
+}
+
+.login-register-body-reg {
+  background: rgba(255, 255, 255, 0.884);
+  width: 40%;
+  height: 450px;
+  padding-top: 32px;
+  position: relative;
+  top: 175px;
+  left: 31%;
+  border-radius: 5px;
+  box-shadow: 15px 20px 25px rgba(0, 0, 0, 0.16),
+    15px 20px 25px rgba(0, 0, 0, 0.23);
+}
+
+.authForm {
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  margin: 8% auto;
+}
+
+.login-reg-input {
+  width: 80%;
+  height: 38px;
+  outline: none;
+  border: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin-bottom: 20px;
+  font-size: 18px;
+  text-indent: 10px;
+}
+
+.login-logo {
+  position: relative;
+  left: 46px;
+}
+
+.login-reg-buttons {
+  border: none;
+  width: 200px;
+  padding: 5px 10px;
+  background: lightgreen;
+  margin: 5px 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23);
+}
+
+.login-reg-buttons a {
+  color: darkslategrey;
 }
 
 /* DASHBOARD */
@@ -69,7 +141,7 @@ body {
 
 .dashboard-header {
   height: 645px;
-  margin: 0 9%;
+  margin: 0 7%;
   background-image: url("https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
   background-repeat: no-repeat;
   position: relative;
@@ -162,7 +234,7 @@ body {
   color: black;
   border-radius: 10px;
   border: none;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 a.goalCard:link,
@@ -182,14 +254,6 @@ a.goalCard:active {
   height: 85px;
 }
 
-/* FORMS */
-
-.authForm {
-  display: flex;
-  align-items: center;
-  flex-flow: column;
-}
-
 /* GOAL PAGE */
 
 #goalHeader {
@@ -197,7 +261,6 @@ a.goalCard:active {
   justify-content: space-between;
   margin: 2.5% 10%;
   width: 80%;
-  
 }
 
 #entryContainer {

@@ -5,8 +5,12 @@ export function Login() {
   
 
   return(
-    <div>
-      <LoginForm />
+    <>
+    <div className="login-register">
+      <div className="login-register-body">
+        <LoginForm />
+      </div>
     </div>
+   </> 
   )
 }
