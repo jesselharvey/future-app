@@ -50,7 +50,7 @@ export function GoalPage() {
     dispatch(fetchGoal(goalId))
     dispatch(fetchTasks(goalId))
     dispatch(fetchPosts(goalId))
-    dispatch(fetchPost())
+    // dispatch(fetchPost())
   }, [dispatch])
   // console.log(goal)
   // console.log(tasks)
@@ -180,13 +180,14 @@ export function GoalPage() {
               // }
           ))}
         </div>
-        {/* <Modal
+        {post == undefined ? '' :
+        <Modal
           title={"date_time"}
           visible={entryModalState}
           footer={null}
           onCancel={() => setEntryModalState(false)}>
             <p>{post.description}</p>
-        </Modal> */}
+        </Modal>}
       {/* </div> */}
       <div id="goalFooterContent">
         {/* <Card className="inputEntryCard" title={'Add new task!'}   >
