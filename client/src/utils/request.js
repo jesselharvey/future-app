@@ -58,10 +58,9 @@ class Request {
         return this.request(url, 'post', data)
     }
 
-    delete = (url) => {
-        return this.request(url, 'delete')
+    delete = (url, data) => {
+        return this.request(url, 'delete', data)
     }
-
 }
 
 export class AuthService {

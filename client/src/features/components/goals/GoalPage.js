@@ -24,18 +24,14 @@ import { Collapse, Card, Input, Statistic, Button, Modal } from 'antd';
 import { FormOutlined, EditOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { Accordian } from '../../UI/Accordian'
 
-
 export function GoalPage() {
 
   const { goalId } = useParams()
   const { taskId } = useParams()
   const { postId } = useParams()
-
   const { Panel } = Collapse
   const { Countdown } = Statistic
-
   const { TextArea } = Input
-  
   function callback(key) {
     console.log(key)
   }
@@ -81,7 +77,6 @@ export function GoalPage() {
     toggleId = id
     console.log(toggleId)
   }
-
   const [editPostText, setEditPostText] = useState('')
   function handlePostEdit(e, id) {
     e.preventDefault()
@@ -90,7 +85,6 @@ export function GoalPage() {
     setPostStatus(!postStatus)
     //use some type of filter to edit a single one
   }
-
   function handleTaskAdd(e) {
     e.preventDefault()
     dispatch(addTask(goalId, taskText))
@@ -177,7 +171,6 @@ export function GoalPage() {
             //     <button type="submit">Edit post</button>
             //   </form>
             // </Card> 
-
               // {postStatus == false && toggleId !== post.id ? 
               // <span>{post.description}</span> :
               // <form onSubmit={(e) => handlePostEdit(e, post.id)}>
