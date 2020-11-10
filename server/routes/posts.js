@@ -29,7 +29,7 @@ router.patch('/posts/:id/', async (req, res) => {
 router.delete('/posts', async (req, res) => {
   const post = await conn('posts').where({id: req.body.id}).del()
   console.log(req.body.id)
-  res.json(post.rows)
+  res.json(post)
 })
 
 module.exports = router
