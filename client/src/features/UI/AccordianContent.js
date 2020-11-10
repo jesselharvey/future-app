@@ -67,7 +67,7 @@ export function AccordianContent(props) {
           // ))
         }
         <form onSubmit={(e) => handleTaskAdd(e)}>
-          <Input style={{width: "50%"}} value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
+          <Input style={{width: "25%"}} value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
           <button type="submit">Add new sub task</button>
         </form>
     </div>

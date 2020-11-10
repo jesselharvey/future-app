@@ -273,6 +273,9 @@ a.goalCard:active {
 #entries {
   display: inline-flex;
   overflow-x: scroll;
+  width: 80%;
+  margin: 0 10% 2.5%;
+  align-items: center;
 }
 
 .entryIcons {
@@ -289,18 +292,19 @@ a.goalCard:active {
 }
 
 .override.entryCard {
-  width: 250px;
+  min-width: 20%;
 }
 
 .addEntryButton {
   position: relative;
-  left: 93%;
-  bottom: 135px;
+  left: 85%;
+  top: 20px;
   z-index: 1;
 }
 
 #goalFooterContent {
-  display: inline-flex;
+  display: flex;
+  flex-flow: row wrap;
   width: 80%;
   margin: 2.5% 10% 2.5%;
   justify-content: center;

@@ -110,7 +110,7 @@ export function GoalPage() {
         <Countdown title="Time left to accomplish your goal!" value={goal.finish_line_date} format="D HH:mm:ss" />}
       </div>
       <br />
-      <div id="entryContainer">
+      {/* <div id="entryContainer"> */}
           <Button onClick={() => toggleModal()} className="addEntryButton" shape="round" icon={<FormOutlined />}>
             New Entry
           </Button>
@@ -164,21 +164,20 @@ export function GoalPage() {
               // }
           ))}
         </div>
-      </div>
+      {/* </div> */}
       <div id="goalFooterContent">
-        <Card className="inputEntryCard" title={'Add new task!'}   >
-          {/* <Input prefix={<FormOutlined />} /> */}
+        {/* <Card className="inputEntryCard" title={'Add new task!'}   >
           <form onSubmit={(e) => handleTaskAdd(e)}>
             <TextArea value={taskText} onChange={(e) => setTaskText(e.target.value)} autoSize={{minRows: 1, maxRows: 2}} />
             <button type="submit">Submit task</button>
           </form>
-        </Card>
+        </Card> */}
+        <form onSubmit={(e) => handleTaskAdd(e)}>
+          <Input value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
+          <button type="submit">Submit task</button>
+        </form>
         <div id="accordianContainer">
           <Accordian goalI={goalId} goal={goal} tasks={tasks}></Accordian>
-        </div>
-        <div /*onClick={modal for editor}> */>
-          <EditOutlined />
-          <span>Edit Steps...</span>
         </div>
       </div>
       {/* <Button type="primary">Test</Button> */}
