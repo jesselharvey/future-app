@@ -9,7 +9,7 @@ router.get('/posts/goals/:goalId', async (req, res) => {
 })
 
 router.get('/posts/:postId', async (req, res) => {
-  const postId = req.params.id
+  const postId = req.params.postId
   const selectedPost = await conn.raw(`SELECT * FROM posts WHERE id = ${postId}`)
   res.json(selectedPost.rows)
 })

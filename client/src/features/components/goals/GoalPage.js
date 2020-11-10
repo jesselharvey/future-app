@@ -7,10 +7,12 @@ import {
   fetchGoal,
   fetchTasks,
   fetchPosts,
+  fetchPost,
   selectUser,
   selectGoal,
   selectTasks,
   selectPosts,
+  selectPost,
   addPost,
   deletePost,
   editPost,
@@ -45,11 +47,14 @@ export function GoalPage() {
   const goal = useSelector(selectGoal)
   const tasks = useSelector(selectTasks)
   const posts = useSelector(selectPosts)
+  const incomingPost = useSelector(selectPost)
+  const post = incomingPost[0]
 
   useEffect(() => {
     dispatch(fetchGoal(goalId))
     dispatch(fetchTasks(goalId))
     dispatch(fetchPosts(goalId))
+    dispatch(fetchPost())
   }, [dispatch])
   // console.log(goal)
   // console.log(tasks)
@@ -60,7 +65,7 @@ export function GoalPage() {
     dispatch(addPost(goalId, new Date(), postText))
     setPostText('')
     dispatch(fetchPosts(goalId))
-    setModalState(false)
+    setEntryInputModalState(false)
   }
 
   function handlePostDelete(id) {
@@ -93,9 +98,17 @@ export function GoalPage() {
     dispatch(fetchTasks(goalId))
   }
 
-  const [modalState, setModalState] = useState(false)
-  function toggleModal() {
-    setModalState(!modalState)
+  const [entryInputModalState, setEntryInputModalState] = useState(false)
+  function toggleEntryInputModal() {
+    setEntryInputModalState(!entryInputModalState)
+  }
+
+  const [entryModalState, setEntryModalState] = useState(false)
+  function toggleEntryModal(id) {
+    dispatch(fetchPost(id))
+    setEntryModalState(!entryModalState)
+    console.log(post)
+    
   }
 
   return (
@@ -111,14 +124,14 @@ export function GoalPage() {
       </div>
       <br />
       {/* <div id="entryContainer"> */}
-          <Button onClick={() => toggleModal()} className="addEntryButton" shape="round" icon={<FormOutlined />}>
+          <Button onClick={() => toggleEntryInputModal()} className="addEntryButton" shape="round" icon={<FormOutlined />}>
             New Entry
           </Button>
           <Modal
           title="New Entry"
-          visible={modalState}
+          visible={entryInputModalState}
           footer={null}
-          onCancel={() => setModalState(false)}>
+          onCancel={() => setEntryInputModalState(false)}>
             <form onSubmit={(e) => handlePostAdd(e)}>
               <Input value={postText} onChange={(e) => setPostText(e.target.value)} />
               <button type="submit">Submit post</button>
@@ -136,13 +149,23 @@ export function GoalPage() {
             // postStatus == false && toggleId !== post.id ?
             
             //have to fix the normalization of the date data
-            <Card className="entryCard override" title={post.date_time}>
+            <>
+            <Card onClick={() => toggleEntryModal(post.id)} className="entryCard override" title={post.date_time}>
               <div className="entryIcons">
                 <CloseCircleOutlined onClick={() => handlePostDelete(post.id)} />
                 <EditOutlined onClick={() => togglePostStatus(post.id)} />
               </div><br />
               <span>{post.description}</span> 
-            </Card> 
+            </Card>
+            
+            {/* <Modal
+            title={post.date_time}
+            visible={entryModalState && post.id}
+            footer={null}
+            onCancel={() => setEntryModalState(false)}>
+              <p>{post.description}</p>
+            </Modal> */}
+            </>
             // : 
             // <Card className="inputEntryCard" title={post.date}>
             //   <div className="entryIcons">
@@ -164,6 +187,13 @@ export function GoalPage() {
               // }
           ))}
         </div>
+        {/* <Modal
+          title={"date_time"}
+          visible={entryModalState}
+          footer={null}
+          onCancel={() => setEntryModalState(false)}>
+            <p>{post.description}</p>
+        </Modal> */}
       {/* </div> */}
       <div id="goalFooterContent">
         {/* <Card className="inputEntryCard" title={'Add new task!'}   >
@@ -172,9 +202,9 @@ export function GoalPage() {
             <button type="submit">Submit task</button>
           </form>
         </Card> */}
-        <form onSubmit={(e) => handleTaskAdd(e)}>
+        <form className="taskInput" onSubmit={(e) => handleTaskAdd(e)}>
           <Input value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
-          <button type="submit">Submit task</button>
+          <button style={{width: '50%'}} type="submit">Add new task</button>
         </form>
         <div id="accordianContainer">
           <Accordian goalI={goalId} goal={goal} tasks={tasks}></Accordian>

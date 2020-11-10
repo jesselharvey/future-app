@@ -317,6 +317,11 @@ a.goalCard:active {
   /* margin: 5% 10%; */
 }
 
+.taskInput {
+  display: inline-flex;
+  width: 35%;
+}
+
 .checkboxGroup {
   display: flex;
   flex-flow: column;

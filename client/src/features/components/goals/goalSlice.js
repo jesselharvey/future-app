@@ -10,6 +10,7 @@ export const goalsSlice = createSlice({
     goals: [],
     tasks: [],
     posts: [],
+    post: {}
   },
   reducers: {
     // GENERAL FETCH REQUESTS
@@ -28,6 +29,9 @@ export const goalsSlice = createSlice({
     asyncFetchPosts: (state, action) => {
       state.posts = action.payload
     },
+    asyncFetchPost: (state, action) => {
+      state.post = action.payload
+    }
     // // GOAL REQUESTS
     // addGoalFunct: (state, action) => {
     //   state.goals.push(action.payload)
@@ -77,6 +81,7 @@ export const {
   asyncFetchUser, 
   asyncFetchTasks,
   asyncFetchPosts,
+  asyncFetchPost,
   // addPostFunc,
   // removePostFunc,
   // addGoalFunct, 
@@ -118,6 +123,13 @@ export const fetchTasks = (goalId) => (dispatch) => {
 export const fetchPosts = (goalId) => (dispatch) => {
   api.get('/posts/goals/' + goalId).then((resp) => {
     dispatch(asyncFetchPosts(resp.data))
+  })
+}
+
+export const fetchPost = (id) => (dispatch) => {
+  api.get('/posts/' + id).then((resp) => {
+    dispatch(asyncFetchPost(resp.data))
+    console.log(resp.data[0])
   })
 }
 
@@ -174,5 +186,6 @@ export const selectGoals = state => state.goal.goals
 export const selectGoal = state => state.goal.goal
 export const selectTasks = state => state.goal.tasks
 export const selectPosts = state => state.goal.posts
+export const selectPost = state => state.goal.post
 
 export default goalsSlice.reducer
