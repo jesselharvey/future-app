@@ -126,11 +126,11 @@ ul {
 
 .name-logo {
   position: relative;
-  right: 162%;
+  right: 265%;
   color: darkslategrey;
   font-size: 30px;
+  letter-spacing: 1px;
   outline: none;
-  letter-spacing: 0;
 }
 
 .fake-logo {
