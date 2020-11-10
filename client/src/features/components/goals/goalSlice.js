@@ -9,6 +9,7 @@ export const goalsSlice = createSlice({
     goal: [],
     goals: [],
     tasks: [],
+    task: {},
     posts: [],
     post: {}
   },
@@ -25,6 +26,9 @@ export const goalsSlice = createSlice({
     },
     asyncFetchTasks: (state, action) => {
       state.tasks = action.payload
+    },
+    asyncFetchTask: (state, action) => {
+      state.task = action.payload
     },
     asyncFetchPosts: (state, action) => {
       state.posts = action.payload
@@ -80,6 +84,7 @@ export const {
   asyncFetchGoal, 
   asyncFetchUser, 
   asyncFetchTasks,
+  asyncFetchTask,
   asyncFetchPosts,
   asyncFetchPost,
   // addPostFunc,
@@ -115,8 +120,14 @@ export const fetchGoal = (id) => (dispatch) => {
 }
 
 export const fetchTasks = (goalId) => (dispatch) => {
-  api.get('/tasks/' + goalId).then((resp) => {
+  api.get('/tasks/goals/' + goalId).then((resp) => {
     dispatch(asyncFetchTasks(resp.data))
+  })
+}
+
+export const fetchTask = (id) => (dispatch) => {
+  api.get('/tasks/' + id).then((resp) => {
+    dispatch(asyncFetchTask(resp.data))
   })
 }
 
@@ -185,6 +196,7 @@ export const selectUser = state => state.goal.user
 export const selectGoals = state => state.goal.goals
 export const selectGoal = state => state.goal.goal
 export const selectTasks = state => state.goal.tasks
+export const selectTask = state => state.goal.task
 export const selectPosts = state => state.goal.posts
 export const selectPost = state => state.goal.post
 

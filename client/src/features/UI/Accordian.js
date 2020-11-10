@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Collapse, Progress, Input } from 'antd';
-import { CloseCircleOutlined } from '@ant-design/icons'
+import { Collapse, Progress, Input, Modal } from 'antd';
+import { CloseCircleOutlined, EditOutlined, ArrowsAltOutlined } from '@ant-design/icons'
 import { AccordianContent } from './AccordianContent'
 import { useParams } from 'react-router-dom'
 import { 
   addTask,
-  deleteTask
+  deleteTask,
+  fetchTask,
+  selectTask,
 } from '../../features/components/goals/goalSlice'
 
 export function Accordian(props) {
@@ -56,14 +58,24 @@ export function Accordian(props) {
     dispatch(deleteTask(goalId, id))
   }
 
+  const incomingTask = useSelector(selectTask)
+  const singleTask = incomingTask[0]
+  const [taskModalState, setTaskModalState] = useState(false)
+  function toggleTaskModal(id) {
+    dispatch(fetchTask(id))
+    setTaskModalState(!taskModalState)
+    console.log(singleTask)
+  }
+
   const tasks = props.tasks
   // console.log(tasks)
-
+  // <CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />]
   return (
+    <>
     <Collapse onChange={callback}>
     {tasks.map(task => (
       task.parent_id === null ? 
-      <Panel header={[task.description, " ", <CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />]} extra={<Progress type="circle" percent={testPercent(incomplete, complete)} width={50} />} key={task.id}>
+      <Panel header={[task.description, " ", <ArrowsAltOutlined onClick={() => toggleTaskModal(task.id)} />]} extra={<Progress type="circle" percent={testPercent(incomplete, complete)} width={50} />} key={task.id}>
         
         <AccordianContent goal={props.goal} handlePercent={handlePercent} tasks={tasks} parent_id={task.id}></AccordianContent>
         {
@@ -79,5 +91,17 @@ export function Accordian(props) {
       // <span>{task.name}</span>
     ))}
     </Collapse>
+    {singleTask == undefined ? '' :
+    <Modal
+    title={singleTask.description}
+    visible={taskModalState}
+    onCancel={() => setTaskModalState(false)}>
+      {tasks.map(task => (
+        task.parent_id == singleTask.id ?
+        task.description :
+        ''
+      ))}
+    </Modal>}
+    </>
   )
 }

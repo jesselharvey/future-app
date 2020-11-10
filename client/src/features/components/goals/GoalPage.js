@@ -6,11 +6,13 @@ import {
   fetchUser,
   fetchGoal,
   fetchTasks,
+  fetchTask,
   fetchPosts,
   fetchPost,
   selectUser,
   selectGoal,
   selectTasks,
+  selectTask,
   selectPosts,
   selectPost,
   addPost,
@@ -21,7 +23,7 @@ import {
 } from './goalSlice'  
 // import { Button } from 'antd'
 import { Collapse, Card, Input, Statistic, Button, Modal } from 'antd';
-import { FormOutlined, EditOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import { FormOutlined, EditOutlined, CloseCircleOutlined, ArrowsAltOutlined, PlusOutlined } from '@ant-design/icons'
 import { Accordian } from '../../UI/Accordian'
 
 export function GoalPage() {
@@ -67,6 +69,7 @@ export function GoalPage() {
   function handlePostDelete(id) {
     dispatch(deletePost(id, goalId))
     dispatch(fetchPosts(goalId))
+    setEntryModalState(false)
   }
   
   const [postStatus, setPostStatus] = useState(false)
@@ -101,9 +104,9 @@ export function GoalPage() {
   function toggleEntryModal(id) {
     dispatch(fetchPost(id))
     setEntryModalState(!entryModalState)
-    console.log(post)
-    
+    // console.log(post)
   }
+
 
   return (
     <div>
@@ -118,7 +121,7 @@ export function GoalPage() {
       </div>
       <br />
       {/* <div id="entryContainer"> */}
-          <Button onClick={() => toggleEntryInputModal()} className="addEntryButton" shape="round" icon={<FormOutlined />}>
+          <Button onClick={() => toggleEntryInputModal()} className="addEntryButton" shape="round" icon={<PlusOutlined />}>
             New Entry
           </Button>
           <Modal
@@ -144,11 +147,11 @@ export function GoalPage() {
             
             //have to fix the normalization of the date data
             <>
-            <Card onClick={() => toggleEntryModal(post.id)} className="entryCard override" title={post.date_time}>
-              <div className="entryIcons">
+            <Card className="entryCard override" title={[moment(post.date_time).format('MMMM Do YYYY'),  "     ", <ArrowsAltOutlined onClick={() => toggleEntryModal(post.id)} />]}>
+              {/* <div className="entryIcons">
                 <CloseCircleOutlined onClick={() => handlePostDelete(post.id)} />
                 <EditOutlined onClick={() => togglePostStatus(post.id)} />
-              </div><br />
+              </div><br /> */}
               <span>{post.description}</span> 
             </Card>
             
@@ -182,11 +185,19 @@ export function GoalPage() {
         </div>
         {post == undefined ? '' :
         <Modal
+          className="entryModal"
           title={"date_time"}
           visible={entryModalState}
-          footer={null}
+          footer={<div className="entryIcons">
+          <span>Delete entry</span><CloseCircleOutlined onClick={() => handlePostDelete(post.id)} />
+          <span>Edit entry</span><EditOutlined onClick={() => togglePostStatus(post.id)} />
+          </div>}
           onCancel={() => setEntryModalState(false)}>
-            <p>{post.description}</p>
+          {/* <div className="entryIcons">
+            <CloseCircleOutlined onClick={() => handlePostDelete(post.id)} />
+            <EditOutlined onClick={() => togglePostStatus(post.id)} />
+          </div><br /> */}
+          <p>{post.description}</p>
         </Modal>}
       {/* </div> */}
       <div id="goalFooterContent">
@@ -201,7 +212,7 @@ export function GoalPage() {
           <button style={{width: '50%'}} type="submit">Add new task</button>
         </form>
         <div id="accordianContainer">
-          <Accordian goalI={goalId} goal={goal} tasks={tasks}></Accordian>
+          <Accordian goalId={goalId} goal={goal} tasks={tasks}></Accordian>
         </div>
       </div>
       {/* <Button type="primary">Test</Button> */}

@@ -311,13 +311,17 @@ a.goalCard:active {
   display: inline-flex;
   overflow-x: scroll;
   width: 80%;
-  margin: 0 10% 2.5%;
+  margin: 0 10%;
   align-items: center;
 }
 
 .entryIcons {
-  display: flex;
-  justify-content: space-around;
+  display: inline-flex;
+  width: 50%;
+  justify-content: space-between;
+  /* position: relative; */
+  /* left: -255px;  */
+  align-items: center;
 }
 
 .inputEntryCard {
@@ -345,6 +349,14 @@ a.goalCard:active {
   left: 85%;
   top: 20px;
   z-index: 1;
+}
+
+.entryModal .ant-modal-footer {
+  padding: 10px 16px;
+  background: transparent;
+  text-align: initial;
+  border-top: 1px solid #f0f0f0;
+  border-radius: 0 0 2px 2px;
 }
 
 #goalFooterContent {

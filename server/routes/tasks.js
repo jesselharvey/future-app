@@ -7,10 +7,16 @@ router.get('/tasks', async (req, res) => {
   res.json(tasks.rows)
 })
 
-router.get('/tasks/:goalId', async (req, res) => {
+router.get('/tasks/goals/:goalId', async (req, res) => {
   const goalId = req.params.goalId
   const selectedTask = await conn.raw(`SELECT * FROM tasks WHERE goal_id = ${goalId}`)
   res.json(selectedTask.rows)
+})
+
+router.get('/tasks/:id', async (req, res) => {
+  const id = req.params.id
+  const selectTask = await conn.select().table('tasks').where({id: id})
+  res.json(selectTask)
 })
 
 router.post('/tasks/goals/:goalId', async (req, res) => {

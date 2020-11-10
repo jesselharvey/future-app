@@ -59,7 +59,8 @@ export function AccordianContent(props) {
       //   task.parent_id == props.parent_id ?
         <Checkbox.Group className="checkboxGroup" onChange={onChange} options={goalOptions.filter(task => (
             task.parent_id == props.parent_id && task.parent_id !== null ?
-            [<CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />, task]
+            // <CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />
+            task.id
             : ''
           ))} />
           // <span key={task.id}>{task.name}</span> 

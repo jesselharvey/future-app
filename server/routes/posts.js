@@ -15,7 +15,7 @@ router.get('/posts/:postId', async (req, res) => {
 })
 
 router.post('/posts/goals/:goalId', async (req, res) => {
-  const post = await conn('posts').insert({description: req.body.description, goal_id: req.params.goalId})
+  const post = await conn('posts').insert({description: req.body.description, date_time: req.body.date_time, goal_id: req.params.goalId})
   res.json(post.rows)
 })
 
