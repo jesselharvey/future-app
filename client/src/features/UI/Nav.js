@@ -13,7 +13,7 @@ export default function Navbar () {
     <div className="header">
       <Breadcrumb id="nav-bar">
         <button className="fake-logo">
-          <h1 className="name-logo">AppName</h1>
+          <h1 className="name-logo">docYOUment</h1>
         </button>
         <Breadcrumb.Item><a href="">Home</a></Breadcrumb.Item>
         <Breadcrumb.Item><a href="">Archives</a></Breadcrumb.Item>
