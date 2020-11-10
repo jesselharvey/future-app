@@ -292,6 +292,13 @@ a.goalCard:active {
   width: 250px;
 }
 
+.addEntryButton {
+  position: relative;
+  left: 93%;
+  bottom: 135px;
+  z-index: 1;
+}
+
 #goalFooterContent {
   display: inline-flex;
   width: 80%;

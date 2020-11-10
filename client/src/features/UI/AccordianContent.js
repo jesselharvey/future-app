@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Checkbox, Input } from 'antd'
+import { Checkbox, Input, Button } from 'antd'
+import { CloseCircleOutlined } from '@ant-design/icons'
+import { useParams } from 'react-router-dom'
 import { 
   fetchTasks,
   addSubTask,
@@ -9,6 +11,7 @@ import {
 
 
 export function AccordianContent(props) {
+    const { goalId } = useParams()
   const dispatch = useDispatch()
   const [taskText, setTaskText] = useState('')
   const tasks = props.tasks
@@ -45,6 +48,10 @@ export function AccordianContent(props) {
         dispatch(fetchTasks(props.goal.id))
       }
 
+      function handleTaskDelete(id) {
+        dispatch(deleteTask(goalId, id))
+      }
+
   return (
     <div>
       {
@@ -52,7 +59,7 @@ export function AccordianContent(props) {
       //   task.parent_id == props.parent_id ?
         <Checkbox.Group className="checkboxGroup" onChange={onChange} options={goalOptions.filter(task => (
             task.parent_id == props.parent_id && task.parent_id !== null ?
-            task 
+            [<CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />, task]
             : ''
           ))} />
           // <span key={task.id}>{task.name}</span> 
@@ -60,7 +67,8 @@ export function AccordianContent(props) {
           // ))
         }
         <form onSubmit={(e) => handleTaskAdd(e)}>
-          <Input value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
+          <Input style={{width: "50%"}} value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
+          <button type="submit">Add new sub task</button>
         </form>
     </div>
   )

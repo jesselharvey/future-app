@@ -63,8 +63,8 @@ export function Accordian(props) {
     <Collapse onChange={callback}>
     {tasks.map(task => (
       task.parent_id === null ? 
-      <Panel header={task.description} extra={<Progress type="circle" percent={testPercent(incomplete, complete)} width={50} />} key={task.id}>
-        <CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />
+      <Panel header={[task.description, " ", <CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />]} extra={<Progress type="circle" percent={testPercent(incomplete, complete)} width={50} />} key={task.id}>
+        
         <AccordianContent goal={props.goal} handlePercent={handlePercent} tasks={tasks} parent_id={task.id}></AccordianContent>
         {
         // tasks.map(task => (

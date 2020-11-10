@@ -18,7 +18,7 @@ import {
   deleteTask,
 } from './goalSlice'  
 // import { Button } from 'antd'
-import { Collapse, Card, Input, Statistic, Button } from 'antd';
+import { Collapse, Card, Input, Statistic, Button, Modal } from 'antd';
 import { FormOutlined, EditOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import { Accordian } from '../../UI/Accordian'
 
@@ -60,6 +60,7 @@ export function GoalPage() {
     dispatch(addPost(goalId, new Date(), postText))
     setPostText('')
     dispatch(fetchPosts(goalId))
+    setModalState(false)
   }
 
   function handlePostDelete(id) {
@@ -92,10 +93,10 @@ export function GoalPage() {
     dispatch(fetchTasks(goalId))
   }
 
-  // const [taskState, setTaskState] = useState(false)
-
-
-
+  const [modalState, setModalState] = useState(false)
+  function toggleModal() {
+    setModalState(!modalState)
+  }
 
   return (
     <div>
@@ -110,14 +111,25 @@ export function GoalPage() {
       </div>
       <br />
       <div id="entryContainer">
-
-          <Card className="inputEntryCard" title={'Add new entry!'}   >
-            {/* <Input prefix={<FormOutlined />} /> */}
+          <Button onClick={() => toggleModal()} className="addEntryButton" shape="round" icon={<FormOutlined />}>
+            New Entry
+          </Button>
+          <Modal
+          title="New Entry"
+          visible={modalState}
+          footer={null}
+          onCancel={() => setModalState(false)}>
+            <form onSubmit={(e) => handlePostAdd(e)}>
+              <Input value={postText} onChange={(e) => setPostText(e.target.value)} />
+              <button type="submit">Submit post</button>
+            </form>
+          </Modal>
+          {/* <Card className="inputEntryCard" title={'Add new entry!'}   >
             <form onSubmit={(e) => handlePostAdd(e)}>
             <TextArea value={postText} onChange={(e) => setPostText(e.target.value)} autoSize={{minRows: 1, maxRows: 2}} />
             <button type="submit">Submit post</button>
             </form>
-          </Card>
+          </Card> */}
         
         <div id="entries">
           {posts.map(post => (
