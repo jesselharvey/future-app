@@ -87,7 +87,7 @@ useEffect(() => {
           <Step title="The Reason" />
           <Step title="The Steps" />
           <Step title="The Finish Line" />
-          <Step title="Finish Up" />
+          <Step title="Confirm" />
         </Steps>
       </div>
       <div className="onboarding-body">
@@ -145,11 +145,11 @@ export function Tasks() {
           <Step title="The Reason" />
           <Step title="The Steps" />
           <Step title="The Finish Line" />
-          <Step title="Finish Up" />
+          <Step title="Confirm" />
         </Steps>
       </div>
       <div className="onboarding-body" id="onboard-tasks">
-      <h3 className="onboarding-questions">Neccessary tasks needed to attain this goal?</h3>
+      <h3 className="onboarding-questions">Neccessary tasks needed to meet this goal?</h3>
       <TextArea rows={3} value={task} onChange={(e) => setTask(e.target.value)} type="text" placeholder="Lets list a few..."></TextArea>
       <div className="onboard-tasks-buttons">
       <button className="add-tasks-button1" onClick={(e) => handleTaskAdd(e)} >Add Task</button>
@@ -256,16 +256,23 @@ return(
           <Step title="The Reason" />
           <Step title="The Steps" />
           <Step title="The Finish Line" />
-          <Step title="Finish Up" />
+          <Step title="Confirm" />
         </Steps>
       </div>
     <div className="onboarding-body">
-    <h1 className="onboarding-questions">Confirm</h1>
+    <h1 className="onboarding-questions">Are we set to start?</h1>
+    <div className="confirm-form-body">
     <div>
       <span>My goal is: <strong>{title}</strong></span>
     </div>
     <div>
       <span>Because: <strong>{reason}</strong></span>
+    </div>
+    <div>
+      <span>By the date of: <strong>2021-11-10</strong></span>
+    </div>
+    <div>
+      <span>By the time of: <strong>12:00:00</strong></span>
     </div>
     <div>
       <span>Steps to accomplish my goal:</span>
@@ -274,6 +281,7 @@ return(
         <li key={tasks.indexOf(task)}><strong>{task}</strong></li>
       ))}
       </ol>
+    </div>
     </div>
     <div className="onboarding-buttons">
     <button style={{backgroundColor: "#FA4E4E"}} onClick={(e) => handlePrevious(e)}>Previous</button>
