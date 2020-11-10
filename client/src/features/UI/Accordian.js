@@ -56,6 +56,11 @@ export function Accordian(props) {
 
   function handleTaskDelete(id) {
     dispatch(deleteTask(goalId, id))
+    setTaskModalState(false)
+  }
+
+  function handleSubTaskDelete(id) {
+    dispatch(deleteTask(goalId, id))
   }
 
   const incomingTask = useSelector(selectTask)
@@ -93,12 +98,14 @@ export function Accordian(props) {
     </Collapse>
     {singleTask == undefined ? '' :
     <Modal
-    title={singleTask.description}
+    title={[<CloseCircleOutlined onClick={() => handleTaskDelete(singleTask.id)}/> ,singleTask.description]}
     visible={taskModalState}
     onCancel={() => setTaskModalState(false)}>
       {tasks.map(task => (
         task.parent_id == singleTask.id ?
-        task.description :
+        <div>
+        <CloseCircleOutlined onClick={() => handleSubTaskDelete(task.id)}/><span>{task.description}</span>
+        </div> :
         ''
       ))}
     </Modal>}

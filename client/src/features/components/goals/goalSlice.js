@@ -114,7 +114,7 @@ export const displayGoals = () => (dispatch) => {
 
 export const fetchGoal = (id) => (dispatch) => {
   api.get('/goals/' + id).then((resp) => {
-    console.log(resp.data)
+    // console.log(resp.data)
     dispatch(asyncFetchGoal(resp.data))
   })
 }
@@ -140,7 +140,7 @@ export const fetchPosts = (goalId) => (dispatch) => {
 export const fetchPost = (id) => (dispatch) => {
   api.get('/posts/' + id).then((resp) => {
     dispatch(asyncFetchPost(resp.data))
-    console.log(resp.data[0])
+    // console.log(resp.data[0])
   })
 }
 
@@ -162,9 +162,9 @@ export const deletePost = (id, goalId) => (dispatch) => {
   })
 }
 
-export const editPost = (id, text) => (dispatch) => {
+export const editPost = (id, text, goalId) => (dispatch) => {
   api.patch('/posts/' + id, {description: text}).then((resp) => {
-    
+    dispatch(fetchPosts(goalId))
   })
 }
 
