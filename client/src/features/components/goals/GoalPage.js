@@ -25,7 +25,7 @@ import {
 import { Collapse, Card, Input, Statistic, Button, Modal, Popover } from 'antd';
 import { FormOutlined, EditOutlined, CloseCircleOutlined, ArrowsAltOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Accordian } from '../../UI/Accordian'
-import { AppModal } from '../../UI/AppModal'
+import { EntryModal } from '../../UI/AppModal'
 
 export function GoalPage() {
 
@@ -168,11 +168,11 @@ export function GoalPage() {
           ))}
         </div>
         {activeModal && (
-        <AppModal 
+        <EntryModal 
           disableModal={() => setActiveModal(null)}
           // modalState={entryModalState}
           post={activeModal}
-          ></AppModal>
+          ></EntryModal>
         )}
         {/* {post == undefined ? '' :
         <Modal

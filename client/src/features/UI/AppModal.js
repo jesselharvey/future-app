@@ -5,7 +5,7 @@ import { editPost, deletePost, fetchPosts } from '../components/goals/goalSlice'
 import { Modal, Input, Popover } from 'antd'
 import { CloseCircleOutlined, DeleteOutlined } from '@ant-design/icons'
 
-export function AppModal(props) {
+export function EntryModal(props) {
   const dispatch = useDispatch()
   // console.log(props.post)
 
@@ -48,8 +48,9 @@ export function AppModal(props) {
     <>
     <Modal
     className="entryModal"
-    title={[ <Popover content={<span>Delete entry.</span>} >
-    <DeleteOutlined onClick={() => handlePostDelete(id)} />
+    title={[
+    <Popover content={<span>Delete entry.</span>} >
+      <DeleteOutlined onClick={() => handlePostDelete(id)} />
     </Popover>, 
     moment(DT).format('MMMM Do YYYY')]}
     visible={props.post}
