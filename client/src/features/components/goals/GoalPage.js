@@ -25,6 +25,7 @@ import {
 import { Collapse, Card, Input, Statistic, Button, Modal } from 'antd';
 import { FormOutlined, EditOutlined, CloseCircleOutlined, ArrowsAltOutlined, PlusOutlined } from '@ant-design/icons'
 import { Accordian } from '../../UI/Accordian'
+import { AppModal } from '../../UI/AppModal'
 
 export function GoalPage() {
 
@@ -97,12 +98,13 @@ export function GoalPage() {
 
   const [entryModalState, setEntryModalState] = useState(false)
   // let post_description = ''
-  function toggleEntryModal(id) {
-    dispatch(fetchPost(id))
-    setEntryModalState(!entryModalState)
-    // return post == undefined ? '' : setEditPostText(post.description)
+  // function toggleEntryModal(post) {
+  //   console.log(post)
+  //   // dispatch(fetchPost(id))
+  //   // setEntryModalState(!entryModalState)
+  //   // return post == undefined ? '' : setEditPostText(post.description)
     
-  }
+  // }
   // console.log(editPostText)
 
   function handleTaskAdd(e) {
@@ -110,6 +112,16 @@ export function GoalPage() {
     dispatch(addTask(goalId, taskText))
     setTaskText('')
     dispatch(fetchTasks(goalId))
+  }
+
+  const [activeModal, setActiveModal] = useState(null)
+  function toggleEntryModal(post) {
+    setActiveModal(post)
+    console.log(post)
+    // dispatch(fetchPost(id))
+    // setEntryModalState(!entryModalState)
+    // return post == undefined ? '' : setEditPostText(post.description)
+    
   }
 
 
@@ -139,20 +151,12 @@ export function GoalPage() {
               <button type="submit">Submit post</button>
             </form>
           </Modal>
-          {/* <Card className="inputEntryCard" title={'Add new entry!'}   >
-            <form onSubmit={(e) => handlePostAdd(e)}>
-            <TextArea value={postText} onChange={(e) => setPostText(e.target.value)} autoSize={{minRows: 1, maxRows: 2}} />
-            <button type="submit">Submit post</button>
-            </form>
-          </Card> */}
         
         <div id="entries">
           {posts.map(post => (
             // postStatus == false && toggleId !== post.id ?
-            
-            //have to fix the normalization of the date data
             <>
-            <Card className="entryCard override" title={[moment(post.date_time).format('MMMM Do YYYY'),  "     ", <ArrowsAltOutlined onClick={() => toggleEntryModal(post.id)} />]}>
+            <Card className="entryCard override" title={[moment(post.date_time).format('MMMM Do YYYY'),  "     ", <ArrowsAltOutlined onClick={() => toggleEntryModal(post)} />]}>
               {/* <div className="entryIcons">
                 <CloseCircleOutlined onClick={() => handlePostDelete(post.id)} />
                 <EditOutlined onClick={() => togglePostStatus(post.id)} />
@@ -162,24 +166,24 @@ export function GoalPage() {
             </>
           ))}
         </div>
-        
-        {post == undefined ? '' :
+        {activeModal && (
+        <AppModal onClose={setActiveModal(null)} post={activeModal}></AppModal>
+        )}
+        {/* {post == undefined ? '' :
         <Modal
           className="entryModal"
           title={moment(post.date_time).format('MMMM Do YYYY')}
           visible={entryModalState}
           footer={<div className="entryIcons">
           <span>Delete entry</span><CloseCircleOutlined onClick={() => handlePostDelete(post.id)} />
-          {/* <span>Edit entry</span><EditOutlined onClick={() => togglePostStatus(post.id)} /> */}
           </div>}
           onCancel={() => setEntryModalState(false)}>
-          {/* <p>{post.description}</p> */}
-          {/* {setEditPostText(post.description)} */}
           <form onSubmit={(e) => handlePostEdit(e, post.id)}>
-            <Input defaultValue={post.description} value={editPostText} onChange={(e) => setEditPostText(e.target.value)}></Input>
+            <Input defaultValue={post.description} onChange={(e) => setEditPostText(e.target.value)}></Input>
             <button type="submit">Edit entry</button>
           </form>
-        </Modal>}
+        </Modal>
+        } */}
 
       {/* </div> */}
 
