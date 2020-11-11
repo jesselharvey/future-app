@@ -22,8 +22,8 @@ import {
   deleteTask,
 } from './goalSlice'  
 // import { Button } from 'antd'
-import { Collapse, Card, Input, Statistic, Button, Modal } from 'antd';
-import { FormOutlined, EditOutlined, CloseCircleOutlined, ArrowsAltOutlined, PlusOutlined } from '@ant-design/icons'
+import { Collapse, Card, Input, Statistic, Button, Modal, Popover } from 'antd';
+import { FormOutlined, EditOutlined, CloseCircleOutlined, ArrowsAltOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Accordian } from '../../UI/Accordian'
 import { AppModal } from '../../UI/AppModal'
 
@@ -169,7 +169,7 @@ export function GoalPage() {
         </div>
         {activeModal && (
         <AppModal 
-          // disableModal={setActiveModal(null)}
+          disableModal={() => setActiveModal(null)}
           // modalState={entryModalState}
           post={activeModal}
           ></AppModal>

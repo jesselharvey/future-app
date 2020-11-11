@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Collapse, Progress, Input, Modal } from 'antd';
-import { CloseCircleOutlined, EditOutlined, ArrowsAltOutlined } from '@ant-design/icons'
+import { Collapse, Progress, Input, Modal, Popover } from 'antd';
+import { CloseCircleOutlined, EditOutlined, ArrowsAltOutlined, DeleteOutlined } from '@ant-design/icons'
 import { AccordianContent } from './AccordianContent'
 import { useParams } from 'react-router-dom'
 import { 
@@ -78,18 +78,23 @@ export function Accordian(props) {
 
   function handlePercent(task) {
     // console.log(task)
-    // let subTasks = tasks.filter(item => {
-    //   return task.id == item.parent_id
-    // })
-    // // console.log(subTasks)
-    // let completeTasks = tasks.filter(item => {
-    //   return task.id == item.parent_id && item.status == 'complete'
-    // })
-    // // console.log(completeTasks)
-    // return testPercent(completeTasks.length, subTasks.length)
+    let subTasks = tasks.filter(item => {
+      return task.id == item.parent_id
+    })
+    console.log(subTasks)
+    let completeTasks = tasks.filter(item => {
+      return task.id == item.parent_id && item.status == 'complete'
+    })
+    // console.log(completeTasks)
+    return testPercent(completeTasks.length, subTasks.length)
   }
 
   const tasks = props.tasks
+  // state = { subTasks: [], completeTasks: [] }
+  // getPercent = (subTasksArr, completeTasksArr) => {
+  //   this.setState({ subTasks: subTasksArr, completeTasks: completeTasksArr })
+  // }
+
   // console.log(tasks)
   // <CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />]
   return (
@@ -115,13 +120,20 @@ export function Accordian(props) {
     </Collapse>
     {singleTask == undefined ? '' :
     <Modal
-    title={[<CloseCircleOutlined onClick={() => handleTaskDelete(singleTask.id)}/> ,singleTask.description]}
+    title={[
+      <Popover content={<span>Delete task.</span>} >
+        <DeleteOutlined onClick={() => handleTaskDelete(singleTask.id)}/>
+      </Popover>,
+      singleTask.description]}
     visible={taskModalState}
     onCancel={() => setTaskModalState(false)}>
       {tasks.map(task => (
         task.parent_id == singleTask.id ?
         <div>
-        <CloseCircleOutlined onClick={() => handleSubTaskDelete(task.id)}/><span>{task.description}</span>
+          <Popover content={<span>Delete task.</span>} >
+            <DeleteOutlined onClick={() => handleSubTaskDelete(task.id)}/>
+          </Popover>
+            <span>{task.description}</span>
         </div> :
         ''
       ))}

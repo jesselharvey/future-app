@@ -339,8 +339,9 @@ a.goalCard:active {
 
 .override.entryCard {
   min-width: 20%;
+  width: 20%;
   background: rgb(108, 213, 108);
-  height: 260px;
+  height: 230px;
   /* width: 31%; */
   margin: 1%;
   color: black;

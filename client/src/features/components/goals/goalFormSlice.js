@@ -20,11 +20,11 @@ export const goalFormSlice = createSlice({
     setDateState: (state, action) => {state.date = action.payload},
     setTimeState: (state, action) => {state.time = action.payload},
     clearAllForms: (state) => {
-      state.formIndex = 1,
-      state.title = '',
-      state.reason = '',
-      state.task = [],
-      state.date = '',
+      state.formIndex = 1
+      state.title = ''
+      state.reason = ''
+      state.task = []
+      state.date = ''
       state.time = ''
     }
   },  

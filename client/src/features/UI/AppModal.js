@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import moment from 'moment'
-import { editPost } from '../components/goals/goalSlice'
-import { Modal, Input } from 'antd'
+import { editPost, deletePost, fetchPosts } from '../components/goals/goalSlice'
+import { Modal, Input, Popover } from 'antd'
+import { CloseCircleOutlined, DeleteOutlined } from '@ant-design/icons'
 
 export function AppModal(props) {
+  const dispatch = useDispatch()
   // console.log(props.post)
 
   const [title, setTitle] = useState('')
@@ -31,17 +33,28 @@ export function AppModal(props) {
   function handleSubmit(e) {
     e.preventDefault()
     //patch request for the entry
-    editPost(id, title, goalId)
+    dispatch(editPost(id, title, goalId))
+    props.disableModal()
   }
-    // props.disableModal()
 
+  function handlePostDelete(id) {
+    dispatch(deletePost(id, goalId))
+    dispatch(fetchPosts(goalId))
+    props.disableModal()
+  }
+
+  
   return (
     <>
     <Modal
     className="entryModal"
-    title={moment(DT).format('MMMM Do YYYY')}
-    visible={props.post}>
-      <form onSubmit={(e) => handleSubmit(e)} >
+    title={[ <Popover content={<span>Delete entry.</span>} >
+    <DeleteOutlined onClick={() => handlePostDelete(id)} />
+    </Popover>, 
+    moment(DT).format('MMMM Do YYYY')]}
+    visible={props.post}
+    onCancel={() => props.disableModal()}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <Input value={title} onChange={(e) => setTitle(e.target.value)}></Input>
         <button type="submit">Edit Entry</button>
       </form>
