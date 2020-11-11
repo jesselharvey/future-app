@@ -5,16 +5,22 @@ import { selectFormIndex,
   selectTitle,
   selectReason,
   selectTasks,
+  selectDate,
+  selectTime,
   setTitleState,
   setReasonState,
   setTasksState,
+  setDateState,
+  setTimeState,
   incrementIndex,
   decrementIndex,
   submitGoalForm,
-  clearGoalFormState
+  clearAllForms
 } from './goalFormSlice'
+import { useHistory } from 'react-router-dom'
 import Navbar from '../../UI/Nav'
-import { DatePicker, TimePicker, Space, Input, Steps } from 'antd';
+import { Dashboard }from '../dashboard/Dashboard'
+import { DatePicker, TimePicker, Space, Input, Steps, Card } from 'antd';
 import moment from 'moment';
 
 export function Title() {
@@ -94,7 +100,7 @@ useEffect(() => {
       <h3 className="onboarding-questions">Why do we want to accomplish this?</h3>
       <TextArea rows={6} value={reason} onChange={(e) => setReason(e.target.value)} type="text" placeholder="Purpose, motivations, benefits... "></TextArea>
       <div className="onboarding-buttons">
-      <button style={{backgroundColor: "#FA4E4E"}} onClick={(e) => handlePrevious(e)} >Previous</button>
+      <button style={{backgroundColor: "#FFFFFF"}} onClick={(e) => handlePrevious(e)} >Previous</button>
       <button onClick={(e) => handleNext(e)} >Next</button>
       </div>
       </div>
@@ -168,18 +174,36 @@ export function Tasks() {
 
 export function Timeframe() {
   const dispatch = useDispatch()
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
+  const dateState = useSelector(selectDate)
+  const timeState = useSelector(selectTime)
   const { Step } = Steps
-  
+
+  useEffect(() => {
+    setDate(dateState)
+    setTime(timeState)
+  }, [dateState, timeState])
+
+  function onChangeDate(dateData, dateString) {
+    const dateValue = dateString
+    console.log(dateValue)
+    dispatch(setDateState(dateValue))
+  }
+
+  function onChangeTime(timeData, timeString) {
+    const timeValue = timeString
+    console.log(timeValue)
+    dispatch(setTimeState(timeValue))
+  }
 
   function handleNext(e) {
     e.preventDefault()
-    // dispatch(setReasonState(timeframe))
     dispatch(incrementIndex())
   }
   
   function handlePrevious(e) {
     e.preventDefault()
-    // dispatch(setReasonState(timeframe))
     dispatch(decrementIndex())
   }
 
@@ -199,16 +223,22 @@ export function Timeframe() {
           <h1 className="onboarding-questions" id="timeframe-question-date">What date shall we set to reach our goal?</h1>
           <div className="onboarding-date-picker">
           <Space direction="horizontal" size={12}>
-            <DatePicker size={100} />
+            <DatePicker onChange={onChangeDate} size={100}/>
           </Space>
           </div>
           <h1 className="onboarding-questions" id="timeframe-question-time">Do we want to narrow it down to the time of the day?</h1>
           <div className="onboarding-time-picker">
-          <TimePicker defaultValue={moment('12:08:23', 'HH:mm:ss')} size="large" />
+          <TimePicker use12Hours format="h:mm a" onChange={onChangeTime} size="large"/>
+          </div>
+          <div>
+            <h1 className="onboarding-questions" id="timeframe-question-forever">Or will this become a habit with no deadline?</h1>
+          </div>
+          <div className="input-frame">
+            <input className="forever-checkbox" type="checkbox"/>
           </div>
           <div className="onboarding-buttons" id="timeframe-buttons">
-      <button style={{backgroundColor: "#FA4E4E"}} onClick={(e) => handlePrevious(e)} >Previous</button>
-      <button onClick={(e) => handleNext(e)} >Next</button>
+          <button style={{backgroundColor: "#FFFFFF"}} onClick={(e) => handlePrevious(e)} >Previous</button>
+          <button onClick={(e) => handleNext(e)} >Next</button>
       </div>
         </div>
       </div>
@@ -216,24 +246,29 @@ export function Timeframe() {
   )
 }
 
-export function Confirm() {
+export function Confirm(props) {
   const dispatch = useDispatch()
-
   const [title, setTitle] = useState('')
   const [reason, setReason] = useState('')
   const [tasks, setTasks] = useState([])
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
 
   const titleState = useSelector(selectTitle)
   const reasonState = useSelector(selectReason)
   const taskState = useSelector(selectTasks)
+  const dateState = useSelector(selectDate)
+  const timeState = useSelector(selectTime)
+  const history = useHistory()
   const { Step } = Steps
 
 useEffect(() => {
   setTitle(titleState)
   setReason(reasonState)
   setTasks(taskState)
-}, [titleState, reasonState, taskState])
-console.log(tasks)
+  setDate(dateState)
+  setTime(timeState)
+}, [titleState, reasonState, taskState, dateState, timeState])
 
 function handlePrevious(e) {
   e.preventDefault()
@@ -242,10 +277,10 @@ function handlePrevious(e) {
 
 function handleSubmit(e) {
   e.preventDefault()
-  dispatch(submitGoalForm(title, reason, tasks))
-  
-  // dispatch(clearGoalFormState())
-  
+  dispatch(submitGoalForm(title, reason, date, time)).then((resp) => {
+    props.close()
+    dispatch(clearAllForms())
+  })
 }
 
 return(
@@ -262,29 +297,34 @@ return(
     <div className="onboarding-body">
     <h1 className="onboarding-questions">Are we set to start?</h1>
     <div className="confirm-form-body">
+    <div className="confirm-left-side">
     <div>
-      <span>My goal is: <strong>{title}</strong></span>
+      <Card><span>The Goal: <i>{title}</i></span></Card>
     </div>
     <div>
-      <span>Because: <strong>{reason}</strong></span>
+      <Card><span>The Reason: <i>{reason}</i></span></Card>
     </div>
     <div>
-      <span>By the date of: <strong>2021-11-10</strong></span>
+      <Card><span>The Day: <i>{date}</i></span></Card>
     </div>
     <div>
-      <span>By the time of: <strong>12:00:00</strong></span>
+      <Card><span>The Time: <i>{time}</i></span></Card>
     </div>
+    </div>
+    <div className="confirm-right-side">
     <div>
-      <span>Steps to accomplish my goal:</span>
+      <Card><span>Steps to accomplish my goal:</span>
       <ol>
       {tasks.map((task) => (
-        <li key={tasks.indexOf(task)}><strong>{task}</strong></li>
+        <li key={tasks.indexOf(task)}><i>{task}</i></li>
       ))}
       </ol>
+      </Card>
     </div>
     </div>
-    <div className="onboarding-buttons">
-    <button style={{backgroundColor: "#FA4E4E"}} onClick={(e) => handlePrevious(e)}>Previous</button>
+    </div>
+    <div className="onboarding-buttons" id="confirm-buttons">
+    <button style={{backgroundColor: "#FFFFFF"}} onClick={(e) => handlePrevious(e)}>Previous</button>
     <button onClick={(e) => handleSubmit(e)}>Confirm goal</button>
     </div>
     </div>
@@ -292,16 +332,17 @@ return(
 )
 }
 
-export function GoalForm() {
+export function GoalForm(props) {
   const formIndex = useSelector(selectFormIndex)
 
   const renderForm1 = formIndex === 1 ? <Title /> : ''
   const renderForm2 = formIndex === 2 ? <Reason /> : ''
   const renderForm3 = formIndex === 3 ? <Tasks /> : ''
   const renderForm4 = formIndex === 4 ? <Timeframe /> : ''
-  const renderForm5 = formIndex === 5 ? <Confirm /> : ''
+  const renderForm5 = formIndex === 5 ? <Confirm close={props.close} /> : ''
   
   const tasksArr = []
+
 
   return (
     <form>
