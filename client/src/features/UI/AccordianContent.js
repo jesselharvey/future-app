@@ -6,7 +6,8 @@ import { useParams } from 'react-router-dom'
 import { 
   fetchTasks,
   addSubTask,
-  deleteTask
+  deleteTask,
+  editTaskStatus
 } from '../../features/components/goals/goalSlice'
 
 
@@ -15,6 +16,7 @@ export function AccordianContent(props) {
   const dispatch = useDispatch()
   const [taskText, setTaskText] = useState('')
   const tasks = props.tasks
+  console.log(tasks)
   // const [deleteState, setDeleteState] = useState(false)
   // console.log(props.parent_id)
   // console.log(tasks)
@@ -26,43 +28,59 @@ export function AccordianContent(props) {
   // console.log(goalOptions)
   
   function onChange(checkedValues) {
-    console.log('checked = ', checkedValues.length);
-    let filteredArr = goalOptions.filter(task => (
-      task.parent_id == props.parent_id && task.parent_id !== null 
-      // ?
-      // task 
-      // : ''
-    ))
-    // console.log(filteredArr.length)
-    let unchecked = filteredArr.length
-    console.log(unchecked)
-    props.handlePercent(unchecked, checkedValues.length)
-    // props.onChange(checkedValues)
-    // console.log('unchecked = ', uncheckedValues);
-
+    // console.log('checked = ', checkedValues.length);
+    // let filteredArr = goalOptions.filter(task => (
+    //   task.parent_id == props.parent_id && task.parent_id !== null 
+    //   // ?
+    //   // task 
+    //   // : ''
+    // ))
+    // // console.log(filteredArr.length)
+    // let unchecked = filteredArr.length
+    // console.log(unchecked)
+    // props.handlePercent(unchecked, checkedValues.length)
+    // // props.onChange(checkedValues)
+    // // console.log('unchecked = ', uncheckedValues);
   }
-      function handleTaskAdd(e) {
-        e.preventDefault()
-        dispatch(addSubTask(props.parent_id, props.goal.id, taskText))
-        setTaskText('')
-        dispatch(fetchTasks(props.goal.id))
-      }
+  let unchecked = tasks.filter(task => {
+    return task.status === 'active' ? task : ''
+  })
+  console.log(unchecked)
 
-      function handleTaskDelete(id) {
-        dispatch(deleteTask(goalId, id))
-      }
 
+
+  function handleTaskAdd(e) {
+    e.preventDefault()
+    dispatch(addSubTask(props.parent_id, props.goal.id, taskText))
+    setTaskText('')
+    dispatch(fetchTasks(props.goal.id))
+  }
+
+  function handleTaskDelete(id) {
+    dispatch(deleteTask(goalId, id))
+  }
+
+  
   return (
     <div>
       {
+        tasks.map(task => (
+        <Checkbox checked={task.status === 'complete' ? true : false}>{task.description}</Checkbox>
+        ))
       // goalOptions.map(task => (
       //   task.parent_id == props.parent_id ?
-        <Checkbox.Group className="checkboxGroup" onChange={onChange} options={goalOptions.filter(task => (
-            task.parent_id == props.parent_id && task.parent_id !== null ?
-            // <CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />
-            task.id
-            : ''
-          ))} />
+        // <Checkbox.Group className="checkboxGroup" onChange={onChange} options={goalOptions.filter(task => (
+        //     task.parent_id == props.parent_id && task.parent_id !== null ?
+        //     // <CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />
+        //     <span >{task.id}</span>
+        //     : ''
+        //   ))}
+        //   checked={true
+
+        //   //   tasks.filter(task => {
+        //   //   return task.status !== 'active' ? task : ''
+        //   // })
+        //   } />
           // <span key={task.id}>{task.name}</span> 
           //   : ''
           // ))

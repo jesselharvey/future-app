@@ -116,6 +116,7 @@ export function GoalPage() {
 
   const [activeModal, setActiveModal] = useState(null)
   function toggleEntryModal(post) {
+    setEntryModalState(true)
     setActiveModal(post)
     console.log(post)
     // dispatch(fetchPost(id))
@@ -167,7 +168,11 @@ export function GoalPage() {
           ))}
         </div>
         {activeModal && (
-        <AppModal onClose={setActiveModal(null)} post={activeModal}></AppModal>
+        <AppModal 
+          // disableModal={setActiveModal(null)}
+          // modalState={entryModalState}
+          post={activeModal}
+          ></AppModal>
         )}
         {/* {post == undefined ? '' :
         <Modal
