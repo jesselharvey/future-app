@@ -21,13 +21,11 @@ export function AccordianContent(props) {
   // console.log(props.parent_id)
   // console.log(tasks)
 
-  const goalOptions = tasks.map(task => (
-    { label: task.description, value: task.description, id: task.id, parent_id: task.parent_id}
-  ))
+
 
   // console.log(goalOptions)
   
-  function onChange(checkedValues) {
+  // function onChange(checkedValues) {
     // console.log('checked = ', checkedValues.length);
     // let filteredArr = goalOptions.filter(task => (
     //   task.parent_id == props.parent_id && task.parent_id !== null 
@@ -41,7 +39,8 @@ export function AccordianContent(props) {
     // props.handlePercent(unchecked, checkedValues.length)
     // // props.onChange(checkedValues)
     // // console.log('unchecked = ', uncheckedValues);
-  }
+  // }
+
   let unchecked = tasks.filter(task => {
     return task.status === 'active' ? task : ''
   })
@@ -60,12 +59,24 @@ export function AccordianContent(props) {
     dispatch(deleteTask(goalId, id))
   }
 
+  function onChange(e, task) {
+    console.log('task ',task.id ,' is checked, ', e.target.checked)
+    
+    // if (e.target.checked === true) {
+
+    // }
+  }
+
   
   return (
     <div>
       {
         tasks.map(task => (
-        <Checkbox checked={task.status === 'complete' ? true : false}>{task.description}</Checkbox>
+        <Checkbox 
+        defaultChecked={task.status === 'complete' ? true : false}
+        onChange={(e) => onChange(e, task)}>
+          {task.description}
+        </Checkbox>
         ))
       // goalOptions.map(task => (
       //   task.parent_id == props.parent_id ?

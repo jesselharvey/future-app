@@ -44,7 +44,7 @@ export function AppModal(props) {
       <form onSubmit={(e) => handleSubmit(e)} >
         <Input value={title} onChange={(e) => setTitle(e.target.value)}></Input>
         <button type="submit">Edit Entry</button>
-      </form> 
+      </form>
     </Modal>
     {/* <form>
       <Input value={title} onChange={(e) => setTitle(e.target.value)}></Input>
