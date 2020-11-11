@@ -191,21 +191,17 @@ export function Timeframe() {
   function onChangeTime(timeData, timeString) {
     const timeValue = timeString
     console.log(timeValue)
-    dispatch(setTimeState)
+    dispatch(setTimeState(timeValue))
   }
 
   function handleNext(e) {
     e.preventDefault()
     dispatch(incrementIndex())
-    dispatch(setDateState(date))
-    dispatch(setTimeState(time))
   }
   
   function handlePrevious(e) {
     e.preventDefault()
     dispatch(decrementIndex())
-    dispatch(setDateState(date))
-    dispatch(setTimeState(time))
   }
 
   // value={reason} onChange={(e) => setReason(e.target.value)}

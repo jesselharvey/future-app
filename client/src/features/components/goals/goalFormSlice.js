@@ -16,7 +16,7 @@ export const goalFormSlice = createSlice({
     decrementIndex: (state, action) => {state.formIndex -= 1},
     setTitleState: (state, action) => {state.title = action.payload},
     setReasonState: (state, action) => {state.reason = action.payload},
-    setTasksState: (state, action) => {state.tasks.push(action.payload)},
+    setTasksState: (state, action) => {state.tasks = action.payload},
     setDateState: (state, action) => {state.date = action.payload},
     setTimeState: (state, action) => {state.time = action.payload},
   },  
