@@ -16,9 +16,10 @@ router.get('/goals/:goalId', async (req, res) => {
   res.json(goal.rows[0])
 })
 
-router.post('/goals/users/:userId', async (req, res) => {
-  const { id } = req.user.id
-  const goal = await conn('goals').insert({title: req.body.title, reason: req.body.reason, date: req.body.date, time: req.body.time})
+router.post('/goals/users', async (req, res) => {
+  const { id } = req.user
+  console.log(req.user)
+  const goal = await conn('goals').insert({title: req.body.title, reason: req.body.reason, date: req.body.date, time: req.body.time, user_id: id})
   res.json({message: 'goal created'})
 })
 

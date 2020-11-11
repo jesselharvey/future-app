@@ -17,7 +17,12 @@ button:active {
   outline: none;
 }
 
-ul {
+textarea {
+  resize: none;
+}
+
+ul,
+li {
   list-style-type: none;
 }
 
@@ -351,15 +356,14 @@ a.goalCard:active {
 }
 
 .onboarding-steps {
-  width: 92%;
+  width: 85%;
   position: relative;
-  left: 4%;
+  left: 7%;
   margin-top: 5px;
-  margin-bottom: 30px;
 }
 
 .onboarding-body {
-  width: 80%;
+  width: 85%;
   margin: 0 auto;
 }
 
@@ -375,43 +379,28 @@ a.goalCard:active {
 .ant-modal-header {
   height: 10%;
   text-align: center;
-  background: rgb(108, 213, 108);
   border: none;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .ant-modal-body {
-  height: 80%;
+  height: 90%;
+  background: rgb(247, 247, 247);
 }
 
-.ant-modal-footer {
+/* .ant-modal-footer {
   height: 10%;
-}
+  background: rgb(247, 247, 247);
+} */
 
 .ant-modal-title {
   font-size: 28px;
 }
 
-/* .ant-steps-item-process .ant-steps-item-icon,
-.ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon,
-.ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon {
-  background: rgba(108, 213, 108, 1);
-  border: none;
-}
-
-.ant-steps-item-finish .ant-steps-item-icon {
-  border-color: rgba(108, 213, 108, 1);
-}
-
-.onboarding-steps path {
-  color: rgba(108, 213, 108, 1);
-} */
-
 .onboarding-body textarea {
   width: 70%;
   position: relative;
   top: 60px;
-  left: 15%;
   font-size: 18px;
   border: none;
   padding: 10px 20px;
@@ -422,7 +411,6 @@ a.goalCard:active {
   width: 45%;
   position: relative;
   top: 60px;
-  left: 5%;
   font-size: 18px;
   border: none;
   padding: 10px 20px;
@@ -437,7 +425,6 @@ a.goalCard:active {
 
 .onboarding-buttons {
   display: flex;
-  justify-content: flex-end;
   position: relative;
   top: 100px;
   margin-right: 30px;
@@ -448,11 +435,12 @@ a.goalCard:active {
   flex-direction: column;
   position: relative;
   top: 80px;
-  left: 18px;
 }
 
 .onboarding-buttons button {
-  margin-left: 20px;
+  position: relative;
+  bottom: 10px;
+  margin-right: 20px;
   width: 140px;
   height: 32px;
   border: none;
@@ -461,9 +449,8 @@ a.goalCard:active {
 }
 
 .add-tasks-button1 {
-  margin-left: 20px;
   margin-bottom: 10px;
-  width: 345px;
+  width: 365px;
   height: 32px;
   border: none;
   background: rgba(108, 213, 108, 1);
@@ -478,12 +465,11 @@ a.goalCard:active {
 
 .add-tasks-button2 {
   position: relative;
-  left: 20px;
   top: 3px;
-  width: 165px;
+  width: 175px;
   height: 32px;
   border: none;
-  background: rgb(250, 78, 78);
+  background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
   outline: none;
 }
@@ -491,8 +477,8 @@ a.goalCard:active {
 .add-tasks-button3 {
   position: relative;
   bottom: 29px;
-  left: 200px;
-  width: 165px;
+  left: 190px;
+  width: 175px;
   height: 32px;
   border: none;
   background: #1890ff;
@@ -512,7 +498,7 @@ a.goalCard:active {
   overflow-y: auto;
   padding-top: 10px;
   position: relative;
-  left: 52%;
+  left: 49%;
   bottom: 150px;
   background: rgba(108, 213, 108, 1);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -534,37 +520,37 @@ a.goalCard:active {
   width: 45%;
   height: 280px;
   position: relative;
-  left: 52%;
+  left: 50%;
   bottom: 150px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-#timeframe-question-date {
-  margin-left: 55px;
-}
+/* #timeframe-question-date {} */
 
 .onboarding-date-picker {
   position: relative;
   top: 40px;
-  left: 400px;
   padding: 10px;
   width: 300px;
   height: 61px;
-  background: rgba(108, 213, 108, 1);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .onboarding-date-picker input {
   width: 237px;
   height: 30px;
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
 }
 
 #timeframe-question-time {
   position: relative;
   top: 64px;
-  left: 180px;
+}
+
+#timeframe-question-forever {
+  position: relative;
+  top: 100px;
 }
 
 #timeframe-buttons {
@@ -575,11 +561,9 @@ a.goalCard:active {
 .onboarding-time-picker {
   position: relative;
   top: 70px;
-  left: 65px;
   padding: 10px;
   width: 300px;
   height: 61px;
-  background: rgba(108, 213, 108, 1);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
@@ -592,7 +576,49 @@ a.goalCard:active {
 
 .confirm-form-body {
   position: relative;
-  top: 50px;
-  left: 20px;
+  top: 25px;
+  right: 9px;
   font-size: 16px;
+  display: flex;
+}
+
+.input-frame {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  top: 100px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+input.forever-checkbox {
+  width: 27px;
+  height: 27px;
+  margin: 7px;
+  outline: none;
+}
+
+.confirm-left-side .ant-card {
+  min-height: 10px;
+  width: 400px;
+  margin: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.confirm-right-side .ant-card {
+  min-height: 303px;
+  width: 400px;
+  margin: 5px 5px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.confirm-right-side li {
+  position: relative;
+  top: 5px;
+  right: 25px;
+}
+
+#confirm-buttons button {
+  position: relative;
+  bottom: 60px;
+  right: 4px;
 }
