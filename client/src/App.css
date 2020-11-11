@@ -539,12 +539,18 @@ a.goalCard:active {
 .onboarding-date-picker input {
   width: 237px;
   height: 30px;
-  font-size: 20px;
+  font-size: 16px;
+  text-align: center;
 }
 
 #timeframe-question-time {
   position: relative;
   top: 64px;
+}
+
+#timeframe-question-forever {
+  position: relative;
+  top: 100px;
 }
 
 #timeframe-buttons {
@@ -574,6 +580,21 @@ a.goalCard:active {
   right: 9px;
   font-size: 16px;
   display: flex;
+}
+
+.input-frame {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  top: 100px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+input.forever-checkbox {
+  width: 27px;
+  height: 27px;
+  margin: 7px;
+  outline: none;
 }
 
 .confirm-left-side .ant-card {

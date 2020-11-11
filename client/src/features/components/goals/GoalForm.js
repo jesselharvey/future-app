@@ -14,9 +14,12 @@ import { selectFormIndex,
   setTimeState,
   incrementIndex,
   decrementIndex,
-  submitGoalForm
+  submitGoalForm,
+  clearAllForms
 } from './goalFormSlice'
+import { useHistory } from 'react-router-dom'
 import Navbar from '../../UI/Nav'
+import { Dashboard }from '../dashboard/Dashboard'
 import { DatePicker, TimePicker, Space, Input, Steps, Card } from 'antd';
 import moment from 'moment';
 
@@ -204,9 +207,6 @@ export function Timeframe() {
     dispatch(decrementIndex())
   }
 
-  // value={reason} onChange={(e) => setReason(e.target.value)}
-
-
   return (
     <div>
       <div className="onboarding-container">
@@ -228,11 +228,17 @@ export function Timeframe() {
           </div>
           <h1 className="onboarding-questions" id="timeframe-question-time">Do we want to narrow it down to the time of the day?</h1>
           <div className="onboarding-time-picker">
-          <TimePicker onChange={onChangeTime} size="large"/>
+          <TimePicker use12Hours format="h:mm a" onChange={onChangeTime} size="large"/>
+          </div>
+          <div>
+            <h1 className="onboarding-questions" id="timeframe-question-forever">Or will this become a habit with no deadline?</h1>
+          </div>
+          <div className="input-frame">
+            <input className="forever-checkbox" type="checkbox"/>
           </div>
           <div className="onboarding-buttons" id="timeframe-buttons">
-      <button style={{backgroundColor: "#FFFFFF"}} onClick={(e) => handlePrevious(e)} >Previous</button>
-      <button onClick={(e) => handleNext(e)} >Next</button>
+          <button style={{backgroundColor: "#FFFFFF"}} onClick={(e) => handlePrevious(e)} >Previous</button>
+          <button onClick={(e) => handleNext(e)} >Next</button>
       </div>
         </div>
       </div>
@@ -240,9 +246,8 @@ export function Timeframe() {
   )
 }
 
-export function Confirm() {
+export function Confirm(props) {
   const dispatch = useDispatch()
-
   const [title, setTitle] = useState('')
   const [reason, setReason] = useState('')
   const [tasks, setTasks] = useState([])
@@ -254,6 +259,7 @@ export function Confirm() {
   const taskState = useSelector(selectTasks)
   const dateState = useSelector(selectDate)
   const timeState = useSelector(selectTime)
+  const history = useHistory()
   const { Step } = Steps
 
 useEffect(() => {
@@ -263,7 +269,6 @@ useEffect(() => {
   setDate(dateState)
   setTime(timeState)
 }, [titleState, reasonState, taskState, dateState, timeState])
-console.log(tasks)
 
 function handlePrevious(e) {
   e.preventDefault()
@@ -272,7 +277,10 @@ function handlePrevious(e) {
 
 function handleSubmit(e) {
   e.preventDefault()
-  dispatch(submitGoalForm(title, reason, date, time))
+  dispatch(submitGoalForm(title, reason, date, time)).then((resp) => {
+    props.close()
+    dispatch(clearAllForms())
+  })
 }
 
 return(
@@ -324,16 +332,17 @@ return(
 )
 }
 
-export function GoalForm() {
+export function GoalForm(props) {
   const formIndex = useSelector(selectFormIndex)
 
   const renderForm1 = formIndex === 1 ? <Title /> : ''
   const renderForm2 = formIndex === 2 ? <Reason /> : ''
   const renderForm3 = formIndex === 3 ? <Tasks /> : ''
   const renderForm4 = formIndex === 4 ? <Timeframe /> : ''
-  const renderForm5 = formIndex === 5 ? <Confirm /> : ''
+  const renderForm5 = formIndex === 5 ? <Confirm close={props.close} /> : ''
   
   const tasksArr = []
+
 
   return (
     <form>

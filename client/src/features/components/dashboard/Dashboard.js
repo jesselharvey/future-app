@@ -22,6 +22,11 @@ export function Dashboard() {
     dispatch(fetchUser())
   }, [dispatch])
 
+  function handleClose () {
+    setVisible(false)
+    dispatch(displayGoals())
+  }
+
 
   return (<>
     <Navbar />
@@ -44,7 +49,7 @@ export function Dashboard() {
           on={() => setVisible(false)}
           onCancel={() => setVisible(false)}
           width={1000}>
-          <GoalForm/>
+          <GoalForm close={() => handleClose()} />
         </Modal>
 
         <h1 className="lets-make-progress">Lets make progress!</h1>
