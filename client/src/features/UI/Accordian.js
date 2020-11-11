@@ -30,18 +30,15 @@ export function Accordian(props) {
   
 
   // function getPercent(incomplete, complete) {
-    function handlePercent(complete, incomplete) {
-      setComplete(complete)
-      setIncomplete(incomplete)
+    // function handlePercent(complete, incomplete) {
+    //   setComplete(complete)
+    //   setIncomplete(incomplete)
       // let percent = incomplete / complete * 100
       // console.log(incomplete, complete)
       // console.log(percent)
       // return percent
-    }
-    let testPercent = (x, y) => {
-      let result = x / y * 100
-      return Number.isNaN(result) ? 0 : result.toFixed(1)
-    }
+    // }
+
   // }
 
   // function onChange(checkedValues) {
@@ -72,6 +69,26 @@ export function Accordian(props) {
     console.log(singleTask)
   }
 
+  // x = checked, y = total subTasks
+  let testPercent = (x, y) => {
+    let result = x / y * 100
+    return Number.isNaN(result) ? 0 : result.toFixed(1)
+  }
+  // console.log(testPercent(6, 7))
+
+  function handlePercent(task) {
+    // console.log(task)
+    // let subTasks = tasks.filter(item => {
+    //   return task.id == item.parent_id
+    // })
+    // // console.log(subTasks)
+    // let completeTasks = tasks.filter(item => {
+    //   return task.id == item.parent_id && item.status == 'complete'
+    // })
+    // // console.log(completeTasks)
+    // return testPercent(completeTasks.length, subTasks.length)
+  }
+
   const tasks = props.tasks
   // console.log(tasks)
   // <CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />]
@@ -80,9 +97,10 @@ export function Accordian(props) {
     <Collapse onChange={callback}>
     {tasks.map(task => (
       task.parent_id === null ? 
-      <Panel header={[task.description, " ", <ArrowsAltOutlined onClick={() => toggleTaskModal(task.id)} />]} extra={<Progress type="circle" percent={testPercent(incomplete, complete)} width={50} />} key={task.id}>
+      <Panel header={[task.description, " ", <ArrowsAltOutlined onClick={() => toggleTaskModal(task.id)} />]}
+       extra={<Progress type="circle" percent={handlePercent(task)} width={50} />} key={task.id}>
         
-        <AccordianContent goal={props.goal} handlePercent={handlePercent} tasks={tasks} parent_id={task.id}></AccordianContent>
+        <AccordianContent goal={props.goal} tasks={tasks} parent_id={task.id}></AccordianContent>
         {
         // tasks.map(task => (
           // task.parent_id === task.id ?
@@ -92,7 +110,6 @@ export function Accordian(props) {
         }
       </Panel>
         : ''
-      
       // <span>{task.name}</span>
     ))}
     </Collapse>

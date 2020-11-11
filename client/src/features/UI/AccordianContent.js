@@ -16,7 +16,7 @@ export function AccordianContent(props) {
   const dispatch = useDispatch()
   const [taskText, setTaskText] = useState('')
   const tasks = props.tasks
-  console.log(tasks)
+  // console.log(tasks)
   // const [deleteState, setDeleteState] = useState(false)
   // console.log(props.parent_id)
   // console.log(tasks)
@@ -44,8 +44,7 @@ export function AccordianContent(props) {
   let unchecked = tasks.filter(task => {
     return task.status === 'active' ? task : ''
   })
-  console.log(unchecked)
-
+  // console.log(unchecked)
 
 
   function handleTaskAdd(e) {
@@ -60,7 +59,24 @@ export function AccordianContent(props) {
   }
 
   function onChange(e, task) {
-    console.log('task ',task.id ,' is checked, ', e.target.checked)
+    // console.log('task ',task.id ,' is checked, ', e.target.checked)
+    // console.log(e.target)
+    console.log(task)
+    if (task.status === 'active') {
+      return dispatch(editTaskStatus(task.id, 'complete', goalId))
+    } else if (task.status === 'complete') {
+      return dispatch(editTaskStatus(task.id, 'active', goalId))
+    }
+
+    // let subTasks = tasks.filter(item => {
+    //   return item.parent_id == props.parent_id
+    // })
+    // // console.log(subTasks)
+    
+    // let completeTasks = tasks.filter(item => {
+    //   return item.parent_id == props.parent_id && item.status == 'complete'
+    // })
+    // console.log(completeTasks)
     
     // if (e.target.checked === true) {
 
@@ -72,11 +88,12 @@ export function AccordianContent(props) {
     <div>
       {
         tasks.map(task => (
+          task.parent_id == props.parent_id ?
         <Checkbox 
         defaultChecked={task.status === 'complete' ? true : false}
         onChange={(e) => onChange(e, task)}>
           {task.description}
-        </Checkbox>
+        </Checkbox> : ''
         ))
       // goalOptions.map(task => (
       //   task.parent_id == props.parent_id ?
