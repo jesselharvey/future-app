@@ -18,11 +18,15 @@ function Actions(props) {
 
 function TaskInputItem({id, goalId, description, width}) {
   const dispatch = useDispatch()
+  const [descriptionState, setDescription] = useState('')
+  useEffect(() => {
+    setDescription(descriptionState)
+  }, [description])
   return (
     <div style={{display: 'flex'}}>
-      <input className="ant-input" defaultValue={description} style={{marginBottom: '1rem', width: width}} />
+      <input className="ant-input" value={descriptionState} onChange={(e) => setDescription(e.target.value)} style={{marginBottom: '1rem', width: width}} />
       <div style={{display: 'flex'}}>
-        <Actions onEdit={() => console.log('e', id)} onDelete={() => dispatch(deleteTask(goalId, id))}/>
+        <Actions onEdit={() => dispatch(editTaskDescription(goalId, id, descriptionState))} onDelete={() => dispatch(deleteTask(goalId, id))}/>
       </div>
     </div>
   )
