@@ -38,7 +38,7 @@ export function Dashboard() {
   }
 
 
-  return (<>
+  return (<div className="fade-in">
     <Navbar />
     <div className="body">
       <div className="main">
@@ -83,6 +83,6 @@ export function Dashboard() {
       </div>
       <div className="dashboard-footer"></div>
     </div>
-  </>
+  </div>
   )
 }
