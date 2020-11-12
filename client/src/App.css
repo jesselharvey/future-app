@@ -488,6 +488,17 @@ a.goalCard:active {
   flex-flow: column;
 }
 
+.checkboxGroup label {
+  margin-left: 8px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  /* margin-top: 1rem; */
+  align-items: baseline;
+}
+
 /* Onboarding modal */
 
 .onboarding-container {

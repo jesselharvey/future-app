@@ -131,19 +131,21 @@ export function Accordian(props) {
         : ''
     ))} */}
     {tasks.map(task => (
-      <Panel header={[task.description, " ", <ArrowsAltOutlined onClick={() => toggleTaskModal(task)} />]}
+      <Panel header={task.description}
       extra={
       <Progress type="circle" percent={handlePercent(task)} width={50} />} key={task.id}>
         <AccordianContent goal={props.goal} tasks={task.tasks} parent_id={task.id}></AccordianContent>
       </Panel>
     ))}
     </Collapse>
-    {activeModal && (
+
+    {/* {activeModal && (
     <TaskModal 
       disableModal={() => setActiveModal(null)}
       task={activeModal}
       ></TaskModal>
-    )}
+    )} */}
+
     {/* {singleTask == undefined ? '' :
     <Modal
     title={[

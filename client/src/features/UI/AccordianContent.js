@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Checkbox, Input, Button, Popover } from 'antd'
-import { CloseCircleOutlined } from '@ant-design/icons'
+import { Checkbox, Input, Form, Button, Popover } from 'antd'
+import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { useParams } from 'react-router-dom'
 import { 
   fetchTasks,
@@ -47,8 +47,9 @@ export function AccordianContent(props) {
   // console.log(complete)
 
 
-  function handleTaskAdd(e) {
-    e.preventDefault()
+  function handleTaskAdd() {
+    console.log(taskText)
+    // e.preventDefault()
     dispatch(addSubTask(props.parent_id, props.goal.id, taskText))
     setTaskText('')
     dispatch(fetchTasks(props.goal.id))
@@ -85,7 +86,8 @@ export function AccordianContent(props) {
   
   return (
     <div>
-      {
+      <div className="checkboxGroup">
+        {
         tasks.map(task => (
           <Checkbox
         defaultChecked={task.status === 'complete' ? true : false}
@@ -93,28 +95,18 @@ export function AccordianContent(props) {
           {task.description}
         </Checkbox>
         ))
-      // goalOptions.map(task => (
-      //   task.parent_id == props.parent_id ?
-        // <Checkbox.Group className="checkboxGroup" onChange={onChange} options={goalOptions.filter(task => (
-        //     task.parent_id == props.parent_id && task.parent_id !== null ?
-        //     // <CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />
-        //     <span >{task.id}</span>
-        //     : ''
-        //   ))}
-        //   checked={true
-
-        //   //   tasks.filter(task => {
-        //   //   return task.status !== 'active' ? task : ''
-        //   // })
-        //   } />
-          // <span key={task.id}>{task.name}</span> 
-          //   : ''
-          // ))
         }
-        <form onSubmit={(e) => handleTaskAdd(e)}>
-          <Input style={{width: "25%"}} value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
+      </div>
+        <Form className="taskInput" onFinish={() => handleTaskAdd()}>
+          <Input.Group compact style={{display: 'flex'}}>
+            <Input placeholder="Enter steps to accomplish your task..." value={taskText} onChange={(e) => setTaskText(e.target.value)} />
+            <Button htmlType="submit"><PlusOutlined /></Button>
+          </Input.Group>
+        </Form>
+        {/* <form onSubmit={(e) => handleTaskAdd(e)}>
+          <Input value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
           <button type="submit">Add new sub task</button>
-        </form>
+        </form> */}
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { EditOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 import { 
   editTaskDescription,
   deleteTask,
+  fetchTasks
 } from './goalSlice'
 
 function Actions(props) {
@@ -26,7 +27,7 @@ function TaskInputItem({id, goalId, description, width}) {
     <div style={{display: 'flex'}}>
       <input className="ant-input" value={descriptionState} onChange={(e) => setDescription(e.target.value)} style={{marginBottom: '1rem', width: width}} />
       <div style={{display: 'flex'}}>
-        <Actions onEdit={() => dispatch(editTaskDescription(goalId, id, descriptionState))} onDelete={() => dispatch(deleteTask(goalId, id))}/>
+        <Actions onEdit={() => dispatch(editTaskDescription(goalId, id, descriptionState))} onDelete={() => dispatch(deleteTask(goalId, id))  && dispatch(fetchTasks(goalId))}/>
       </div>
     </div>
   )

@@ -7,8 +7,8 @@ import {
   fetchPosts,
   deleteTask,
   fetchTasks } from '../components/goals/goalSlice'
-import { Modal, Input, Popover } from 'antd'
-import { CloseCircleOutlined, DeleteOutlined } from '@ant-design/icons'
+import { Modal, Input, Popover, Form, Button } from 'antd'
+import { CloseCircleOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 const { TextArea } = Input
 
 export function EntryModal(props) {
@@ -36,8 +36,8 @@ export function EntryModal(props) {
   console.log(props.post)
 
 
-  function handleSubmit(e) {
-    e.preventDefault()
+  function handleSubmit() {
+    // e.preventDefault()
     //patch request for the entry
     dispatch(editPost(id, title, goalId))
     props.disableModal()
@@ -54,17 +54,16 @@ export function EntryModal(props) {
     <>
     <Modal
     className="entryModal"
-    title={[
-    <Popover content={<span>Delete entry.</span>} >
-      <DeleteOutlined onClick={() => handlePostDelete(id)} />
-    </Popover>, 
-    moment(DT).format('MMMM Do YYYY')]}
+    title={moment(DT).format('MMMM Do YYYY')}
     visible={props.post}
     onCancel={() => props.disableModal()}>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <Form onFinish={(e) => handleSubmit()}>
         <TextArea value={title} onChange={(e) => setTitle(e.target.value)}></TextArea>
-        <button type="submit" style={{marginTop: '1rem'}}>Edit Entry</button>
-      </form>
+        <div className="buttonGroup">
+          <Button onClick={() => handlePostDelete(id)}><DeleteOutlined/> Delete Entry</Button>
+          <Button htmlType="submit" style={{marginTop: '1rem'}}><EditOutlined/>Edit Entry</Button>
+        </div>
+      </Form>
     </Modal>
     {/* <form>
       <Input value={title} onChange={(e) => setTitle(e.target.value)}></Input>
@@ -74,45 +73,45 @@ export function EntryModal(props) {
   )
 }
 
-export function TaskModal(props) {
-  const dispatch = useDispatch()
-  console.log(props.task)
-  const [description, setDescription] = useState('')
-  const [id, setId] = useState('')
+// export function TaskModal(props) {
+//   const dispatch = useDispatch()
+//   console.log(props.task)
+//   const [description, setDescription] = useState('')
+//   const [id, setId] = useState('')
   
-  useEffect(() => {
-    setDescription(props.task.description)
-    setId(props.task.id)
-  }, [props.task])
+//   useEffect(() => {
+//     setDescription(props.task.description)
+//     setId(props.task.id)
+//   }, [props.task])
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    //patch request for the entry
-    // dispatch(editPost(id, title, goalId))
-    props.disableModal()
-  }
+//   function handleSubmit(e) {
+//     e.preventDefault()
+//     //patch request for the entry
+//     // dispatch(editPost(id, title, goalId))
+//     props.disableModal()
+//   }
 
-  function handleTaskDelete(id) {
-    // dispatch(deleteTask(id, goalId))
-    // dispatch(fetchTasks(goalId))
-    // props.disableModal()
-  }
+//   function handleTaskDelete(id) {
+//     // dispatch(deleteTask(id, goalId))
+//     // dispatch(fetchTasks(goalId))
+//     // props.disableModal()
+//   }
 
-  return (
-    <>
-    <Modal
-    className="entryModal"
-    title={[
-    <Popover content={<span>Delete task.</span>} >
-      <DeleteOutlined onClick={() => handleTaskDelete(id)} />
-    </Popover>]}
-    visible={props.task}
-    onCancel={() => props.disableModal()}>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <Input value={description} onChange={(e) => setDescription(e.target.value)}></Input>
-        <button type="submit">Edit Entry</button>
-      </form>
-    </Modal>
-    </>
-  )
-}
+//   return (
+//     <>
+//     <Modal
+//     className="entryModal"
+//     title={[
+//     <Popover content={<span>Delete task.</span>} >
+//       <DeleteOutlined onClick={() => handleTaskDelete(id)} />
+//     </Popover>]}
+//     visible={props.task}
+//     onCancel={() => props.disableModal()}>
+//       <form onSubmit={(e) => handleSubmit(e)}>
+//         <Input value={description} onChange={(e) => setDescription(e.target.value)}></Input>
+//         <button type="submit">Edit Entry</button>
+//       </form>
+//     </Modal>
+//     </>
+//   )
+// }

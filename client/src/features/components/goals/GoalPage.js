@@ -120,12 +120,15 @@ export function GoalPage() {
     setEntryModalState(true)
     setActiveModal(post)
     console.log(post)
-    
     // dispatch(fetchPost(id))
     // setEntryModalState(!entryModalState)
     // return post == undefined ? '' : setEditPostText(post.description)
-    
   }
+  // fix toLowerCase because it isn't working right now for some reason
+  // let title = ''
+  // const goalTitle = goal.title
+  // title = goalTitle.toLowerCase()
+  // console.log(title)
 
 
   return (
@@ -133,14 +136,13 @@ export function GoalPage() {
       <div id="goalHeader">
         <div>
           <h2>My goal is {goal.title}</h2>
-          <h2>{goal.reason}</h2>
+          <h2>Because {goal.reason}</h2>
         </div>
         {goal.finish_line_date == null ?
         "" : 
         <Countdown title="Time left to accomplish your goal!" value={goal.finish_line_date} format="D HH:mm:ss" />}
       </div>
       <br />
-      {/* <div id="entryContainer"> */}
           <div style={{marginLeft: '140px'}}>
             <Button onClick={() => toggleEntryInputModal()} className="addEntryButton" shape="round" icon={<PlusOutlined />}>
               New Entry
@@ -163,11 +165,9 @@ export function GoalPage() {
           {posts.map(post => (
             // postStatus == false && toggleId !== post.id ?
             <>
-            <Card className="entryCard override" title={[moment(post.date_time).format('MMMM Do YYYY'),  "     ", <ArrowsAltOutlined onClick={() => toggleEntryModal(post)} />]}>
-              {/* <div className="entryIcons">
-                <CloseCircleOutlined onClick={() => handlePostDelete(post.id)} />
-                <EditOutlined onClick={() => togglePostStatus(post.id)} />
-              </div><br /> */}
+            <Card className="entryCard override" title={[moment(post.date_time).format('MMMM Do YYYY'),
+             "     ",
+            <ArrowsAltOutlined onClick={() => toggleEntryModal(post)} />]}>
               <span>{post.description}</span> 
             </Card>
             </>
@@ -180,23 +180,6 @@ export function GoalPage() {
           post={activeModal}
           ></EntryModal>
         )}
-        {/* {post == undefined ? '' :
-        <Modal
-          className="entryModal"
-          title={moment(post.date_time).format('MMMM Do YYYY')}
-          visible={entryModalState}
-          footer={<div className="entryIcons">
-          <span>Delete entry</span><CloseCircleOutlined onClick={() => handlePostDelete(post.id)} />
-          </div>}
-          onCancel={() => setEntryModalState(false)}>
-          <form onSubmit={(e) => handlePostEdit(e, post.id)}>
-            <Input defaultValue={post.description} onChange={(e) => setEditPostText(e.target.value)}></Input>
-            <button type="submit">Edit entry</button>
-          </form>
-        </Modal>
-        } */}
-
-      {/* </div> */}
 
       {taskModalVisibility && <TaskEditModal goalId={goalId} tasks={tasks} onClose={() => setTaskModalVisibility(false)} />}
 
