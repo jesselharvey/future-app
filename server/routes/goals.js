@@ -11,15 +11,17 @@ router.get('/goals', async (req, res) => {
 
 router.get('/goals/:goalId', async (req, res) => {
   const goalId = req.params.goalId
-  // const goal = await conn.select().table('goals').where({id: goalId})
   const goal = await conn.raw(`SELECT * FROM goals WHERE id = ${goalId}`)
   res.json(goal.rows[0])
 })
 
 router.post('/goals/users', async (req, res) => {
   const { id } = req.user
-  console.log(req.user)
-  const goal = await conn('goals').insert({title: req.body.title, reason: req.body.reason, date: req.body.date, time: req.body.time, user_id: id})
+  const { tasks } = req.body
+  const goal = await conn('goals').returning('id').insert({title: req.body.title, reason: req.body.reason, date: req.body.date, time: req.body.time, user_id: id})
+  for (let task of tasks) {
+    await conn('tasks').insert({description: task.description, goal_id: goal[0]})
+  }
   res.json({message: 'goal created'})
 })
 

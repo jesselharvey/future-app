@@ -42,11 +42,6 @@ router.get('/tasks/:id', async (req, res) => {
   res.json(selectTask)
 })
 
-router.post('/tasks/goals/:goalId', async (req, res) => {
-  const task = await conn('tasks').insert({description: req.body.description, goal_id: req.params.goalId})
-  res.json({message: 'task created'})
-})
-
 router.post('/tasks/:taskId/goals/:goalId', async (req, res) => {
   const subTask = await conn('tasks').insert({description: req.body.description, parent_id: req.params.taskId, goal_id: req.params.goalId})
   res.json({message: 'sub task created'})

@@ -128,7 +128,7 @@ export function GoalPage() {
 
 
   return (
-    <div>
+    <div className="fade-in">
       <div id="goalHeader">
         <div>
           <h2>My goal is {goal.title}</h2>

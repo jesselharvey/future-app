@@ -26,6 +26,12 @@ li {
   list-style-type: none;
 }
 
+.body {
+  background-image: url("https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?cs=srgb&dl=pexels-pixabay-247599.jpg&fm=jpg");
+  background-size: cover;
+  height: 100%;
+}
+
 /* LOGIN/REGISTER */
 
 .login-register {
@@ -99,6 +105,112 @@ li {
   color: darkslategrey;
 }
 
+/* FADE */
+
+.fade-in {
+  animation: fadeIn ease 1s;
+  -webkit-animation: fadeIn ease 1s;
+  -moz-animation: fadeIn ease 1s;
+  -o-animation: fadeIn ease 1s;
+  -ms-animation: fadeIn ease 1s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn ease 0.7s;
+  -webkit-animation: fadeIn ease 1s;
+  -moz-animation: fadeIn ease 1s;
+  -o-animation: fadeIn ease 1s;
+  -ms-animation: fadeIn ease 1s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 /* DASHBOARD */
 
 .header {
@@ -156,86 +268,58 @@ li {
 .dashboard-header {
   height: 645px;
   margin: 0 7%;
-  background-image: url("https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-  background-repeat: no-repeat;
   position: relative;
   top: 75%;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  /* background-image: url("https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-repeat: no-repeat; */
+  /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); */
 }
 
 .welcome-header {
   font-size: 90px;
   position: relative;
   width: 80%;
-  top: 22%;
-  left: 9%;
+  top: 32%;
+  left: 2%;
   color: darkslategrey;
   text-shadow: 1px 1px grey;
-}
-
-.add-goal-button {
-  width: 30%;
-  height: 25%;
-  position: relative;
-  top: 25%;
-  left: 17%;
-  font-size: 30px;
-  border: none;
-  background: darkslategrey;
-  color: rgb(197, 244, 197);
-  border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}
-
-.add-goal-button:active {
-  outline: none;
-}
-
-.add-goal-button:hover {
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  color: darkslategrey;
-  background: rgba(108, 213, 108, 1);
+  line-height: 85px;
 }
 
 .motivation-quote {
-  font-size: 17px;
+  font-size: 18px;
   width: 29%;
   position: relative;
-  left: 60%;
-  top: 13%;
-  text-align: right;
+  left: 3%;
+  top: 32%;
   font-style: italic;
   color: darkslategrey;
 }
 
 .dashboard-start-goal {
   position: relative;
-  top: 70px;
-  left: 11%;
-  width: 275px;
-  height: 45px;
-  background: rgba(108, 213, 108, 1);
+  bottom: 110px;
+  left: 9%;
+  width: 245px;
+  height: 40px;
+  background: white;
   outline: none;
   border: none;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-}
-
-.lets-make-progress {
-  padding-top: 20px;
-  font-size: 40px;
-  text-align: center;
+  border-radius: 1px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16), 0 5px 10px rgba(0, 0, 0, 0.23);
 }
 
 .dashboard-view-goal {
   position: relative;
-  bottom: 76px;
-  left: 70%;
-  width: 275px;
-  height: 44px;
-  background: rgba(108, 213, 108, 1);
+  bottom: 110px;
+  left: 10%;
+  width: 245px;
+  height: 40px;
+  background: white;
   outline: none;
   border: none;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 1px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16), 0 5px 10px rgba(0, 0, 0, 0.23);
 }
 
 .contact-area {
@@ -265,9 +349,20 @@ li {
 
 #goalGrid {
   width: 75%;
-  margin: 0 5% 5% 14%;
+  min-height: 660px;
+  margin: 8% 5% 5% 14%;
   display: flex;
   flex-wrap: wrap;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.19), 0 1px 2px rgba(0, 0, 0, 0.23);
+  padding: 5px 10px 45px 15px;
+  background: rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+}
+
+.no-goals-set {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
 }
 
 #goalGrid .goalCard {
@@ -275,7 +370,7 @@ li {
   width: 31%;
   margin: 1%;
   color: black;
-  border-radius: 5px;
+  border-radius: 1px;
   border: none;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -542,7 +637,6 @@ a.goalCard:active {
   position: relative;
   left: 49%;
   bottom: 150px;
-  background: rgba(108, 213, 108, 1);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
@@ -597,7 +691,7 @@ a.goalCard:active {
 
 #timeframe-buttons {
   position: relative;
-  top: 120px;
+  top: 80px;
 }
 
 .onboarding-time-picker {
@@ -628,15 +722,29 @@ a.goalCard:active {
   width: 40px;
   height: 40px;
   position: relative;
-  top: 100px;
+  left: 490px;
+  top: 41px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 input.forever-checkbox {
-  width: 27px;
-  height: 27px;
-  margin: 7px;
-  outline: none;
+  width: 29px;
+  height: 29px;
+  margin: 6px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  outline: 1px solid lightgrey;
+}
+
+input.forever-checkbox:checked {
+  width: 28px;
+  height: 28px;
+  margin: 6px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  background: #1890ff;
 }
 
 .confirm-left-side .ant-card {
@@ -663,4 +771,21 @@ input.forever-checkbox {
   position: relative;
   bottom: 60px;
   right: 4px;
+}
+
+.new-goal-alert span {
+  font-size: 16px;
+}
+
+.ant-message-notice-content {
+  height: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding-top: 15px;
+  border-radius: 1px;
+}
+
+.ant-spin {
+  position: relative;
+  bottom: 61px;
+  right: 5px;
 }
