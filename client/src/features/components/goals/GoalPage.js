@@ -119,6 +119,7 @@ export function GoalPage() {
     setEntryModalState(true)
     setActiveModal(post)
     console.log(post)
+    
     // dispatch(fetchPost(id))
     // setEntryModalState(!entryModalState)
     // return post == undefined ? '' : setEditPostText(post.description)

@@ -41,10 +41,10 @@ export function AccordianContent(props) {
     // // console.log('unchecked = ', uncheckedValues);
   // }
 
-  let unchecked = tasks.filter(task => {
-    return task.status === 'active' ? task : ''
+  let complete = tasks.filter(task => {
+    return task.status === 'complete'
   })
-  // console.log(unchecked)
+  // console.log(complete)
 
 
   function handleTaskAdd(e) {
@@ -87,12 +87,11 @@ export function AccordianContent(props) {
     <div>
       {
         tasks.map(task => (
-          task.parent_id == props.parent_id ?
-        <Checkbox
+          <Checkbox
         defaultChecked={task.status === 'complete' ? true : false}
         onChange={(e) => onChange(e, task)}>
           {task.description}
-        </Checkbox> : ''
+        </Checkbox>
         ))
       // goalOptions.map(task => (
       //   task.parent_id == props.parent_id ?
