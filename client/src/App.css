@@ -438,17 +438,19 @@ a.goalCard:active {
   background: rgb(108, 213, 108);
   height: 230px;
   /* width: 31%; */
-  margin: 1%;
+  margin-right: 1%;
   color: black;
   border-radius: 5px;
   border: none;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
+.override.entryCard:last-child {
+  margin-right: 0;
+}
+
 .addEntryButton {
   position: relative;
-  left: 85%;
-  top: 20px;
   z-index: 1;
 }
 

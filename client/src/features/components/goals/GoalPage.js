@@ -26,6 +26,7 @@ import { Collapse, Card, Input, Statistic, Button, Modal, Popover, Form } from '
 import { FormOutlined, EditOutlined, CloseCircleOutlined, ArrowsAltOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Accordian } from '../../UI/Accordian'
 import { EntryModal } from '../../UI/AppModal'
+const { TextArea } = Input
 
 export function GoalPage() {
 
@@ -34,7 +35,6 @@ export function GoalPage() {
   const { postId } = useParams()
   const { Panel } = Collapse
   const { Countdown } = Statistic
-  const { TextArea } = Input
   function callback(key) {
     console.log(key)
   }
@@ -60,7 +60,6 @@ export function GoalPage() {
   // console.log(posts)
 
   function handlePostAdd(e) {
-    e.preventDefault()
     dispatch(addPost(goalId, new Date(), postText))
     setPostText('')
     dispatch(fetchPosts(goalId))
@@ -135,23 +134,27 @@ export function GoalPage() {
           <h2>{goal.reason}</h2>
         </div>
         {goal.finish_line_date == null ?
-        "Time goes here" : 
+        "" : 
         <Countdown title="Time left to accomplish your goal!" value={goal.finish_line_date} format="D HH:mm:ss" />}
       </div>
       <br />
       {/* <div id="entryContainer"> */}
-          <Button onClick={() => toggleEntryInputModal()} className="addEntryButton" shape="round" icon={<PlusOutlined />}>
-            New Entry
-          </Button>
+          <div style={{marginLeft: '140px'}}>
+            <Button onClick={() => toggleEntryInputModal()} className="addEntryButton" shape="round" icon={<PlusOutlined />}>
+              New Entry
+            </Button>
+          </div>
           <Modal
           title="New Entry"
           visible={entryInputModalState}
           footer={null}
           onCancel={() => setEntryInputModalState(false) && setEditPostText('')}>
-            <form onSubmit={(e) => handlePostAdd(e)}>
-              <Input value={postText} onChange={(e) => setPostText(e.target.value)} />
-              <button type="submit">Submit post</button>
-            </form>
+            <Form onFinish={handlePostAdd}>
+              <TextArea value={postText} onChange={(e) => setPostText(e.target.value)} />
+              <div style={{display: 'flex', justifyContent: 'flex-end', marginTop: '1rem'}}>
+                <Button htmlType="submit">Submit Entry</Button>
+              </div>
+            </Form>
           </Modal>
         
         <div id="entries">

@@ -9,6 +9,7 @@ import {
   fetchTasks } from '../components/goals/goalSlice'
 import { Modal, Input, Popover } from 'antd'
 import { CloseCircleOutlined, DeleteOutlined } from '@ant-design/icons'
+const { TextArea } = Input
 
 export function EntryModal(props) {
   const dispatch = useDispatch()
@@ -61,8 +62,8 @@ export function EntryModal(props) {
     visible={props.post}
     onCancel={() => props.disableModal()}>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <Input value={title} onChange={(e) => setTitle(e.target.value)}></Input>
-        <button type="submit">Edit Entry</button>
+        <TextArea value={title} onChange={(e) => setTitle(e.target.value)}></TextArea>
+        <button type="submit" style={{marginTop: '1rem'}}>Edit Entry</button>
       </form>
     </Modal>
     {/* <form>
