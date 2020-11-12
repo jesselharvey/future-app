@@ -20,8 +20,8 @@ function TaskInputItem({id, goalId, description, width}) {
   const dispatch = useDispatch()
   const [descriptionState, setDescription] = useState('')
   useEffect(() => {
-    setDescription(descriptionState)
-  }, [description])
+    setDescription(description)
+  }, [])
   return (
     <div style={{display: 'flex'}}>
       <input className="ant-input" value={descriptionState} onChange={(e) => setDescription(e.target.value)} style={{marginBottom: '1rem', width: width}} />
