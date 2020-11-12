@@ -20,11 +20,11 @@ export const goalFormSlice = createSlice({
     setDateState: (state, action) => {state.date = action.payload},
     setTimeState: (state, action) => {state.time = action.payload},
     clearAllForms: (state) => {
-      state.formIndex = 1,
-      state.title = '',
-      state.reason = '',
-      state.task = [],
-      state.date = '',
+      state.formIndex = 1
+      state.title = ''
+      state.reason = ''
+      state.task = []
+      state.date = ''
       state.time = ''
     }
   },  
@@ -32,10 +32,9 @@ export const goalFormSlice = createSlice({
 
 export const { incrementIndex, decrementIndex, setTitleState, setReasonState, setTasksState, setDateState, setTimeState, clearAllForms } = goalFormSlice.actions
 
-export const submitGoalForm = (title, reason, date, time) => () => {
-  return api.post('/goals/users', {title: title, reason: reason, date: date, time: time})
+export const submitGoalForm = (title, reason, date, time, tasks) => () => {
+  return api.post('/goals/users', {title: title, reason: reason, date: date, time: time, tasks: tasks})
 }
-
 
 export const selectFormIndex = state => state.goalForm.formIndex
 export const selectTitle = state => state.goalForm.title

@@ -15,6 +15,15 @@ export function Dashboard() {
   const [visible, setVisible] = useState(false);
   const { Step } = Steps
 
+  const success = () => {
+    message.success({
+      content: 'Nice! A new goal has been created.',
+      className: 'new-goal-alert',
+      style: {
+        marginBottom: '5vh',
+      },
+    });
+  };
   
 
   useEffect(() => {
@@ -25,6 +34,7 @@ export function Dashboard() {
   function handleClose () {
     setVisible(false)
     dispatch(displayGoals())
+    success()
   }
 
 
@@ -53,7 +63,7 @@ export function Dashboard() {
         </Modal>
 
         <h1 className="lets-make-progress">Lets make progress!</h1>
-        <button className="dashboard-view-goal">
+        <button className="dashboard-view-goal" onClick={() => success()}>
           View Goals
         </button>
         <div className="contact-area">

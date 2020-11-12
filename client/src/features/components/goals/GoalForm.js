@@ -20,7 +20,7 @@ import { selectFormIndex,
 import { useHistory } from 'react-router-dom'
 import Navbar from '../../UI/Nav'
 import { Dashboard }from '../dashboard/Dashboard'
-import { DatePicker, TimePicker, Space, Input, Steps, Card } from 'antd';
+import { DatePicker, TimePicker, Space, Input, Steps, Card, Spin } from 'antd';
 import moment from 'moment';
 
 export function Title() {
@@ -207,6 +207,9 @@ export function Timeframe() {
     dispatch(decrementIndex())
   }
 
+  const [checked, setChecked] = useState(false)
+  const handleCheck = () => setChecked(!checked)  
+
   return (
     <div>
       <div className="onboarding-container">
@@ -223,18 +226,18 @@ export function Timeframe() {
           <h1 className="onboarding-questions" id="timeframe-question-date">What date shall we set to reach our goal?</h1>
           <div className="onboarding-date-picker">
           <Space direction="horizontal" size={12}>
-            <DatePicker onChange={onChangeDate} size={100}/>
+            <DatePicker onChange={onChangeDate} disabled={checked == false ? false : true} size={100}/>
           </Space>
           </div>
           <h1 className="onboarding-questions" id="timeframe-question-time">Do we want to narrow it down to the time of the day?</h1>
           <div className="onboarding-time-picker">
-          <TimePicker use12Hours format="h:mm a" onChange={onChangeTime} size="large"/>
+          <TimePicker use12Hours format="h:mm a" onChange={onChangeTime} disabled={checked == false ? false : true} size="large"/>
           </div>
           <div>
             <h1 className="onboarding-questions" id="timeframe-question-forever">Or will this become a habit with no deadline?</h1>
           </div>
           <div className="input-frame">
-            <input className="forever-checkbox" type="checkbox"/>
+            <input className="forever-checkbox" type="checkbox" onClick={handleCheck} checked={checked}/>
           </div>
           <div className="onboarding-buttons" id="timeframe-buttons">
           <button style={{backgroundColor: "#FFFFFF"}} onClick={(e) => handlePrevious(e)} >Previous</button>
@@ -259,8 +262,10 @@ export function Confirm(props) {
   const taskState = useSelector(selectTasks)
   const dateState = useSelector(selectDate)
   const timeState = useSelector(selectTime)
-  const history = useHistory()
   const { Step } = Steps
+
+  const [spin, setSpin] = useState(false)
+  const handleSpin = () => setSpin(!spin)
 
 useEffect(() => {
   setTitle(titleState)
@@ -270,16 +275,22 @@ useEffect(() => {
   setTime(timeState)
 }, [titleState, reasonState, taskState, dateState, timeState])
 
+
 function handlePrevious(e) {
   e.preventDefault()
   dispatch(decrementIndex())
 }
 
+
+
 function handleSubmit(e) {
   e.preventDefault()
-  dispatch(submitGoalForm(title, reason, date, time)).then((resp) => {
+  handleSpin()
+  dispatch(submitGoalForm(title, reason, date, time, tasks)).then((resp) => {
+    setTimeout(() => {
     props.close()
     dispatch(clearAllForms())
+    }, 750);
   })
 }
 
@@ -305,10 +316,10 @@ return(
       <Card><span>The Reason: <i>{reason}</i></span></Card>
     </div>
     <div>
-      <Card><span>The Day: <i>{date}</i></span></Card>
+      <Card><span>The Day: <i>{date == '' ? 'is not necessary' : date}</i></span></Card>
     </div>
     <div>
-      <Card><span>The Time: <i>{time}</i></span></Card>
+      <Card><span>The Time: <i>{time == '' ? 'is not necessary' : time}</i></span></Card>
     </div>
     </div>
     <div className="confirm-right-side">
@@ -326,6 +337,7 @@ return(
     <div className="onboarding-buttons" id="confirm-buttons">
     <button style={{backgroundColor: "#FFFFFF"}} onClick={(e) => handlePrevious(e)}>Previous</button>
     <button onClick={(e) => handleSubmit(e)}>Confirm goal</button>
+    <Spin size="large" spinning={spin}/>
     </div>
     </div>
   </div>
