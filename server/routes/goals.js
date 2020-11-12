@@ -20,9 +20,9 @@ router.post('/goals/users', async (req, res) => {
   const { tasks } = req.body
   const goal = await conn('goals').returning('id').insert({title: req.body.title, reason: req.body.reason, date: req.body.date, time: req.body.time, user_id: id})
   for (let task of tasks) {
-    await conn('tasks').insert({description: task.description, goal_id: goal[0]})
+    await conn('tasks').insert({description: task, goal_id: goal[0]})
   }
-  res.json({message: 'goal created'})
+  res.json({message: 'goal created', id: goal[0]})
 })
 
 

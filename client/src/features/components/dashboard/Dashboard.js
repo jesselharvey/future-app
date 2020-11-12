@@ -61,9 +61,9 @@ export function Dashboard() {
           <GoalForm close={() => handleClose()} />
         </Modal>
 
-        <button className="dashboard-view-goal" onClick={() => success()}>
+        {/* <button className="dashboard-view-goal" onClick={() => success()}>
           View Goals
-        </button>
+        </button> */}
         <div className="contact-area">
           <SmileOutlined className="contact-icon" />
         </div>
