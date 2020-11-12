@@ -1,10 +1,37 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Input, Button, Modal, Form } from 'antd';
+import { EditOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons'
+import { 
+  editTaskDescription,
+  deleteTask,
+} from './goalSlice'
+
+function Actions(props) {
+  return (
+    <div>
+      <Button onClick={props.onEdit}><EditOutlined /></Button>
+      <Button onClick={props.onDelete}><DeleteOutlined /></Button>
+    </div>
+  ) 
+}
+
+function TaskInputItem({id, goalId, description, width}) {
+  const dispatch = useDispatch()
+  return (
+    <div style={{display: 'flex'}}>
+      <input className="ant-input" defaultValue={description} style={{marginBottom: '1rem', width: width}} />
+      <div style={{display: 'flex'}}>
+        <Actions onEdit={() => console.log('e', id)} onDelete={() => dispatch(deleteTask(goalId, id))}/>
+      </div>
+    </div>
+  )
+}
 
 export default function TaskEditModal(props) {
   const [tasks, setTasks] = useState([])
+  const dispatch = useDispatch()
   useEffect(() => {
-    console.log(props.tasks)
     setTasks(props.tasks)
   }, [props.tasks])
   return (
@@ -12,32 +39,27 @@ export default function TaskEditModal(props) {
     title="Edit Tasks"
     visible={true}
     footer={null}
+    style={{overflow: 'auto'}}
+    onCancel={props.onClose}
     >
+      {tasks.length ?
       <form>
       {tasks.map(task => {
-          return <div key={task.id}>
-            <h2>Tasks</h2>
-            <input className="ant-input" defaultValue={task.description} style={{marginBottom: '1rem'}} />
-            {task.tasks.length > 0 && <h2 style={{marginLeft: '1rem'}}>Sub Tasks</h2>}
-            {task.tasks.map(subTask => {
-              return <div style={{marginLeft: '1rem', marginBottom: '1rem'}}>
-                <input className="ant-input" key={subTask.id} defaultValue={subTask.description} />
-              </div>
-            })}
-          </div>
-        })}
-        <Button htmlType="submit">Submit</Button>
+          return (
+            <div key={task.id}>
+              <h2>Tasks</h2>
+              <TaskInputItem id={task.id} description={task.description} goalId={props.goalId}  width={'80%'} />
+              {task.tasks.length > 0 && <h3 style={{marginLeft: '1rem', marginBottom: '1rem', marginTop: '1rem'}}>Sub Tasks</h3>}
+              {task.tasks.map(subTask => {
+                return <div style={{marginLeft: '1rem'}}>
+                  <TaskInputItem id={subTask.id} description={subTask.description} goalId={props.goalId}  width={'79%'} />
+                </div>
+              })}
+          </div>)
+      })}
       </form>
-      {/* <Form>
-        {tasks.map(task => {
-          return <Form.Group key={task.id}>
-            <Input defaultValue={task.description} />
-            {task.tasks.map(subTask => {
-              return <Input key={subTask.id} defaultValue={subTask.description} />
-            })}
-          </Form.Group>
-        })}
-      </Form> */}
+      : <h2>You have no tasks</h2>  
+      }
     </Modal>
       
   )

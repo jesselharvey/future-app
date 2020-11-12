@@ -198,7 +198,7 @@ export function GoalPage() {
 
       {/* </div> */}
 
-      {taskModalVisibility && <TaskEditModal tasks={tasks} />}
+      {taskModalVisibility && <TaskEditModal goalId={goalId} tasks={tasks} onClose={() => setTaskModalVisibility(false)} />}
 
       <div id="goalFooterContent">
         <div style={{display: 'flex', alignItems: 'flex-end', marginBottom: '1rem'}}>
