@@ -44,8 +44,7 @@ export function Dashboard() {
       <div className="main">
         <div className="dashboard-header">
           <h1 className="welcome-header">Good morning, Lance!</h1>
-            {/* <Link to={'/goal-form'}><AddGoalButton className="add-goal-button" /></Link> */}
-             <p className="motivation-quote">“If you fulfill your obligations everyday, you don't need to worry about the future.”<br/> ― Jordan Peterson</p>
+            <p className="motivation-quote">“If you fulfill your obligations everyday, you don't need to worry about the future.”<br/> ― Jordan Peterson</p>
         </div>
 
         <button className="dashboard-start-goal" onClick={() => setVisible(true)}>
@@ -62,7 +61,6 @@ export function Dashboard() {
           <GoalForm close={() => handleClose()} />
         </Modal>
 
-        <h1 className="lets-make-progress">Lets make progress!</h1>
         <button className="dashboard-view-goal" onClick={() => success()}>
           View Goals
         </button>
@@ -70,6 +68,7 @@ export function Dashboard() {
           <SmileOutlined className="contact-icon" />
         </div>
         <div id="goalGrid"> 
+          {/* <h1 className="no-goals-set">You currently dont have any goals set...</h1> */}
           {goals.map((goal) => (
             <Link className="goalCard" to={`/goal/${goal.id}`}>
               <Card>
