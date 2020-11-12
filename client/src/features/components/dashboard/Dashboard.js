@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { selectUser, selectGoals, displayGoals, fetchUser } from '../goals/goalSlice'
-import { AddGoalButton } from '../../UI/Buttons'
 import Navbar from '../../UI/Nav'
 import { Card, Button, Modal, Steps, message } from 'antd'
 import { SmileOutlined } from '@ant-design/icons'
@@ -13,7 +12,6 @@ export function Dashboard() {
   const goals = useSelector(selectGoals)
   const user = useSelector(selectUser)
   const [visible, setVisible] = useState(false);
-  const { Step } = Steps
 
   const success = () => {
     message.success({
@@ -28,7 +26,7 @@ export function Dashboard() {
 
   useEffect(() => {
     dispatch(displayGoals())
-    dispatch(fetchUser())
+    dispatch(fetchUser(user))
   }, [dispatch])
 
   function handleClose () {
@@ -37,16 +35,16 @@ export function Dashboard() {
     success()
   }
 
-
   return (<div className="fade-in">
     <Navbar />
     <div className="body">
       <div className="main">
         <div className="dashboard-header">
-          <h1 className="welcome-header">Good morning, Lance!</h1>
+          {user.map((item) => {
+            return (<h1 className="welcome-header">Good morning, {item.name.length >= 8 ? (<br/>) : ''}{item.name}</h1>)
+             })}
             <p className="motivation-quote">“If you fulfill your obligations everyday, you don't need to worry about the future.”<br/> ― Jordan Peterson</p>
         </div>
-
         <button className="dashboard-start-goal" onClick={() => setVisible(true)}>
           Add Goal
         </button>
@@ -60,15 +58,11 @@ export function Dashboard() {
           width={1000}>
           <GoalForm close={() => handleClose()} />
         </Modal>
-
-        {/* <button className="dashboard-view-goal" onClick={() => success()}>
-          View Goals
-        </button> */}
         <div className="contact-area">
           <SmileOutlined className="contact-icon" />
         </div>
-        <div id="goalGrid"> 
-          {/* <h1 className="no-goals-set">You currently dont have any goals set...</h1> */}
+        <div id={goals.length == 0 ? "goalGridBlank" : "goalGrid"}> 
+          {goals.length == 0 ? (<h1 className="no-goals-set">You currently dont have any goals set...</h1>) : ''}
           {goals.map((goal) => (
             <Link className="goalCard" to={`/goal/${goal.id}`}>
               <Card>
@@ -85,3 +79,4 @@ export function Dashboard() {
   </div>
   )
 }
+
