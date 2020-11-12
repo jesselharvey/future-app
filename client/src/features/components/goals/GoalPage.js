@@ -22,10 +22,12 @@ import {
   deleteTask,
 } from './goalSlice'  
 // import { Button } from 'antd'
-import { Collapse, Card, Input, Statistic, Button, Modal, Popover } from 'antd';
+import { Collapse, Card, Input, Statistic, Button, Modal, Popover, Form } from 'antd';
 import { FormOutlined, EditOutlined, CloseCircleOutlined, ArrowsAltOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Accordian } from '../../UI/Accordian'
 import { EntryModal } from '../../UI/AppModal'
+import TaskEditModal from './TaskEditModal'
+const { TextArea } = Input
 
 export function GoalPage() {
 
@@ -34,7 +36,6 @@ export function GoalPage() {
   const { postId } = useParams()
   const { Panel } = Collapse
   const { Countdown } = Statistic
-  const { TextArea } = Input
   function callback(key) {
     console.log(key)
   }
@@ -60,7 +61,6 @@ export function GoalPage() {
   // console.log(posts)
 
   function handlePostAdd(e) {
-    e.preventDefault()
     dispatch(addPost(goalId, new Date(), postText))
     setPostText('')
     dispatch(fetchPosts(goalId))
@@ -108,13 +108,14 @@ export function GoalPage() {
   // console.log(editPostText)
 
   function handleTaskAdd(e) {
-    e.preventDefault()
+    // e.preventDefault()
     dispatch(addTask(goalId, taskText))
     setTaskText('')
     dispatch(fetchTasks(goalId))
   }
 
   const [activeModal, setActiveModal] = useState(null)
+  const [taskModalVisibility, setTaskModalVisibility] = useState(false)
   function toggleEntryModal(post) {
     setEntryModalState(true)
     setActiveModal(post)
@@ -135,23 +136,27 @@ export function GoalPage() {
           <h2>{goal.reason}</h2>
         </div>
         {goal.finish_line_date == null ?
-        "Time goes here" : 
+        "" : 
         <Countdown title="Time left to accomplish your goal!" value={goal.finish_line_date} format="D HH:mm:ss" />}
       </div>
       <br />
       {/* <div id="entryContainer"> */}
-          <Button onClick={() => toggleEntryInputModal()} className="addEntryButton" shape="round" icon={<PlusOutlined />}>
-            New Entry
-          </Button>
+          <div style={{marginLeft: '140px'}}>
+            <Button onClick={() => toggleEntryInputModal()} className="addEntryButton" shape="round" icon={<PlusOutlined />}>
+              New Entry
+            </Button>
+          </div>
           <Modal
           title="New Entry"
           visible={entryInputModalState}
           footer={null}
           onCancel={() => setEntryInputModalState(false) && setEditPostText('')}>
-            <form onSubmit={(e) => handlePostAdd(e)}>
-              <Input value={postText} onChange={(e) => setPostText(e.target.value)} />
-              <button type="submit">Submit post</button>
-            </form>
+            <Form onFinish={handlePostAdd}>
+              <TextArea value={postText} onChange={(e) => setPostText(e.target.value)} />
+              <div style={{display: 'flex', justifyContent: 'flex-end', marginTop: '1rem'}}>
+                <Button htmlType="submit">Submit Entry</Button>
+              </div>
+            </Form>
           </Modal>
         
         <div id="entries">
@@ -193,11 +198,20 @@ export function GoalPage() {
 
       {/* </div> */}
 
+      {taskModalVisibility && <TaskEditModal goalId={goalId} tasks={tasks} onClose={() => setTaskModalVisibility(false)} />}
+
       <div id="goalFooterContent">
-        <form className="taskInput" onSubmit={(e) => handleTaskAdd(e)}>
-          <Input value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
-          <button style={{width: '50%'}} type="submit">Add new task</button>
-        </form>
+        <div style={{display: 'flex', alignItems: 'flex-end', marginBottom: '1rem'}}>
+          <Button onClick={() => setTaskModalVisibility(true)}><EditOutlined />Edit your goal</Button>
+        </div>
+        <Form className="taskInput" onFinish={(e) => handleTaskAdd(e)}>
+        <Input.Group compact style={{display: 'flex'}}>
+          <Input placeholder="Enter your task..." value={taskText} onChange={(e) => setTaskText(e.target.value)} />
+          <Button htmlType="submit"><PlusOutlined /></Button>
+          </Input.Group>
+          {/* <Input value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
+          <button style={{width: '50%'}} type="submit">Add new task</button> */}
+        </Form>
         <div id="accordianContainer">
           <Accordian goalId={goalId} goal={goal} tasks={tasks}></Accordian>
         </div>

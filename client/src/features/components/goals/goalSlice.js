@@ -188,6 +188,14 @@ export const deleteTask = (goalId, id) => (dispatch) => {
     dispatch(fetchTasks(goalId))
   })
 }
+
+export const editTaskDescription = (goalId, id, description) => (dispatch) => {
+  api.patch('/tasks/' + id, {description}).then((resp) => {
+    dispatch(fetchTasks(goalId))
+  })
+}
+
+
 //  /tasks/:id/:status
 export const editTaskStatus = (id, status, goalId) => (dispatch) => {
   api.patch('/tasks/' + id + '/' + status).then((resp) => {

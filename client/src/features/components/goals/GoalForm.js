@@ -251,6 +251,7 @@ export function Timeframe() {
 
 export function Confirm(props) {
   const dispatch = useDispatch()
+  const history = useHistory()
   const [title, setTitle] = useState('')
   const [reason, setReason] = useState('')
   const [tasks, setTasks] = useState([])
@@ -290,6 +291,7 @@ function handleSubmit(e) {
     setTimeout(() => {
     props.close()
     dispatch(clearAllForms())
+    history.push('/goal/' + resp.data.id)
     }, 750);
   })
 }
