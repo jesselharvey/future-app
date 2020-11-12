@@ -23,11 +23,22 @@ function TaskInputItem({id, goalId, description, width}) {
   useEffect(() => {
     setDescription(description)
   }, [])
+
+  function handleEdit() {
+    dispatch(editTaskDescription(goalId, id, descriptionState))
+    fetchTasks(goalId)
+  }
+  function handleDelete() {
+    dispatch(deleteTask(goalId, id))
+    fetchTasks(goalId)
+  }
   return (
     <div style={{display: 'flex'}}>
       <input className="ant-input" value={descriptionState} onChange={(e) => setDescription(e.target.value)} style={{marginBottom: '1rem', width: width}} />
       <div style={{display: 'flex'}}>
-        <Actions onEdit={() => dispatch(editTaskDescription(goalId, id, descriptionState))} onDelete={() => dispatch(deleteTask(goalId, id))  && dispatch(fetchTasks(goalId))}/>
+      <Button onClick={() => handleEdit()}><EditOutlined /></Button>
+      <Button onClick={() => handleDelete()}><DeleteOutlined /></Button>
+        {/* <Actions onEdit={() => dispatch(editTaskDescription(goalId, id, descriptionState))} onDelete={() => dispatch(deleteTask(goalId, id))  && dispatch(fetchTasks(goalId))}/> */}
       </div>
     </div>
   )
