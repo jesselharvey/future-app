@@ -26,6 +26,7 @@ import { Collapse, Card, Input, Statistic, Button, Modal, Popover, Form } from '
 import { FormOutlined, EditOutlined, CloseCircleOutlined, ArrowsAltOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Accordian } from '../../UI/Accordian'
 import { EntryModal } from '../../UI/AppModal'
+import TaskEditModal from './TaskEditModal'
 const { TextArea } = Input
 
 export function GoalPage() {
@@ -114,6 +115,7 @@ export function GoalPage() {
   }
 
   const [activeModal, setActiveModal] = useState(null)
+  const [taskModalVisibility, setTaskModalVisibility] = useState(false)
   function toggleEntryModal(post) {
     setEntryModalState(true)
     setActiveModal(post)
@@ -196,7 +198,12 @@ export function GoalPage() {
 
       {/* </div> */}
 
+      {taskModalVisibility && <TaskEditModal tasks={tasks} />}
+
       <div id="goalFooterContent">
+        <div style={{display: 'flex', alignItems: 'flex-end', marginBottom: '1rem'}}>
+          <Button onClick={() => setTaskModalVisibility(true)}><EditOutlined />Edit your goal</Button>
+        </div>
         <Form className="taskInput" onFinish={(e) => handleTaskAdd(e)}>
         <Input.Group compact style={{display: 'flex'}}>
           <Input placeholder="Enter your task..." value={taskText} onChange={(e) => setTaskText(e.target.value)} />
