@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Checkbox, Input, Button } from 'antd'
+import { Checkbox, Input, Button, Popover } from 'antd'
 import { CloseCircleOutlined } from '@ant-design/icons'
 import { useParams } from 'react-router-dom'
 import { 
@@ -41,10 +41,10 @@ export function AccordianContent(props) {
     // // console.log('unchecked = ', uncheckedValues);
   // }
 
-  let unchecked = tasks.filter(task => {
-    return task.status === 'active' ? task : ''
+  let complete = tasks.filter(task => {
+    return task.status === 'complete'
   })
-  // console.log(unchecked)
+  // console.log(complete)
 
 
   function handleTaskAdd(e) {
@@ -64,36 +64,34 @@ export function AccordianContent(props) {
     console.log(task)
     if (task.status === 'active') {
       return dispatch(editTaskStatus(task.id, 'complete', goalId))
-    } else if (task.status === 'complete') {
+     } else if (task.status === 'complete') {
       return dispatch(editTaskStatus(task.id, 'active', goalId))
+     }
+     dispatch(fetchTasks(goalId))
     }
-
+    
     // let subTasks = tasks.filter(item => {
     //   return item.parent_id == props.parent_id
     // })
-    // // console.log(subTasks)
+    // console.log(subTasks)
     
     // let completeTasks = tasks.filter(item => {
     //   return item.parent_id == props.parent_id && item.status == 'complete'
     // })
     // console.log(completeTasks)
-    
-    // if (e.target.checked === true) {
 
-    // }
-  }
+    // props.handlePercent(completeTasks, subTasks)
 
   
   return (
     <div>
       {
         tasks.map(task => (
-          task.parent_id == props.parent_id ?
-        <Checkbox 
+          <Checkbox
         defaultChecked={task.status === 'complete' ? true : false}
         onChange={(e) => onChange(e, task)}>
           {task.description}
-        </Checkbox> : ''
+        </Checkbox>
         ))
       // goalOptions.map(task => (
       //   task.parent_id == props.parent_id ?

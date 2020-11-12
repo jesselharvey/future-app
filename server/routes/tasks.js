@@ -10,7 +10,30 @@ router.get('/tasks', async (req, res) => {
 router.get('/tasks/goals/:goalId', async (req, res) => {
   const goalId = req.params.goalId
   const selectedTask = await conn.raw(`SELECT * FROM tasks WHERE goal_id = ${goalId}`)
-  res.json(selectedTask.rows)
+  const tasks = selectedTask.rows
+  let order = 0
+  const taskMap = {}
+  for (let item of tasks) {
+    item.tasks = []
+    // if (!item.parent_id) {
+    //   order++
+    // }
+    item.order = order ++
+    taskMap[item.id] = item
+  }
+  for (let id in taskMap) {
+    const currTask = taskMap[id]
+    const parentId = currTask.parent_id
+    if (parentId) {
+      taskMap[parentId].tasks.push(currTask)
+      delete taskMap[id]
+    }
+  }
+  const taskResult = []
+  for (let key in taskMap) {
+    taskResult.push(taskMap[key])
+  }
+  res.json(taskResult)
 })
 
 router.get('/tasks/:id', async (req, res) => {

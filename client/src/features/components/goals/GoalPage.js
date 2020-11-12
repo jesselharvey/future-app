@@ -22,10 +22,10 @@ import {
   deleteTask,
 } from './goalSlice'  
 // import { Button } from 'antd'
-import { Collapse, Card, Input, Statistic, Button, Modal } from 'antd';
-import { FormOutlined, EditOutlined, CloseCircleOutlined, ArrowsAltOutlined, PlusOutlined } from '@ant-design/icons'
+import { Collapse, Card, Input, Statistic, Button, Modal, Popover } from 'antd';
+import { FormOutlined, EditOutlined, CloseCircleOutlined, ArrowsAltOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Accordian } from '../../UI/Accordian'
-import { AppModal } from '../../UI/AppModal'
+import { EntryModal } from '../../UI/AppModal'
 
 export function GoalPage() {
 
@@ -119,6 +119,7 @@ export function GoalPage() {
     setEntryModalState(true)
     setActiveModal(post)
     console.log(post)
+    
     // dispatch(fetchPost(id))
     // setEntryModalState(!entryModalState)
     // return post == undefined ? '' : setEditPostText(post.description)
@@ -168,11 +169,11 @@ export function GoalPage() {
           ))}
         </div>
         {activeModal && (
-        <AppModal 
-          // disableModal={setActiveModal(null)}
+        <EntryModal 
+          disableModal={() => setActiveModal(null)}
           // modalState={entryModalState}
           post={activeModal}
-          ></AppModal>
+          ></EntryModal>
         )}
         {/* {post == undefined ? '' :
         <Modal

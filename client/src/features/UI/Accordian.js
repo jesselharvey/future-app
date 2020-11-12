@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Collapse, Progress, Input, Modal } from 'antd';
-import { CloseCircleOutlined, EditOutlined, ArrowsAltOutlined } from '@ant-design/icons'
+import { Collapse, Progress, Input, Modal, Popover } from 'antd';
+import { CloseCircleOutlined, EditOutlined, ArrowsAltOutlined, DeleteOutlined } from '@ant-design/icons'
 import { AccordianContent } from './AccordianContent'
 import { useParams } from 'react-router-dom'
+import { TaskModal } from '../UI/AppModal'
 import { 
   addTask,
   deleteTask,
@@ -15,41 +16,30 @@ export function Accordian(props) {
   const { goalId } = useParams()
   const dispatch = useDispatch()
   const { Panel } = Collapse
+
+  const tasks = props.tasks
+  console.log(tasks)
+  let subTasks = tasks.map((task) => {
+    return task.tasks
+  })
+  
+  for (let i = 0; i < subTasks.length; i++) {
+    subTasks[i].filter(task => {
+      return task.status == 'complete'
+    })
+  //   for (let j = 0; j < subTasks[i].tasks; i++) {
+  //     console.log(subTasks[i].tasks[j])
+  //   }
+  }
+  // let completeTasks = subTasks.map().filter((task) => {
+  //   return task.status == 'complete'
+  // })
+  console.log(subTasks)
+  // console.log(completeTasks)
   
   function callback(key) {
     // console.log(key)
   }
-
-  const arrComplete = [1, 2, 3]
-  const arrIncomplete = [4]
-
-  const [complete, setComplete] = useState('')
-  const [incomplete, setIncomplete] = useState('')
-  // let complete = null
-  // let incomplete = null
-  
-
-  // function getPercent(incomplete, complete) {
-    // function handlePercent(complete, incomplete) {
-    //   setComplete(complete)
-    //   setIncomplete(incomplete)
-      // let percent = incomplete / complete * 100
-      // console.log(incomplete, complete)
-      // console.log(percent)
-      // return percent
-    // }
-
-  // }
-
-  // function onChange(checkedValues) {
-  //   console.log(checkedValues.length)
-  //   let filteredArr = goal.tasks.filter(task => (
-  //     task.parent_id !== task.id && task.parent_id !== null ?
-  //     task 
-  //     : ''
-  //   ))
-  //   console.log(filteredArr)
-  // }
 
   function handleTaskDelete(id) {
     dispatch(deleteTask(goalId, id))
@@ -75,9 +65,34 @@ export function Accordian(props) {
     return Number.isNaN(result) ? 0 : result.toFixed(1)
   }
   // console.log(testPercent(6, 7))
+  // let mainTasks = []
+  // let subTasks = []
+
+  // useEffect(() => {
+    
+  // })
+  //     for (let i = 0; i < tasks.length; i++) {
+  //       mainTasks = tasks[i].tasks
+  //       console.log(mainTasks)
+        
+  //       for (let j = 0; j < tasks[i].tasks.length; j++) {
+  //         subTasks = tasks[i].tasks[j]
+  //         console.log(subTasks)
+  //       }
+  //     }
 
   function handlePercent(task) {
     // console.log(task)
+
+    // for (let i = 0; i < tasks.length; i++) {
+    //   console.log(tasks[i].tasks)
+
+    //   for (let j = 0; j < tasks[i].tasks.length; j++) {
+    //     let subTasks = tasks[i].tasks[j]
+    //     console.log(subTasks)
+    //   }
+    // }
+    
     // let subTasks = tasks.filter(item => {
     //   return task.id == item.parent_id
     // })
@@ -89,43 +104,66 @@ export function Accordian(props) {
     // return testPercent(completeTasks.length, subTasks.length)
   }
 
-  const tasks = props.tasks
-  // console.log(tasks)
-  // <CloseCircleOutlined onClick={() => handleTaskDelete(task.id)} />]
+  // let subTasks = tasks.map(task => task.tasks.filter(item => {
+  //   return task.id == item.parent_id
+  // }))
+  // console.log(subTasks)
+  // let completeTasks = tasks.map(task => task.tasks.filter(item => {
+  //   return task.id == item.parent_id && item.status == 'complete'
+  // }))
+  // console.log(completeTasks)
+
+  const [activeModal, setActiveModal] = useState(null)
+  function toggleTaskModal(task) {
+    setActiveModal(task)
+    console.log(task)
+  }
   return (
     <>
     <Collapse onChange={callback}>
-    {tasks.map(task => (
+    {/* {tasks.map(task => (
       task.parent_id === null ? 
-      <Panel header={[task.description, " ", <ArrowsAltOutlined onClick={() => toggleTaskModal(task.id)} />]}
-       extra={<Progress type="circle" percent={handlePercent(task)} width={50} />} key={task.id}>
-        
+      <Panel header={[task.description, " ", <ArrowsAltOutlined onClick={() => toggleTaskModal(task)} />]}
+      extra={
+      <Progress type="circle" percent={handlePercent(task)} width={50} />} key={task.id}>
         <AccordianContent goal={props.goal} tasks={tasks} parent_id={task.id}></AccordianContent>
-        {
-        // tasks.map(task => (
-          // task.parent_id === task.id ?
-          // <span>{task.title}</span> 
-          // : ''
-        // ))
-        }
       </Panel>
         : ''
-      // <span>{task.name}</span>
+    ))} */}
+    {tasks.map(task => (
+      <Panel header={[task.description, " ", <ArrowsAltOutlined onClick={() => toggleTaskModal(task)} />]}
+      extra={
+      <Progress type="circle" percent={handlePercent(task)} width={50} />} key={task.id}>
+        <AccordianContent goal={props.goal} tasks={task.tasks} parent_id={task.id}></AccordianContent>
+      </Panel>
     ))}
     </Collapse>
-    {singleTask == undefined ? '' :
+    {activeModal && (
+    <TaskModal 
+      disableModal={() => setActiveModal(null)}
+      task={activeModal}
+      ></TaskModal>
+    )}
+    {/* {singleTask == undefined ? '' :
     <Modal
-    title={[<CloseCircleOutlined onClick={() => handleTaskDelete(singleTask.id)}/> ,singleTask.description]}
+    title={[
+      <Popover content={<span>Delete task.</span>} >
+        <DeleteOutlined onClick={() => handleTaskDelete(singleTask.id)}/>
+      </Popover>,
+      singleTask.description]}
     visible={taskModalState}
     onCancel={() => setTaskModalState(false)}>
       {tasks.map(task => (
         task.parent_id == singleTask.id ?
         <div>
-        <CloseCircleOutlined onClick={() => handleSubTaskDelete(task.id)}/><span>{task.description}</span>
+          <Popover content={<span>Delete task.</span>} >
+            <DeleteOutlined onClick={() => handleSubTaskDelete(task.id)}/>
+          </Popover>
+            <span>{task.description}</span>
         </div> :
         ''
       ))}
-    </Modal>}
+    </Modal>} */}
     </>
   )
 }
