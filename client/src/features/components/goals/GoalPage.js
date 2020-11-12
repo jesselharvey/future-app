@@ -22,7 +22,7 @@ import {
   deleteTask,
 } from './goalSlice'  
 // import { Button } from 'antd'
-import { Collapse, Card, Input, Statistic, Button, Modal, Popover } from 'antd';
+import { Collapse, Card, Input, Statistic, Button, Modal, Popover, Form } from 'antd';
 import { FormOutlined, EditOutlined, CloseCircleOutlined, ArrowsAltOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Accordian } from '../../UI/Accordian'
 import { EntryModal } from '../../UI/AppModal'
@@ -108,7 +108,7 @@ export function GoalPage() {
   // console.log(editPostText)
 
   function handleTaskAdd(e) {
-    e.preventDefault()
+    // e.preventDefault()
     dispatch(addTask(goalId, taskText))
     setTaskText('')
     dispatch(fetchTasks(goalId))
@@ -194,10 +194,14 @@ export function GoalPage() {
       {/* </div> */}
 
       <div id="goalFooterContent">
-        <form className="taskInput" onSubmit={(e) => handleTaskAdd(e)}>
-          <Input value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
-          <button style={{width: '50%'}} type="submit">Add new task</button>
-        </form>
+        <Form className="taskInput" onFinish={(e) => handleTaskAdd(e)}>
+        <Input.Group compact style={{display: 'flex'}}>
+          <Input placeholder="Enter your task..." value={taskText} onChange={(e) => setTaskText(e.target.value)} />
+          <Button htmlType="submit"><PlusOutlined /></Button>
+          </Input.Group>
+          {/* <Input value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
+          <button style={{width: '50%'}} type="submit">Add new task</button> */}
+        </Form>
         <div id="accordianContainer">
           <Accordian goalId={goalId} goal={goal} tasks={tasks}></Accordian>
         </div>

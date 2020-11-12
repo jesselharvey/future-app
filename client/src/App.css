@@ -476,8 +476,9 @@ a.goalCard:active {
 }
 
 .taskInput {
-  display: inline-flex;
-  width: 35%;
+  display: flex;
+  width: 100%;
+  /* margin-bottom: 1rem; */
 }
 
 .checkboxGroup {
