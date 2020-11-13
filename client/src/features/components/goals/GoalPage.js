@@ -140,8 +140,8 @@ export function GoalPage() {
       <div className="pageMain">
       <div id="goalHeader">
         <div>
-          <h2>My goal is {goal.title}</h2>
-          <h2>Because {goal.reason}</h2>
+          <h2>My goal: {goal.title}</h2>
+          <h2>The Reason: {goal.reason}</h2>
         </div>
         {goal.finish_line_date == null ?
         <h2 className="whiteText" style={{color: '#fffff'}}>"Time waits for no one." – Folklore</h2> : 

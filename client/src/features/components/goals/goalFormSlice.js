@@ -23,7 +23,7 @@ export const goalFormSlice = createSlice({
       state.formIndex = 1
       state.title = ''
       state.reason = ''
-      state.task = []
+      state.tasks = []
       state.date = ''
       state.time = ''
     }
