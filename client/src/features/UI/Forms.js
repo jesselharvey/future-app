@@ -20,9 +20,7 @@ export function LoginForm() {
   return(
     <div>
       <form onSubmit={handle} className="authForm">
-        <button className="fake-logo login-logo">
-          <h1 className="name-logo login-name">AppName</h1>
-        </button>
+        <div className="login-logo"></div>
         <input 
           className="login-reg-input" 
           value={email} onChange={(e) => setEmail(e.target.value)} 
@@ -69,9 +67,7 @@ export function RegisterForm() {
 
   return (
     <form onSubmit={handle} className="authForm">
-      <button className="fake-logo login-logo">
-        <h1 className="name-logo login-name">AppName</h1>
-      </button>
+      <div className="login-logo"></div>
       <input 
         className="login-reg-input" 
         value={name} onChange={(e) => setName(e.target.value)} 

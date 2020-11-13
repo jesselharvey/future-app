@@ -12,9 +12,9 @@ export default function Navbar () {
   return (
     <div className="header">
       <Breadcrumb id="nav-bar">
-        <button className="fake-logo">
-          <h1 className="name-logo">AppName</h1>
-        </button>
+        <div className="fake-logo">
+          <h1 className="name-logo">Tasks Tree</h1>
+        </div>
         <Breadcrumb.Item><a href="">Home</a></Breadcrumb.Item>
         <Breadcrumb.Item><a href="">Archives</a></Breadcrumb.Item>
         <Breadcrumb.Item><a href="">Settings</a></Breadcrumb.Item>
