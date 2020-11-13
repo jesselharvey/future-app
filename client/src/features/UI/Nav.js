@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Breadcrumb } from 'antd'
 
 export default function Navbar () {
@@ -15,7 +16,7 @@ export default function Navbar () {
         <button className="fake-logo">
           <h1 className="name-logo">AppName</h1>
         </button>
-        <Breadcrumb.Item><a href="">Home</a></Breadcrumb.Item>
+        <Breadcrumb.Item><Link to={'/dashboard'}>Home</Link></Breadcrumb.Item>
         <Breadcrumb.Item><a href="">Archives</a></Breadcrumb.Item>
         <Breadcrumb.Item><a href="">Settings</a></Breadcrumb.Item>
         <Breadcrumb.Item><a href="" onClick={() => signout()} >Logout</a></Breadcrumb.Item>
