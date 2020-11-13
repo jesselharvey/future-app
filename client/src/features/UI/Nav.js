@@ -16,7 +16,7 @@ export default function Navbar () {
         <div className="fake-logo">
           <h1 className="name-logo">Tasks Tree</h1>
         </div>
-        <Breadcrumb.Item><a href="">Home</a></Breadcrumb.Item>
+        <Breadcrumb.Item><Link to={'/dashboard'}>Home</Link></Breadcrumb.Item>
         <Breadcrumb.Item><a href="">Archives</a></Breadcrumb.Item>
         <Breadcrumb.Item><a href="">Settings</a></Breadcrumb.Item>
         <Breadcrumb.Item><a href="" onClick={() => signout()} >Logout</a></Breadcrumb.Item>
