@@ -27,6 +27,7 @@ import { FormOutlined, EditOutlined, CloseCircleOutlined, ArrowsAltOutlined, Plu
 import { Accordian } from '../../UI/Accordian'
 import { EntryModal } from '../../UI/AppModal'
 import TaskEditModal from './TaskEditModal'
+import Navbar from '../../UI/Nav'
 const { TextArea } = Input
 
 export function GoalPage() {
@@ -113,6 +114,7 @@ export function GoalPage() {
     setTaskText('')
     dispatch(fetchTasks(goalId))
   }
+  console.log(goal.date)
 
   const [activeModal, setActiveModal] = useState(null)
   const [taskModalVisibility, setTaskModalVisibility] = useState(false)
@@ -133,18 +135,22 @@ export function GoalPage() {
 
   return (
     <div className="fade-in">
+          <Navbar />
+    <div className="body">
+      <div className="pageMain">
       <div id="goalHeader">
         <div>
           <h2>My goal is {goal.title}</h2>
           <h2>Because {goal.reason}</h2>
         </div>
         {goal.finish_line_date == null ?
-        "" : 
-        <Countdown title="Time left to accomplish your goal!" value={goal.finish_line_date} format="D HH:mm:ss" />}
+        <h2 className="whiteText" style={{color: '#fffff'}}>"Time waits for no one." – Folklore</h2> : 
+        <Countdown title="Time left to accomplish your goal!" format={goal.date}  />
+       }
       </div>
       <br />
           <div style={{marginLeft: '140px'}}>
-            <Button onClick={() => toggleEntryInputModal()} className="addEntryButton" shape="round" icon={<PlusOutlined />}>
+            <Button onClick={() => toggleEntryInputModal()} className="addEntryButton" icon={<PlusOutlined />}>
               New Entry
             </Button>
           </div>
@@ -161,6 +167,7 @@ export function GoalPage() {
             </Form>
           </Modal>
         
+        {posts.length === 0 ? <h1 style={{textAlign: 'center'}} className="whiteText">Add a new entry!</h1> : 
         <div id="entries">
           {posts.map(post => (
             // postStatus == false && toggleId !== post.id ?
@@ -173,6 +180,7 @@ export function GoalPage() {
             </>
           ))}
         </div>
+}   
         {activeModal && (
         <EntryModal 
           disableModal={() => setActiveModal(null)}
@@ -195,8 +203,11 @@ export function GoalPage() {
           {/* <Input value={taskText} onChange={(e) => setTaskText(e.target.value)}></Input>
           <button style={{width: '50%'}} type="submit">Add new task</button> */}
         </Form>
+        {tasks.length === 0 ? <h1 style={{textAlign: 'center'}} className="whiteText">What steps can you take to accomplish your goal?</h1> : 
         <div id="accordianContainer">
           <Accordian goalId={goalId} goal={goal} tasks={tasks}></Accordian>
+          </div>}
+          </div>
         </div>
       </div>
     </div>
