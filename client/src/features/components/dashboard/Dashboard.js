@@ -69,6 +69,7 @@ export function Dashboard() {
                 <div className="a-tag-spread">
                   <span>{goal.title}</span>
                 </div>
+                <div className="goal-card-body"></div>
               </Card>
             </Link>
           ))}
@@ -80,3 +81,4 @@ export function Dashboard() {
   )
 }
 
+<a href="https://www.vecteezy.com/free-vector/silhouette">Silhouette Vectors by Vecteezy</a>
