@@ -56,7 +56,7 @@ async function main() {
 
   const salt = createSalt(20)
   const user = await conn('users').insert({ name: `Lance Amolo`, email: `test@example.com`, password: sha512(`test` + salt), salt: salt})
-  const goal = await conn('goals').insert({title: `goal 1`, reason:`this is the reason`, date: '2020-10-07', time: '12:00:00', user_id: 1})
+  const goal = await conn('goals').insert({title: `Complete this final project`, reason:`this is the reason`, date: '2020-10-07', time: '12:00:00', user_id: 1})
   const task = await conn('tasks').insert({ description: `task 1`, parent_id: null, goal_id: 1})
   const subTasks = await conn('tasks').insert({ description: `sub task of 1`, parent_id: 1, goal_id: 1})
   await conn('posts').insert({date_time: new Date(), description: `My first post`, goal_id: 1})
