@@ -62,12 +62,12 @@ export default function TaskEditModal(props) {
       <form>
       {tasks.map(task => {
           return (
-            <div key={task.id}>
+            <div key={'task-' + task.id}>
               <h2>Tasks</h2>
               <TaskInputItem id={task.id} description={task.description} goalId={props.goalId}  width={'80%'} />
               {task.tasks.length > 0 && <h3 style={{marginLeft: '1rem', marginBottom: '1rem', marginTop: '1rem'}}>Sub Tasks</h3>}
               {task.tasks.map(subTask => {
-                return <div style={{marginLeft: '1rem'}}>
+                return <div key={'task-sub-' + subTask.id} style={{marginLeft: '1rem'}}>
                   <TaskInputItem id={subTask.id} description={subTask.description} goalId={props.goalId}  width={'79%'} />
                 </div>
               })}

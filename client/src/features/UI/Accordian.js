@@ -18,7 +18,6 @@ export function Accordian(props) {
   const { Panel } = Collapse
 
   const tasks = props.tasks
-  console.log(tasks)
   let subTasks = tasks.map((task) => {
     return task.tasks
   })
@@ -34,7 +33,6 @@ export function Accordian(props) {
   // let completeTasks = subTasks.map().filter((task) => {
   //   return task.status == 'complete'
   // })
-  console.log(subTasks)
   // console.log(completeTasks)
   
   function callback(key) {
@@ -56,7 +54,6 @@ export function Accordian(props) {
   function toggleTaskModal(id) {
     dispatch(fetchTask(id))
     setTaskModalState(!taskModalState)
-    console.log(singleTask)
   }
 
   // x = checked, y = total subTasks
@@ -81,7 +78,11 @@ export function Accordian(props) {
   //       }
   //     }
 
-  function handlePercent(task) {
+  function handlePercent(tasks) {
+    // console.log(tasks)
+    const doneAmount = tasks.filter(task => task.status == 'complete').length
+    const num = (doneAmount / tasks.length) * 100
+    return isNaN(num) ? 0 : (num).toFixed(2)
     // console.log(task)
 
     // for (let i = 0; i < tasks.length; i++) {
@@ -116,7 +117,6 @@ export function Accordian(props) {
   const [activeModal, setActiveModal] = useState(null)
   function toggleTaskModal(task) {
     setActiveModal(task)
-    console.log(task)
   }
   return (
     <>
@@ -133,7 +133,7 @@ export function Accordian(props) {
     {tasks.map(task => (
       <Panel header={task.description}
       extra={
-      <Progress type="circle" percent={handlePercent(task)} width={50} />} key={task.id}>
+      <Progress type="circle" percent={handlePercent(task.tasks)} width={50} />} key={task.id}>
         <AccordianContent goal={props.goal} tasks={task.tasks} parent_id={task.id}></AccordianContent>
       </Panel>
     ))}
